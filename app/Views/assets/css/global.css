@@ -26,10 +26,8 @@
 
 body {
   overflow-x: hidden;
-}
-
-body {
   font-family: "Poppins", sans-serif;
+
 }
 
 h2 {
@@ -48,35 +46,6 @@ button {
   font-size: 16px;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  overflow-x: hidden;
-  font-family: "Poppins", sans-serif;
-}
-
-h2 {
-  font-size: 28px;
-}
-
-p {
-  font-size: 16px;
-}
-
-.opcao {
-  font-size: 15px;
-}
-
-button {
-  font-size: 16px;
-  /* >>>>>>> ca3908e0b31f1b0217200f0e57af04dfd1e3ee43
- */
-}
 
 /* =========================
 EFEITO QUANDO CLICA

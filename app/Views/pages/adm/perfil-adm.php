@@ -37,6 +37,10 @@ include './../../components/head/head.php';
             <section class="card perfil-box">
                 <h3>Informações Pessoais</h3>
 
+                <button class="btn-editar" id="abrirEditar">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+
                 <div class="perfil-info">
                     <img src="./../../assets/img/adm-foto.jpg" class="foto-adm" alt="">
                     <div class="dados">
@@ -79,5 +83,107 @@ include './../../components/head/head.php';
 
         </main>
     </div>
+
+    <!-- MODAL EDITAR PERFIL -->
+    <div class="modaladm" id="modalEditar">
+
+        <div class="modal2">
+
+            <h3>Editar Perfil</h3>
+
+            <form id="formEditarPerfil">
+
+                <label>Telefone</label>
+                <input type="text" id="editTelefone" value="(67) 9999-9999" maxlength="15" required>
+
+                <label>E-mail</label>
+                <input type="email" id="editEmail" value="exemplo@gmail.com" required>
+
+                <label>Nova Senha</label>
+                <input type="password" id="editSenha" placeholder="Digite a nova senha">
+
+                <label>Confirmar Senha</label>
+                <input type="password" id="editConfirmar" placeholder="Confirme a senha">
+
+                <div class="botoes-modal">
+                    <button type="button" class="btn-voltar" id="fecharEditar">Cancelar</button>
+                    <button type="submit" class="btn-concluir">Salvar</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+        function trocarAba(id, botao) {
+
+            document.querySelectorAll('.painel').forEach(item => {
+                item.classList.remove('ativo');
+            });
+
+            document.querySelectorAll('.aba').forEach(item => {
+                item.classList.remove('ativa');
+            });
+
+            document.getElementById(id).classList.add('ativo');
+            botao.classList.add('ativa');
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const modalEditar = document.getElementById("modalEditar");
+
+            function abrir(modal) {
+                modal.style.display = "flex";
+            }
+
+            function fechar(modal) {
+                modal.style.display = "none";
+            }
+
+            function fecharFora(modal) {
+                modal.addEventListener("click", function(e) {
+                    if (e.target === modal) {
+                        fechar(modal);
+                    }
+                });
+            }
+
+            /* abrir modal */
+            document.getElementById("abrirEditar").addEventListener("click", function() {
+                abrir(modalEditar);
+            });
+
+            /* fechar modal */
+            document.getElementById("fecharEditar").addEventListener("click", function() {
+                fechar(modalEditar);
+            });
+
+            fecharFora(modalEditar);
+
+            /* salvar */
+            document.getElementById("formEditarPerfil").addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                let senha = document.getElementById("editSenha").value;
+                let confirmar = document.getElementById("editConfirmar").value;
+
+                if (senha !== confirmar) {
+                    alert("As senhas não coincidem.");
+                    return;
+                }
+
+                alert("Dados atualizados com sucesso!");
+                fechar(modalEditar);
+            });
+
+        });
+    </script>
 
 </body>

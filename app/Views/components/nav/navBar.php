@@ -51,7 +51,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <li><a href="sobre.php">Sobre</a></li>
         <li><a href="./../../pages/user/favoritos.php">Favoritos</a></li>
         <li><a href="./../../pages/user/contato.php">Contato</a></li>
-        <li><a href="./../../pages/user/login.php">Publicar</a></li>
+        <li><a href="./../../pages/user/doacao1.php">Publicar</a></li>
 
     </div>
 

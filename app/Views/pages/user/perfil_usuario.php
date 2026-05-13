@@ -228,5 +228,3 @@ include './../../components/head/head.php';
   </script>
 
 </body>
-
-
