@@ -9,7 +9,7 @@ include './../../components/head/head.php';
 
         <div class="modal-box">
 
-            <?php echo $modalConteudo; ?>
+            <?php echo $modalConteudo ?? '';  ?>
 
         </div>
 

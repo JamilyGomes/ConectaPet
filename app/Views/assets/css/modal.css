@@ -291,7 +291,7 @@ HOVER BOTÕES
     background: #f2f2f2;
     padding: 40px;
     border-radius: 15px;
-    text-align: center;
+    /* text-align: center; */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 

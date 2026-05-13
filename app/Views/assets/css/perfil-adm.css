@@ -1,9 +1,4 @@
-/* RESET BÁSICO */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-}
+
 
 /* SIDEBAR */
 .sidebar {
@@ -89,11 +84,12 @@ h3 {
 
 /* CARD PADRÃO */
 .card-adm {
-    background: #fffaf3;
+    background: #f0ece6;
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    
 }
 
 /* PERFIL */
@@ -101,6 +97,7 @@ h3 {
     display: flex;
     gap: 20px;
     align-items: center;
+    background: #f0ece6
 }
 
 .foto-adm {
@@ -177,3 +174,41 @@ h3 {
         align-items: flex-start;
     }
 }
+
+/* botaoeditar */
+
+/* CARD PERFIL */
+.perfil-box {
+    position: relative;
+}
+
+/* BOTÃO EDITAR */
+.btn-editar-perfil {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #f0ece6;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+
+    transition: 0.2s;
+}
+
+/* hover */
+.btn-editar-perfil:hover {
+    background: #e2ddd5;
+}/*  */

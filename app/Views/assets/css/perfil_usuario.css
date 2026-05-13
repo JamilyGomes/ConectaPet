@@ -78,7 +78,7 @@
 }
 
 .campo{
-    font-size:24px;
+    /* font-size:24px; */
     display:flex;
     gap:8px;
     flex-wrap:wrap;

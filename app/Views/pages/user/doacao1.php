@@ -23,26 +23,39 @@ include './../../components/head/head.php';
 
     <h2>Apresente seu Aumigo 🐾</h2>
 
-    <form class="form-animal" method="POST" novalidate>
+    <form class="form-animal"
+        action="doacao2.php"
+        method="POST"
+        enctype="multipart/form-data"
+        novalidate>
 
         <!-- INFORMAÇÕES BÁSICAS -->
         <fieldset>
             <legend>Informações básicas</legend>
 
             <label class="form-cadastro">Nome do pet</label>
-            <input type="text" placeholder="Ex: Thor" required>
+            <input type="text"
+                name="nome_pet"
+                placeholder="Ex: Thor"
+                required>
 
             <label class="form-cadastro">Raça do pet (se houver)</label>
-            <input type="text" placeholder="Ex: Vira-lata">
+            <input type="text"
+                name="raca"
+                placeholder="Ex: Vira-lata">
 
             <label class="form-cadastro">Idade aproximada</label>
-            <input type="date" required>
+            <input type="date"
+                name="idade"
+                required>
 
             <div class="campo">
                 <label class="form-cadastro">Tipo do Animal</label>
 
                 <div class="dropdown">
-                    <div class="dropdown-selected">Selecione um tipo</div>
+                    <div class="dropdown-selected">
+                        Selecione um tipo
+                    </div>
 
                     <div class="dropdown-options">
                         <div class="option">Cachorro</div>
@@ -51,17 +64,36 @@ include './../../components/head/head.php';
                         <div class="option">Outro</div>
                     </div>
 
-                    <!-- valor enviado -->
-                    <input type="hidden" name="tipoAnimal" required>
+                    <input type="hidden"
+                        name="tipoAnimal"
+                        required>
                 </div>
             </div>
 
-            <input type="text" placeholder="Ex: Coelho" style="display:none;" class="outroAssunto">
+            <input type="text"
+                name="outro_tipo"
+                placeholder="Ex: Coelho"
+                style="display:none;"
+                class="outroAssunto">
 
             <label class="form-cadastro">Gênero</label>
+
             <div class="radio-group">
-                <label><input type="radio" name="genero" value="Macho" required> Macho</label>
-                <label><input type="radio" name="genero" value="Fêmea" required> Fêmea</label>
+                <label>
+                    <input type="radio"
+                        name="genero"
+                        value="Macho"
+                        required>
+                    Macho
+                </label>
+
+                <label>
+                    <input type="radio"
+                        name="genero"
+                        value="Fêmea"
+                        required>
+                    Fêmea
+                </label>
             </div>
         </fieldset>
 
@@ -70,19 +102,36 @@ include './../../components/head/head.php';
             <legend>Saúde e cuidados</legend>
 
             <div class="campo">
-                <label class="form-cadastro">O animal está vacinado?</label>
+                <label class="form-cadastro">
+                    O animal está vacinado?
+                </label>
 
                 <div class="dropdown">
-                    <div class="dropdown-selected">Selecione</div>
-
-                    <div class="dropdown-options">
-                        <div class="option">Sim, vacinas em dia</div>
-                        <div class="option">Sim, desatualizadas</div>
-                        <div class="option">Não</div>
-                        <div class="option">Desconhecido</div>
+                    <div class="dropdown-selected">
+                        Selecione
                     </div>
 
-                    <input type="hidden" name="vacinado" required>
+                    <div class="dropdown-options">
+                        <div class="option">
+                            Sim, vacinas em dia
+                        </div>
+
+                        <div class="option">
+                            Sim, desatualizadas
+                        </div>
+
+                        <div class="option">
+                            Não
+                        </div>
+
+                        <div class="option">
+                            Desconhecido
+                        </div>
+                    </div>
+
+                    <input type="hidden"
+                        name="vacinado"
+                        required>
                 </div>
             </div>
 
@@ -90,7 +139,9 @@ include './../../components/head/head.php';
                 <label class="form-cadastro">Peso</label>
 
                 <div class="dropdown">
-                    <div class="dropdown-selected">Selecione o peso</div>
+                    <div class="dropdown-selected">
+                        Selecione o peso
+                    </div>
 
                     <div class="dropdown-options">
                         <div class="option">0-11 kg</div>
@@ -99,14 +150,30 @@ include './../../components/head/head.php';
                         <div class="option">+45 kg</div>
                     </div>
 
-                    <input type="hidden" name="peso" required>
+                    <input type="hidden"
+                        name="peso"
+                        required>
                 </div>
             </div>
 
             <label class="form-cadastro">Castrado</label>
+
             <div class="radio-group">
-                <label><input type="radio" name="castrado" value="Sim" required> Sim</label>
-                <label><input type="radio" name="castrado" value="Não" required> Não</label>
+                <label>
+                    <input type="radio"
+                        name="castrado"
+                        value="Sim"
+                        required>
+                    Sim
+                </label>
+
+                <label>
+                    <input type="radio"
+                        name="castrado"
+                        value="Não"
+                        required>
+                    Não
+                </label>
             </div>
         </fieldset>
 
@@ -115,13 +182,25 @@ include './../../components/head/head.php';
             <legend>Contato e localização</legend>
 
             <label class="form-cadastro">E-mail</label>
-            <input type="email" placeholder="Ex: seuemail@gmail.com" required>
+
+            <input type="email"
+                name="email"
+                placeholder="Ex: seuemail@gmail.com"
+                required>
 
             <label class="form-cadastro">Telefone</label>
-            <input type="text" placeholder="Ex: (67) 99999-9999" required>
+
+            <input type="text"
+                name="telefone"
+                placeholder="Ex: (67) 99999-9999"
+                required>
 
             <label class="form-cadastro">Localização</label>
-            <input type="text" placeholder="Ex: Rua das Flores, 123" required>
+
+            <input type="text"
+                name="localizacao"
+                placeholder="Ex: Rua das Flores, 123"
+                required>
         </fieldset>
 
         <!-- SOBRE -->
@@ -129,18 +208,30 @@ include './../../components/head/head.php';
             <legend>Sobre o pet</legend>
 
             <label class="form-cadastro">Foto</label>
-            <input type="file" required>
-<label>Mensagem</label>
-        <textarea id="mensagem" name="mensagem" placeholder="Digite a sua mensagem" maxlength="500"required></textarea>
-        <small id="contador">0 / 500 caracteres</small>
+
+            <input type="file"
+                name="foto"
+                accept="image/*"
+                required>
+
+            <!-- MENSAGEM -->
+            <label class="form-cadastro">Mensagem</label>
+
+            <textarea
+                id="mensagem"
+                name="mensagem"
+                placeholder="Digite a sua mensagem"
+                maxlength="500"
+                required></textarea>
+
+            <small id="contador">
+                0 / 500 caracteres
+            </small>
+
         </fieldset>
-
         <div class="botoes">
-            <button type="button" class="btn-voltar" onclick="window.location.href='./home.php'">
-                Voltar
-            </button>
-
-            <button type="submit" class="btn-concluir">Continuar 🐾</button>
+            <button type="button" class="btn-voltar" onclick="window.location.href='./home.php'"> Voltar </button>
+            <button type="submit" class="btn-concluir"> Continuar 🐾 </button>
         </div>
 
     </form>
@@ -150,13 +241,16 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
-
+    <!-- DROPDOWN -->
     <script>
         const dropdowns = document.querySelectorAll(".dropdown");
 
         dropdowns.forEach(dropdown => {
+
             const selected = dropdown.querySelector(".dropdown-selected");
+
             const options = dropdown.querySelectorAll(".option");
+
             const hidden = dropdown.querySelector("input[type='hidden']");
 
             selected.addEventListener("click", () => {
@@ -164,83 +258,155 @@ include './../../components/head/head.php';
             });
 
             options.forEach(option => {
+
                 option.addEventListener("click", () => {
+
                     selected.textContent = option.textContent;
+
                     dropdown.classList.remove("active");
 
-                    if (hidden) hidden.value = option.textContent;
+                    if (hidden) {
+                        hidden.value = option.textContent;
+                    }
 
-                    // campo "Outro"
-                    const campo = dropdown.closest(".campo");
+                    // Campo "Outro"
                     const outroInput = document.querySelector(".outroAssunto");
 
-                    if (option.textContent === "Outro" && outroInput) {
+                    if (option.textContent === "Outro") {
+
                         outroInput.style.display = "block";
+
                         outroInput.required = true;
-                    } else if (outroInput) {
+
+                    } else {
+
                         outroInput.style.display = "none";
+
                         outroInput.required = false;
                     }
                 });
             });
 
             document.addEventListener("click", (e) => {
+
                 if (!dropdown.contains(e.target)) {
                     dropdown.classList.remove("active");
                 }
+
             });
+
         });
     </script>
 
+    <!-- CONTADOR -->
     <script>
-        document.querySelector(".form-animal").addEventListener("submit", function(e) {
-            let valido = true;
+        const textarea = document.getElementById("mensagem");
+        const contador = document.getElementById("contador");
+        const limite = 500;
 
-            // remove erros antigos
-            document.querySelectorAll(".erro").forEach(el => el.classList.remove("erro"));
+        textarea.addEventListener("input", () => {
+            let tamanho = textarea.value.length;
 
-            // pega todos os campos obrigatórios
-            const campos = this.querySelectorAll("[required]");
-            
-            campos.forEach(campo => {
-                if (!campo.value || campo.value.trim() === "") {
+            contador.textContent = `${tamanho} / ${limite} caracteres`;
 
-                    if (campo.type === "hidden") {
-                        campo.closest(".dropdown").classList.add("erro");
-                    } else {
-                        campo.classList.add("erro");
-                    }
-
-                    valido = false;
-                }
-            });
-
-            // valida radio (porque é diferente)
-            const radios = this.querySelectorAll("input[type='radio'][required]");
-            const nomes = [...new Set([...radios].map(r => r.name))];
-
-            nomes.forEach(nome => {
-                const marcado = this.querySelector(`input[name="${nome}"]:checked`);
-                if (!marcado) {
-                    valido = false;
-
-                    // marca todos do grupo
-                    this.querySelectorAll(`input[name="${nome}"]`).forEach(r => {
-                        r.parentElement.classList.add("erro");
-                    });
-                }
-            });
-
-            if (!valido) {
-                e.preventDefault();
-                alert("Preencha todos os campos obrigatórios!");
-            } else {
-                e.preventDefault(); // impede envio padrão
-                window.location.href = "doacao2.php";
+            // limitar caracteres
+            if (tamanho > limite) {
+                textarea.value = textarea.value.substring(0, limite);
             }
         });
     </script>
 
+    <!-- VALIDAÇÃO -->
+    <script>
+        document
+            .querySelector(".form-animal")
+            .addEventListener("submit", function(e) {
 
+                let valido = true;
+
+                // remove erros antigos
+                document
+                    .querySelectorAll(".erro")
+                    .forEach(el => {
+                        el.classList.remove("erro");
+                    });
+
+                // campos obrigatórios
+                const campos = this.querySelectorAll("[required]");
+
+                campos.forEach(campo => {
+
+                    if (
+                        !campo.value ||
+                        (
+                            campo.type !== "file" &&
+                            campo.value.trim() === ""
+                        )
+                    ) {
+
+                        if (campo.type === "hidden") {
+
+                            campo
+                                .closest(".dropdown")
+                                .classList.add("erro");
+
+                        } else {
+
+                            campo.classList.add("erro");
+                        }
+
+                        valido = false;
+                    }
+
+                });
+
+                // valida radios
+                const radios =
+                    this.querySelectorAll(
+                        "input[type='radio'][required]"
+                    );
+
+                const nomes = [
+                    ...new Set(
+                        [...radios].map(r => r.name)
+                    )
+                ];
+
+                nomes.forEach(nome => {
+
+                    const marcado =
+                        this.querySelector(
+                            `input[name="${nome}"]:checked`
+                        );
+
+                    if (!marcado) {
+
+                        valido = false;
+
+                        this
+                            .querySelectorAll(
+                                `input[name="${nome}"]`
+                            )
+                            .forEach(r => {
+
+                                r.parentElement
+                                    .classList.add("erro");
+
+                            });
+                    }
+
+                });
+
+                if (!valido) {
+
+                    e.preventDefault();
+
+                    alert(
+                        "Preencha todos os campos obrigatórios!"
+                    );
+                }
+
+            });
+    </script>
 
 </body>

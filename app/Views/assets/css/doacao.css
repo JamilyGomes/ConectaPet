@@ -2,7 +2,7 @@
 .form-animal {
     max-width: 800px;
     margin: 0 auto;
-    
+
     padding: 20px;
     border-radius: 12px;
 }
@@ -27,14 +27,16 @@ legend {
     /* font-size: 14px; */
 
 
-input, select,
+input,
+select,
 textarea {
-    
     padding: 8px;
     margin-top: 5px;
     border-radius: 10px;
     border: 1px solid #ccc;
 }
+
+
 
 /* RADIO */
 .radio-group {
@@ -44,12 +46,37 @@ textarea {
 }
 
 /* TEXTAREA */
-textarea:focus {
+/* TEXTAREA */
+textarea {
+    width: 100%;
+    min-height: 50px;
+
+    padding: 15px;
+    margin-top: 8px;
+
+    border-radius: 10px;
+    border: 1px solid #ccc;
+
+    background: #f5f5f5;
+
     resize: none;
-    height: 80px;
+
+    font-size: 14px;
+    font-family: inherit;
+}
+
+/* quando clicar */
+textarea:focus {
     border: 2px solid rgb(250, 177, 42);
     outline: none;
+    background: white;
 }
+
+
+
+
+
+
 
 /* BOTÕES */
 .botoes {
@@ -64,4 +91,3 @@ button {
     border-radius: 8px;
     cursor: pointer;
 }
-

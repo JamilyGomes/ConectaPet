@@ -19,14 +19,14 @@ $posts = [
 ?>
 
 <?php
-$titulo = "Perfil adm
-";
+$titulo = "Perfil adm";
 include './../../components/head/head.php';
 ?>
 
 <body>
 
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
+
     <div class="container">
 
         <main class="content">
@@ -35,30 +35,65 @@ include './../../components/head/head.php';
 
             <!-- INFORMAÇÕES -->
             <section class="card perfil-box">
+
                 <h3>Informações Pessoais</h3>
 
-                <button class="btn-editar" id="abrirEditar">
+                <!-- BOTÃO EDITAR -->
+                <button class="btn-editar-perfil" id="abrirEditar">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
 
                 <div class="perfil-info">
-                    <img src="./../../assets/img/adm-foto.jpg" class="foto-adm" alt="">
+
+                    <img src="./../../assets/img/adm-foto.jpg"
+                        class="foto-adm"
+                        alt="">
+
                     <div class="dados">
-                        <p><strong>Nome:</strong> <?= $usuario['nome'] ?></p>
-                        <p><strong>Email:</strong> <?= $usuario['email'] ?></p>
-                        <p><strong>CPF:</strong> <?= $usuario['cpf'] ?></p>
-                        <p><strong>Senha:</strong> <?= $usuario['senha'] ?></p>
-                        <p><strong>Endereço:</strong> <?= $usuario['endereco'] ?></p>
-                        <p><strong>Telefone:</strong> <?= $usuario['telefone'] ?></p>
+
+                        <p>
+                            <strong>Nome:</strong>
+                            <?= $usuario['nome'] ?>
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            <?= $usuario['email'] ?>
+                        </p>
+
+                        <p>
+                            <strong>CPF:</strong>
+                            <?= $usuario['cpf'] ?>
+                        </p>
+
+                        <p>
+                            <strong>Senha:</strong>
+                            <?= $usuario['senha'] ?>
+                        </p>
+
+                        <p>
+                            <strong>Endereço:</strong>
+                            <?= $usuario['endereco'] ?>
+                        </p>
+
+                        <p>
+                            <strong>Telefone:</strong>
+                            <?= $usuario['telefone'] ?>
+                        </p>
+
                     </div>
+
                 </div>
+
             </section>
 
             <!-- POSTAGENS -->
             <section class="card-adm">
+
                 <h3>Postagens</h3>
 
                 <div class="cards-adm">
+
                     <div class="box azul">
                         <h4><?= $posts['total'] ?></h4>
                         <p>Total de publicações</p>
@@ -78,10 +113,13 @@ include './../../components/head/head.php';
                         <h4><?= $posts['tempo'] ?></h4>
                         <p>Tempo médio</p>
                     </div>
+
                 </div>
+
             </section>
 
         </main>
+
     </div>
 
     <!-- MODAL EDITAR PERFIL -->
@@ -94,20 +132,46 @@ include './../../components/head/head.php';
             <form id="formEditarPerfil">
 
                 <label>Telefone</label>
-                <input type="text" id="editTelefone" value="(67) 9999-9999" maxlength="15" required>
+
+                <input type="text"
+                    id="editTelefone"
+                    value="(67) 9999-9999"
+                    maxlength="15"
+                    required>
 
                 <label>E-mail</label>
-                <input type="email" id="editEmail" value="exemplo@gmail.com" required>
+
+                <input type="email"
+                    id="editEmail"
+                    value="exemplo@gmail.com"
+                    required>
 
                 <label>Nova Senha</label>
-                <input type="password" id="editSenha" placeholder="Digite a nova senha">
+
+                <input type="password"
+                    id="editSenha"
+                    placeholder="Digite a nova senha">
 
                 <label>Confirmar Senha</label>
-                <input type="password" id="editConfirmar" placeholder="Confirme a senha">
 
+                <input type="password"
+                    id="editConfirmar"
+                    placeholder="Confirme a senha">
+
+                <!-- BOTÕES -->
                 <div class="botoes-modal">
-                    <button type="button" class="btn-voltar" id="fecharEditar">Cancelar</button>
-                    <button type="submit" class="btn-concluir">Salvar</button>
+
+                    <button type="button"
+                        class="btn-cancelar-perfil"
+                        id="fecharEditar">
+                        Cancelar
+                    </button>
+
+                    <button type="submit"
+                        class="btn-salvar-perfil">
+                        Salvar
+                    </button>
+
                 </div>
 
             </form>
@@ -115,8 +179,6 @@ include './../../components/head/head.php';
         </div>
 
     </div>
-
-
 
     <script>
         function trocarAba(id, botao) {
@@ -130,6 +192,7 @@ include './../../components/head/head.php';
             });
 
             document.getElementById(id).classList.add('ativo');
+
             botao.classList.add('ativa');
         }
     </script>
@@ -137,7 +200,8 @@ include './../../components/head/head.php';
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            const modalEditar = document.getElementById("modalEditar");
+            const modalEditar =
+                document.getElementById("modalEditar");
 
             function abrir(modal) {
                 modal.style.display = "flex";
@@ -148,40 +212,62 @@ include './../../components/head/head.php';
             }
 
             function fecharFora(modal) {
+
                 modal.addEventListener("click", function(e) {
+
                     if (e.target === modal) {
                         fechar(modal);
                     }
+
                 });
+
             }
 
             /* abrir modal */
-            document.getElementById("abrirEditar").addEventListener("click", function() {
-                abrir(modalEditar);
-            });
+            document
+                .getElementById("abrirEditar")
+                .addEventListener("click", function() {
+
+                    abrir(modalEditar);
+
+                });
 
             /* fechar modal */
-            document.getElementById("fecharEditar").addEventListener("click", function() {
-                fechar(modalEditar);
-            });
+            document
+                .getElementById("fecharEditar")
+                .addEventListener("click", function() {
+
+                    fechar(modalEditar);
+
+                });
 
             fecharFora(modalEditar);
 
             /* salvar */
-            document.getElementById("formEditarPerfil").addEventListener("submit", function(e) {
-                e.preventDefault();
+            document
+                .getElementById("formEditarPerfil")
+                .addEventListener("submit", function(e) {
 
-                let senha = document.getElementById("editSenha").value;
-                let confirmar = document.getElementById("editConfirmar").value;
+                    e.preventDefault();
 
-                if (senha !== confirmar) {
-                    alert("As senhas não coincidem.");
-                    return;
-                }
+                    let senha =
+                        document.getElementById("editSenha").value;
 
-                alert("Dados atualizados com sucesso!");
-                fechar(modalEditar);
-            });
+                    let confirmar =
+                        document.getElementById("editConfirmar").value;
+
+                    if (senha !== confirmar) {
+
+                        alert("As senhas não coincidem.");
+
+                        return;
+                    }
+
+                    alert("Dados atualizados com sucesso!");
+
+                    fechar(modalEditar);
+
+                });
 
         });
     </script>
