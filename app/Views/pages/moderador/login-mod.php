@@ -1,17 +1,17 @@
 <?php
-$titulo = 'Login Administrador';
+$titulo = 'Login Moderador';
 ?>
 <?php
 include './../../components/head/head.php';
 ?>
 
-<body>  
+<body>
 
     <section id="login-form">
         <!-- LADO ESQUERDO-->
 
         <div id="esquerda">
-            <p>Olá, Administrador! 🐾</p>
+            <p>Olá, Moderador! 🐾</p>
             <p>Bem-vindo ao <strong>Conecta Pet</strong>.</p>
             <p>Gerencie a plataforma de forma rápida e simples. ⚙️</p>
 
@@ -43,7 +43,7 @@ include './../../components/head/head.php';
                 </div>
 
             </form>
-            <a class="esqueceu" href="./senha_adm.php">Esqueceu a senha?</a>
+            <a class="esqueceu" href="./senha-mod.php">Esqueceu a senha?</a>
         </div>
     </section>
 
