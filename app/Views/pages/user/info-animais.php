@@ -13,7 +13,7 @@ include './../../components/head/head.php';
 
     <?php
 
-    $nome = "Priscila";
+    $nome = "Theo";
 
     $imagem = "../../assets/img/dog-card.png";
     $descricao = "Olá! Estou buscando um novo lar amoroso para o Theo, um cachorro de 1 ano cheio de energia e muito carinhoso. Ele é saudável, brincalhão e adora correr, brincar e receber atenção. Theo gosta muito de interagir com as pessoas e é um ótimo companheiro para o dia a dia.

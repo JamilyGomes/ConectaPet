@@ -1,0 +1,318 @@
+/* ===== CONTAINER ===== */
+
+.admin-container-mod h2 {
+    margin-bottom: 15px;
+}
+
+.topo-tabela-mod {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+/* ===== FILTRO ===== */
+
+.filtro-mod select {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+/* ===== TABELA ===== */
+
+.tabela-mod {
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+/* HEADER */
+
+.tabela-header-mod {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    padding: 10px;
+    background: #E8BE7D;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* LINHAS */
+
+.linha-mod {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 10px;
+    margin-top: 8px;
+    background: #f5f2f2;
+    border-radius: 10px;
+}
+
+/* STATUS */
+
+.status-mod {
+    padding: 3px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    width: fit-content;
+    font-size: 14px;
+}
+
+.pendente-mod {
+    background: #fce2b4;
+    color: #8a4b08;
+}
+
+.aprovado-mod {
+    background: #d8f0d4;
+    color: #2e7d32;
+}
+
+.recusado-mod {
+    background: #ffd2d2;
+    color: #d32f2f;
+}
+
+/* AÇÕES */
+
+.acoes-mod {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-acao-mod {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    transition: .3s;
+}
+
+.btn-acao-mod:hover {
+    transform: scale(1.1);
+}
+
+.visualizar-mod {
+    color: #555;
+}
+
+.aprovar-mod {
+    color: #66c8a4;
+}
+
+.recusar-mod {
+    color: #ff6b6b;
+}
+
+/* ===== MODAL RECUSAR ===== */
+
+.modal-recusa-mod {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.caixa-recusa-mod {
+    width: 550px;
+    max-width: 90%;
+    background: #f7f4f4;
+    border-radius: 18px;
+    padding: 30px;
+    animation: aparecerMod .3s;
+}
+
+.caixa-recusa-mod h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.caixa-recusa-mod p {
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* CHECKBOX */
+
+.motivos-mod {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.motivos-mod label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+/* TEXTO */
+
+.caixa-recusa-mod textarea {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+/* BOTÕES */
+
+.botoes-recusa-mod {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancelar-recusa-mod {
+    border: none;
+    background: #ff7d7d;
+    color: white;
+    padding: 12px 35px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.confirmar-recusa-mod {
+    border: none;
+    background: #77a7ff;
+    color: white;
+    padding: 12px 35px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ===== MODAL VISUALIZAR ===== */
+
+.modal-publicacao-mod {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.caixa-publicacao-mod {
+    width: 900px;
+    max-width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    animation: aparecerMod .3s;
+}
+
+/* HEADER */
+
+.header-publicacao-mod {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-publicacao-mod button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* FIELDSETS */
+
+.box-mod {
+    border: 1px solid #fbbf24;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.box-mod legend {
+    padding: 0 8px;
+    font-weight: bold;
+    color: #d59d30;
+}
+
+/* FOTOS */
+
+.fotos-animal-mod {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.fotos-animal-mod img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+/* DESCRIÇÃO */
+
+.descricao-animal-mod {
+    margin-top: 15px;
+    line-height: 1.7;
+}
+
+/* PERFIL */
+
+.perfil-mod {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.perfil-foto-mod img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fbbf24;
+}
+
+.perfil-info-mod {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ANIMAÇÃO */
+
+@keyframes aparecerMod {
+
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}

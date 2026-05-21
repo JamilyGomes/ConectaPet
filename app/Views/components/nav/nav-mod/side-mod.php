@@ -31,8 +31,8 @@ $totalNotificacoes = 3; // exemplo
             </a>
         </li>
 
-        <li class="<?= $currentPage == 'publicacoes.php' ? 'active' : '' ?>">
-            <a href="./publicacoes.php">
+        <li class="<?= $currentPage == 'publi-mod.php' ? 'active' : '' ?>">
+            <a href="./publi-mod.php">
                 <i class="fas fa-file-alt"></i> Publicações
             </a>
         </li>
