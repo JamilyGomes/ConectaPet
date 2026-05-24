@@ -21,7 +21,7 @@ include './../../components/head/head.php';
 
         <!-- LADO direito -->
         <div class="direita">
-            <h1>Login</h1>
+            <h1>Login - Moderador</h1>
             <form method="POST" action="" onsubmit="return validarLogin()">
 
                 <label for="email">E-mail</label>
@@ -82,7 +82,7 @@ include './../../components/head/head.php';
 
             // Se estiver tudo preenchido
             localStorage.setItem('login', 'true');
-            window.location.href = "./home_adm.php";
+            window.location.href = "./home-mod.php";
 
             return false; // impede envio padrão já que você redireciona manualmente
         }
