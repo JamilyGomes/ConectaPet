@@ -20,7 +20,7 @@
 
                 <div class="modal-adocao-pi-user">
 
-                    <img src="../assets/img/user.png">
+                    <img src="../../assets/img/car.jpg">
 
                     <div>
 
@@ -58,7 +58,7 @@
 
                 <div class="modal-adocao-pi-animal">
 
-                    <img src="../assets/img/dog.jpg">
+                    <img src="../../assets/img/dog-card.png">
 
                     <div>
 

@@ -1,13 +1,19 @@
+/* ===================== LAYOUT PRINCIPAL CENTRALIZADO ===================== */
 
-/* ===================== CONTAINER PRINCIPAL ===================== */
 .solicitacao-pi-container {
-    margin-left: 230px; /* CORREÇÃO PRINCIPAL (não fica embaixo da sidebar) */
+    margin-left: 230px;
+    /* mesmo padrão do sistema com sidebar */
     padding: 20px;
     min-height: 100vh;
     background: #f5f5f5;
+
+    /* centralização interna igual padrão admin */
+    width: calc(100% - 230px);
+    box-sizing: border-box;
 }
 
 /* ===================== HEADER ===================== */
+
 .solicitacao-pi-header {
     display: flex;
     justify-content: space-between;
@@ -19,16 +25,18 @@
     border: none;
     padding: 10px 15px;
     border-radius: 20px;
+    outline: none;
 }
 
 /* ===================== TABELA ===================== */
+
 .solicitacao-pi-tabela {
     background: #fff;
     border-radius: 16px;
     overflow: hidden;
 }
 
-/* HEADER DA TABELA */
+/* CABEÇALHO */
 .solicitacao-pi-tabela-head {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
@@ -47,6 +55,7 @@
 }
 
 /* ===================== USUÁRIO ===================== */
+
 .solicitacao-pi-usuario {
     display: flex;
     align-items: center;
@@ -65,6 +74,7 @@
 }
 
 /* ===================== STATUS ===================== */
+
 .solicitacao-pi-status {
     padding: 6px 12px;
     border-radius: 20px;
@@ -78,6 +88,7 @@
 }
 
 /* ===================== AÇÕES ===================== */
+
 .solicitacao-pi-acoes {
     display: flex;
     gap: 10px;
@@ -91,6 +102,7 @@
 }
 
 /* ===================== PAGINAÇÃO ===================== */
+
 .solicitacao-pi-paginacao {
     display: flex;
     justify-content: center;
@@ -114,7 +126,8 @@
     background: #E8BE7D;
 }
 
-/* ===================== MODAL ===================== */
+/* ===================== MODAL ADOÇÃO ===================== */
+
 .modal-adocao-pi {
     position: fixed;
     inset: 0;
@@ -182,6 +195,7 @@
 }
 
 /* ===================== BOTÕES MODAL ===================== */
+
 .modal-adocao-pi-footer {
     display: flex;
     justify-content: flex-end;
@@ -205,4 +219,59 @@
     padding: 12px 25px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+/* ===================== MODAL RECUSA ===================== */
+/* ===================== MODAL RECUSA ===================== */
+
+.modal-recusa-adocao {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10000;
+
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* abrir modal */
+.modal-recusa-adocao.ativo {
+    display: flex;
+}
+
+/* CAIXA DO MODAL */
+.caixa-recusa-adocao {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    width: 500px;
+    max-width: 90%;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+    animation: aparecerMod .3s;
+}
+
+.motivos-adocao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aprovado {
+    background: #d8f0d4;
+    color: #2e7d32;
+}
+
+.recusado {
+    background: #ffd2d2;
+    color: #d32f2f;
+}
+
+.pendente {
+    background: #FFF2D8;
+    color: #A66A00;
 }

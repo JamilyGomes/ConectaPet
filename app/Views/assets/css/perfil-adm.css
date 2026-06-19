@@ -1,171 +1,214 @@
-
-
-/* SIDEBAR */
-.sidebar {
-    width: 230px;
-    height: 100vh;
-    background: #E8BE7D;
-    position: fixed;
-    left: 0;
-    top: 0;
-    padding: 20px 10px;
-}
-
-/* LOGO */
-.sidebar-logo {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.sidebar-logo img {
-    width: 60px;
-}
-
-/* MENU */
-.sidebar-menu {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar-menu li {
-    margin: 12px 0;
-}
-
-/* LINKS */
-.sidebar-menu li a {
+/* CONTAINER PRINCIPAL */
+.container {
     display: flex;
-    align-items: center;
-    gap: 12px;
-
-    font-size: 18px;
-    font-weight: 500;
-
-    padding: 12px 18px;
-    margin-right: 15px;
-
-    text-decoration: none;
-    color: #333;
-
-    border-radius: 0 12px 12px 0;
-
-    transition: all 0.2s ease;
 }
 
-/* HOVER */
-.sidebar-menu li a:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: translateX(4px);
-}
+/* ===================== CONTEÚDO ===================== */
 
-/* ATIVO */
-.sidebar-menu li.active a {
-    background: #f3e6d0;
-    font-weight: bold;
-}
-
-/* CONTEÚDO PRINCIPAL */
 .content {
     margin-left: 230px;
-    /* 🔥 igual à sidebar */
     padding: 30px;
-    min-height: 100vh;
+    width: 100%;
+
+    background: transparent;
+    /* remove branco exagerado */
 }
 
-/* TÍTULOS */
-h2 {
+/* TÍTULO */
+.content h2 {
+    font-size: 26px;
     margin-bottom: 20px;
-    color: #333;
+    color: #222;
 }
 
-h3 {
-    margin-bottom: 15px;
-    color: #444;
-}
+/* ===================== CARD BASE ===================== */
 
-/* CARD PADRÃO */
+.card,
 .card-adm {
-    background: #f0ece6;
-    padding: 20px;
-    border-radius: 12px;
+/*     background: #ffffff;
+ */    border-radius: 18px;
+    padding: 22px;
+
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    /* mais suave */
+    border: 1px solid #e9edf3;
+    /* dá profundidade */
 }
 
-/* PERFIL */
+/* ===================== PERFIL ===================== */
+
+.perfil-box {
+    position: relative;
+    background: linear-gradient(145deg, #ffffff, #f7f9fc);
+}
+
+.perfil-box h3 {
+    margin-bottom: 15px;
+}
+
 .perfil-info {
     display: flex;
-    gap: 20px;
     align-items: center;
-    background: #f0ece6
+    gap: 20px;
 }
 
 .foto-adm {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* deixa redonda */
-    object-fit: cover; /* evita deformar */
-    border: 3px solid #E8BE7D;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e8be7d;
 }
 
 .dados p {
     margin: 6px 0;
     color: #333;
+    font-size: 14px;
 }
 
-/* CARDS DE POSTAGEM */
+/* ===================== BOTÃO EDITAR (MODERNO) ===================== */
+
+.btn-editar-perfil {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    /* 
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: 0.25s; */
+}
+
+.perfil-box:hover .btn-editar-perfil {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================== CARDS DE POSTAGENS ===================== */
+
 .cards-adm {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* 4 lado a lado */
-    gap: 20px;
+    gap: 15px;
     margin-top: 15px;
-
 }
 
 .box {
     padding: 18px;
-    border-radius: 12px;
+    border-radius: 14px;
     color: #fff;
-    font-weight: 500;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.box:hover {
+    transform: translateY(-3px);
 }
 
 .box h4 {
-    font-size: 24px;
-    margin: 0 0 5px 0;
+    font-size: 22px;
+    margin-bottom: 5px;
 }
 
-/* CORES SUAVES */
+/* CORES MODERNAS */
 .azul {
-    background: #4db6ac;
+    background: linear-gradient(135deg, #4db6ac, #3aa79a);
 }
 
 .rosa {
-    background: #ef9a9a;
+    background: linear-gradient(135deg, #ef9a9a, #e57373);
 }
 
 .roxo {
-    background: #b39ddb;
+    background: linear-gradient(135deg, #b39ddb, #9575cd);
 }
 
 .verde {
-    background: #81c784;
+    background: linear-gradient(135deg, #81c784, #66bb6a);
 }
 
-/* RESPONSIVO (bônus) */
+/* ===================== MODAL ===================== */
+
+.modaladm {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal2 {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    width: 420px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* INPUTS */
+.modal2 input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* BOTÕES MODAL */
+.botoes-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.btn-cancelar-perfil {
+    background: #ff7d7d;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-salvar-perfil {
+    background: #77a7ff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ===================== RESPONSIVO ===================== */
+
 @media (max-width: 768px) {
+
     .content {
         margin-left: 0;
+        padding: 15px;
     }
 
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-    }
-
-    .cards {
+    .cards-adm {
         grid-template-columns: 1fr;
     }
 
@@ -173,42 +216,5 @@ h3 {
         flex-direction: column;
         align-items: flex-start;
     }
+
 }
-
-/* botaoeditar */
-
-/* CARD PERFIL */
-.perfil-box {
-    position: relative;
-}
-
-/* BOTÃO EDITAR */
-.btn-editar-perfil {
-    position: absolute;
-
-    top: 20px;
-    right: 20px;
-
-    width: 45px;
-    height: 45px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: #f0ece6;
-
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 18px;
-
-    transition: 0.2s;
-}
-
-/* hover */
-.btn-editar-perfil:hover {
-    background: #e2ddd5;
-}/*  */

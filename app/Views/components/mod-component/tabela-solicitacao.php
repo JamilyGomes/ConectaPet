@@ -31,7 +31,7 @@
 
                 <div class="solicitacao-pi-usuario">
 
-                    <img src="../assets/img/user.png">
+                    <img src="../../assets/img/car.jpg">
 
                     <div>
                         <strong>Carlos Silva</strong>
@@ -54,11 +54,11 @@
                         <i class="fas fa-eye"></i>
                     </button>
 
-                    <button>
+                    <button class="aprovar-adocao">
                         <i class="fas fa-check"></i>
                     </button>
 
-                    <button>
+                    <button class="recusar-adocao">
                         <i class="fas fa-times"></i>
                     </button>
 
@@ -70,6 +70,55 @@
 
     </div>
 
+    <div class="modal-recusa-adocao" id="modalRecusaAdocao">
+
+        <div class="caixa-recusa-adocao">
+
+            <h3>⚠ Confirmar recusa da solicitação?</h3>
+
+            <p>Selecione um motivo ou escreva uma observação.</p>
+
+            <div class="motivos-adocao">
+
+                <label>
+                    <input type="checkbox">
+                    Dados incompletos
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    Perfil suspeito
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    Não atende critérios
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    Outro motivo
+                </label>
+
+            </div>
+
+            <textarea placeholder="Observação adicional..."></textarea>
+
+            <div>
+
+                <button id="fecharRecusaAdocao">
+                    Cancelar
+                </button>
+
+                <button class="confirmar-recusa-adocao">
+                    Confirmar recusa
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
     <div class="solicitacao-pi-paginacao">
 
         <button>

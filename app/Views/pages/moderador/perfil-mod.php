@@ -19,7 +19,7 @@ $posts = [
 ?>
 
 <?php
-$titulo = "Perfil adm";
+$titulo = "Perfil Moderador";
 include './../../components/head/head.php';
 ?>
 
@@ -28,7 +28,7 @@ include './../../components/head/head.php';
     <?php
     include './../../components/nav/nav-mod/side-mod.php';
     ?>
-    
+
     <div class="container">
 
         <main class="content">

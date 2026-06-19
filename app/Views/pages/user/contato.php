@@ -35,9 +35,7 @@ include './../../components/head/head.php';
         <label>Nome</label>
         <input type="text" name="nome" placeholder="Digite seu nome" required>
 
-        <label>E-mail</label>
-        <input type="email" name="email" placeholder="Digite seu E-mail" required>
-
+       
         <label>Mensagem</label>
         <textarea id="mensagem" name="mensagem" placeholder="Digite a sua mensagem" maxlength="500"required></textarea>
         <small id="contador">0 / 500 caracteres</small>
