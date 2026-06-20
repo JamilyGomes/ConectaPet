@@ -24,10 +24,8 @@ include './../../components/head/head.php';
 ?>
 
 <body>
+    <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
-    <?php
-    include './../../components/nav/nav-mod/side-mod.php';
-    ?>
 
     <div class="container">
 
