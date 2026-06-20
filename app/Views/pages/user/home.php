@@ -2,27 +2,27 @@
 $titulo = 'Home';
 ?>
 <?php
-    include './../../components/head/head.php';
+include './../../components/head/head.php';
 ?>
 
 <body>
     <!-- navbar -->
     <?php
-        include './../../components/nav/navBar.php';
-        ?>
+    include './../../components/nav/navBar.php';
+    ?>
 
     <!-- header -->
 
     <?php
-        include './../../components/header_home/header_home.php';
-        ?>
+    include './../../components/header_home/header_home.php';
+    ?>
 
     <section class="cards-container">
         <div class="cards">
             <?php
-                for($i=0; $i < 16; $i++){
-                    include './../../components/card_home/card_home.php';
-                }
+            for ($i = 0; $i < 16; $i++) {
+                include './../../components/card_home/card_home.php';
+            }
             ?>
         </div>
 
@@ -34,12 +34,12 @@ $titulo = 'Home';
     </section>
 
     <dialog id="modal-acessibilidade">
-     <?php
+        <?php
         include './teste2.php';
         ?>
     </dialog>
+
+    <?php include './../../components/footer/footer.php'; ?>
 </body>
 
 </html>
-
-

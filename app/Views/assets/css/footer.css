@@ -1,0 +1,95 @@
+/* ===================== FOOTER USER NOVO ===================== */
+
+.footer-user {
+    width: 100%;
+    background: linear-gradient(135deg, #fff7ec, #fff1db);
+    color: #333;
+    padding: 40px 20px 15px 20px;
+    margin-top: 50px;
+    border-top: 3px solid #f4a623;
+}
+
+.footer-user-conteudo {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-user-conteudo h4 {
+    margin-bottom: 10px;
+    font-size: 18px; /* antes 16px */
+    color: #d89d14;
+}
+
+.footer-user-conteudo p {
+    font-size: 15px; /* antes 13px */
+    color: #555;
+    line-height: 1.6;
+}
+
+/* bottom */
+.footer-user-bottom {
+    margin-top: 25px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 12px;
+    text-align: center;
+    font-size: 13px; /* antes 12px */
+    color: #666;
+}
+
+/* redes sociais */
+.footer-user-redes {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* ícones */
+.social-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.social-icon:hover {
+    background: #f4a623;
+    transform: translateY(-3px);
+}
+
+.social-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: #d89d14;
+}
+
+.social-icon:hover svg {
+    fill: #fff;
+}
+
+/* bottom */
+/* .footer-user-bottom {
+    margin-top: 25px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 12px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+} */
+
+/* responsivo */
+@media (max-width: 768px) {
+    .footer-user-conteudo {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+}

@@ -27,18 +27,21 @@ include './../../components/head/head.php';
 
                 </div>
                 <!-- dropdown -->
-                <div class="dropdown">
-                    <div class="dropdown-selected">Selecione um tipo</div>
+                <div class="fav-dd">
 
-                    <div class="dropdown-options">
-                        <div class="option">Gatos</div>
-                        <div class="option">Cachorro</div>
-                        <div class="option">Aves</div>
-                        <div class="option">Outros</div>
+                    <div class="fav-dd-selected">Selecione um tipo</div>
+
+                    <div class="fav-dd-menu">
+
+                        <div class="fav-dd-option" data-value="Gatos">Gatos</div>
+                        <div class="fav-dd-option" data-value="Cachorro">Cachorro</div>
+                        <div class="fav-dd-option" data-value="Aves">Aves</div>
+                        <div class="fav-dd-option" data-value="Outros">Outros</div>
+
                     </div>
 
-                    <!-- valor enviado -->
-                    <input type="hidden" name="tipoAnimal" required>
+                    <input type="hidden" name="tipoAnimal">
+
                 </div>
 
             </div>
@@ -85,43 +88,28 @@ include './../../components/head/head.php';
     </section>
 
     <script>
-        const dropdowns = document.querySelectorAll(".dropdown");
+        const favDd = document.querySelector(".fav-dd");
+        const favSelected = document.querySelector(".fav-dd-selected");
+        const favMenu = document.querySelector(".fav-dd-menu");
+        const favOptions = document.querySelectorAll(".fav-dd-option");
+        const favHidden = document.querySelector(".fav-dd input");
 
-        dropdowns.forEach(dropdown => {
-            const selected = dropdown.querySelector(".dropdown-selected");
-            const options = dropdown.querySelectorAll(".option");
-            const hidden = dropdown.querySelector("input[type='hidden']");
+        favSelected.addEventListener("click", () => {
+            favMenu.classList.toggle("active");
+        });
 
-            selected.addEventListener("click", () => {
-                dropdown.classList.toggle("active");
+        favOptions.forEach(option => {
+            option.addEventListener("click", () => {
+                favSelected.textContent = option.textContent;
+                favHidden.value = option.dataset.value;
+                favMenu.classList.remove("active");
             });
+        });
 
-            options.forEach(option => {
-                option.addEventListener("click", () => {
-                    selected.textContent = option.textContent;
-                    dropdown.classList.remove("active");
-
-                    if (hidden) hidden.value = option.textContent;
-
-                    // campo "Outro"
-                    const campo = dropdown.closest(".campo");
-                    const outroInput = document.querySelector(".outroAssunto");
-
-                    if (option.textContent === "Outro" && outroInput) {
-                        outroInput.style.display = "block";
-                        outroInput.required = true;
-                    } else if (outroInput) {
-                        outroInput.style.display = "none";
-                        outroInput.required = false;
-                    }
-                });
-            });
-
-            document.addEventListener("click", (e) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove("active");
-                }
-            });
+        document.addEventListener("click", (e) => {
+            if (!favDd.contains(e.target)) {
+                favMenu.classList.remove("active");
+            }
         });
     </script>
 
