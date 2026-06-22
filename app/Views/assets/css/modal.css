@@ -4,24 +4,20 @@ FUNDO DO MODAL
 
 .modal-bg {
 
-    background-size: cover;
-    padding-top: 80px;
-
-
     width: 100%;
     min-height: 100vh;
+
+    padding-top: 80px;
 
     background-image: url('../img/fundo.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     background-attachment: fixed;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 
@@ -376,61 +372,66 @@ input:focus {
 /* CONTATO */
 
 .campo {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
 .dropdown {
-  position: relative;
-  width: 50%;
+    position: relative;
+    width: 100%;
 }
 
 /* caixa principal */
 .dropdown-selected {
-  background: white;
-  padding: 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  position: relative;
-  text-align: left;
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    text-align: left;
+
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding-right: 35px;
 }
 
 /* setinha */
 .dropdown-selected::after {
-  content: "▾";
-  position: absolute;
-  right: 15px;
+    content: "▾";
+    position: absolute;
+    right: 15px;
 }
 
 /* lista escondida */
 .dropdown-options {
-  position: absolute;
-  width: 100%;
-  background: #fff;
-  border-radius: 12px;
-  border: #e19f0c;
-  margin-top: 5px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  display: none;
-  overflow: hidden;
-  z-index: 10;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    border: #e19f0c;
+    margin-top: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    overflow: hidden;
+    z-index: 10;
 }
 
 /* opções */
 .option {
-  padding: 12px;
-  cursor: pointer;
-  transition: 0.2s;
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 /* hover bonito */
 .option:hover {
-  background: #eee;
-  border: #e19f0c;
+    background: #eee;
+    border: #e19f0c;
 }
 
 /* quando aberto */
 .dropdown.active .dropdown-options {
-  display: block;
+    display: block;
 }

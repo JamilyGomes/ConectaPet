@@ -22,22 +22,35 @@ include './../../components/head/head.php';
     <form class="form-cadastro" id="formResidencia">
 
         <!-- MORADIA -->
-        <p>Você mora em casa, apartamento ou chácara/sítio?</p>
+
 
         <div class="campo">
+            <label class="form-cadastro">Você mora em casa, apartamento ou chácara/sítio?</label>
+
             <div class="dropdown">
-                <div class="dropdown-selected">Selecione o tipo de moradia</div>
+                <div class="dropdown-selected">
+                    Selecione um tipo
+                </div>
 
                 <div class="dropdown-options">
-                    <div class="option">Casa </div>
+                    <div class="option">Casa</div>
                     <div class="option">Apartamento </div>
-                    <div class="option">Chácara/Sítio </div>
+                    <div class="option">Chácara/Sítio</div>
                     <div class="option">Outro</div>
                 </div>
 
-                <input type="hidden" name="moradia" required>
+                <input type="hidden"
+                    name="tipoAnimal"
+                    required>
             </div>
         </div>
+
+        <input type="text"
+            name="outro_tipo"
+            placeholder="Ex: Fazenda"
+            style="display:none;"
+            class="outroAssunto">
+
 
         <!-- IMÓVEL -->
         <p>O imóvel é próprio, alugado ou cedido?</p>
@@ -74,32 +87,33 @@ include './../../components/head/head.php';
         </div>
 
         <!-- CHECKBOX -->
+        <!-- CHECKBOX -->
         <p>A residência tem quintal, jardim, área externa ou telas nas janelas?</p>
 
         <div class="radio-group" id="checkboxGroup">
 
             <label class="opcao">
-                <input class="input-questionario" type="checkbox" name="estrutura[]">
+                <input class="input-questionario" type="checkbox" name="estrutura[]" value="Quintal">
                 Quintal
             </label>
 
             <label class="opcao">
-                <input class="input-questionario" type="checkbox" name="estrutura[]">
+                <input class="input-questionario" type="checkbox" name="estrutura[]" value="Jardim">
                 Jardim
             </label>
 
             <label class="opcao">
-                <input class="input-questionario" type="checkbox" name="estrutura[]">
+                <input class="input-questionario" type="checkbox" name="estrutura[]" value="Área externa">
                 Área externa
             </label>
 
             <label class="opcao">
-                <input class="input-questionario" type="checkbox" name="estrutura[]">
+                <input class="input-questionario" type="checkbox" name="estrutura[]" value="Telas nas janelas">
                 Telas nas janelas
             </label>
 
             <label class="opcao">
-                <input class="input-questionario" type="checkbox" name="estrutura[]">
+                <input class="input-questionario" type="checkbox" name="estrutura[]" value="Nenhum dos anteriores">
                 Nenhum dos anteriores
             </label>
 
@@ -114,7 +128,7 @@ include './../../components/head/head.php';
             <button type="submit" class="btn-concluir">
                 <a href="./adocao2.php">Continuar 🐾</a>
             </button>
- 
+
         </div>
 
     </form>
@@ -124,35 +138,6 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
-    <!-- SCRIPT DROPDOWN -->
-    <script>
-        const dropdowns = document.querySelectorAll(".dropdown");
-
-        dropdowns.forEach(dropdown => {
-            const selected = dropdown.querySelector(".dropdown-selected");
-            const options = dropdown.querySelectorAll(".option");
-            const hidden = dropdown.querySelector("input[type='hidden']");
-
-            selected.addEventListener("click", () => {
-                dropdown.classList.toggle("active");
-            });
-
-            options.forEach(option => {
-                option.addEventListener("click", () => {
-                    selected.textContent = option.textContent;
-                    dropdown.classList.remove("active");
-
-                    if (hidden) hidden.value = option.textContent;
-                });
-            });
-
-            document.addEventListener("click", (e) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove("active");
-                }
-            });
-        });
-    </script>
 
     <!-- 🔥 VALIDAÇÃO -->
     <script>
@@ -160,7 +145,6 @@ include './../../components/head/head.php';
 
             let valido = true;
 
-            // limpa erros antigos
             document.querySelectorAll(".erro").forEach(el => el.classList.remove("erro"));
 
             // valida dropdowns
@@ -173,7 +157,18 @@ include './../../components/head/head.php';
                 }
             });
 
-            // valida checkbox (mínimo 1)
+            // valida campo "Outro"
+            const tipoMoradia = document.querySelector("input[name='tipoAnimal']").value;
+            const outro = document.querySelector("input[name='outro_tipo']");
+
+            if (tipoMoradia === "Outro") {
+                if (!outro.value.trim()) {
+                    outro.classList.add("erro");
+                    valido = false;
+                }
+            }
+
+            // valida checkbox
             const checkboxes = document.querySelectorAll("input[name='estrutura[]']");
             const algumMarcado = [...checkboxes].some(c => c.checked);
 
@@ -189,6 +184,101 @@ include './../../components/head/head.php';
                 e.preventDefault();
                 window.location.href = "./adocao2.php";
             }
+
+        });
+    </script>
+
+    <!-- DROPDOWN -->
+    <script>
+        const dropdowns = document.querySelectorAll(".dropdown");
+
+        dropdowns.forEach(dropdown => {
+
+            const selected = dropdown.querySelector(".dropdown-selected");
+
+            const options = dropdown.querySelectorAll(".option");
+
+            const hidden = dropdown.querySelector("input[type='hidden']");
+
+            selected.addEventListener("click", () => {
+                dropdown.classList.toggle("active");
+            });
+
+            options.forEach(option => {
+
+                option.addEventListener("click", () => {
+
+                    selected.textContent = option.textContent;
+
+                    dropdown.classList.remove("active");
+
+                    if (hidden) {
+                        hidden.value = option.textContent;
+                    }
+
+                    // Campo "Outro"
+                    const outroInput = document.querySelector(".outroAssunto");
+
+                    if (option.textContent === "Outro") {
+
+                        outroInput.style.display = "block";
+
+                        outroInput.required = true;
+
+                    } else {
+
+                        outroInput.style.display = "none";
+
+                        outroInput.required = false;
+                    }
+                });
+            });
+
+            document.addEventListener("click", (e) => {
+
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove("active");
+                }
+
+            });
+
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const checkboxes = document.querySelectorAll("input[name='estrutura[]']");
+
+            checkboxes.forEach(checkbox => {
+
+                checkbox.addEventListener("change", () => {
+
+                    // Se marcou "Nenhum dos anteriores"
+                    if (checkbox.value === "Nenhum dos anteriores" && checkbox.checked) {
+
+                        checkboxes.forEach(cb => {
+                            if (cb !== checkbox) {
+                                cb.checked = false;
+                            }
+                        });
+
+                    }
+
+                    // Se marcou qualquer outra opção
+                    else if (checkbox.checked) {
+
+                        checkboxes.forEach(cb => {
+                            if (cb.value === "Nenhum dos anteriores") {
+                                cb.checked = false;
+                            }
+                        });
+
+                    }
+
+                });
+
+            });
 
         });
     </script>

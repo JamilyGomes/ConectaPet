@@ -81,8 +81,8 @@ input[type="radio"]{
     border-radius: 10px;
     border: 2px solid transparent;
 
-    background: #f0c46a;
-
+/*     background: #f0c46a;
+ */
     font-size: 14px;
 
     transition: 0.3s;
@@ -93,8 +93,8 @@ input[type="radio"]{
 .campo-criancas input:focus {
     outline: none;
     border: 2px solid #f4a623;
-    background: #ffd88a;
-}
+/*     background: #ffd88a;
+ */}
 
 
 

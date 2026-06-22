@@ -79,7 +79,7 @@ include './../../components/head/head.php';
 
         <!-- BOTÕES -->
         <div class="botoes-modal">
-            <button type="button" class="btn-voltar" onclick="window.location.href='./questionario.php'">
+            <button type="button" class="btn-voltar" onclick="window.location.href='./adocao1.php'">
                 Voltar
             </button>
 
