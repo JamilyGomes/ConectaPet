@@ -11,100 +11,197 @@ include './../../components/head/head.php';
     ob_start();
     ?>
 
-    <h2>Como podemos ajudar?</h2>
+    <form class="form-cadastro" action="./agradecimento.php">
 
-    <div class="campo">
-        <label class="form-cadastro">Assunto</label>
+        <h2>Como podemos ajudar?</h2>
 
-        <div class="dropdown">
-            <div class="dropdown-selected">Selecione um assunto</div>
+        <label>Qual o assunto?</label>
+        <div class="campo">
 
-            <div class="dropdown-options">
-                <div class="option">Adoção</div>
-                <div class="option">Denúncia</div>
-                <div class="option">Dúvida</div>
-                <div class="option">Sugestão</div>
-                <div class="option">Outro</div>
+            <div class="dropdown">
+
+                <div class="dropdown-selected">
+                    Selecione um assunto
+                </div>
+
+                <div class="dropdown-options">
+                    <div class="option">Adoção</div>
+                    <div class="option">Denúncia</div>
+                    <div class="option">Dúvida</div>
+                    <div class="option">Sugestão</div>
+                    <div class="option">Outro</div>
+                </div>
+
+                <!-- obrigatório -->
+                <input type="hidden" name="assunto" id="assuntoSelecionado" required>
+
             </div>
         </div>
-    </div>
 
-    <input type="text" id="outroAssunto" placeholder="Digite o assunto" style="display:none;" class="input-padrao">
-    <form class="form-cadastro">
+        <!-- aparece apenas quando escolher Outro -->
+        <input
+            type="text"
+            id="outroAssunto"
+            name="outroAssunto"
+            placeholder="Digite o assunto"
+            style="display:none;"
+            class="input-padrao">
 
         <label>Nome</label>
-        <input type="text" name="nome" placeholder="Digite seu nome" required>
+        <input
+            type="text"
+            name="nome"
+            placeholder="Digite seu nome"
+            required>
 
-       
         <label>Mensagem</label>
-        <textarea id="mensagem" name="mensagem" placeholder="Digite a sua mensagem" maxlength="500"required></textarea>
+        <textarea
+            id="mensagem"
+            name="mensagem"
+            placeholder="Digite a sua mensagem"
+            maxlength="500"
+            required></textarea>
+
         <small id="contador">0 / 500 caracteres</small>
-    </form>
 
-    <div class="botoes-modal">
+        <div class="botoes-modal">
 
-        <a href="home.php">
-            <button class="btn-voltar">Voltar</button>
-        </a>
+            <a href="home.php">
+                <button type="button" class="btn-voltar">
+                    Voltar
+                </button>
+            </a>
 
-        <a href="./agradecimento.php">
-            <button  class="btn-concluir">
+            <button type="submit" class="btn-concluir">
                 Enviar Mensagem 🐾
             </button>
-        </a>
 
+        </div>
 
-    </div>
+    </form>
 
     <?php
     $modalConteudo = ob_get_clean();
     include './../../components/modal/modal.php';
     ?>
 
+
     <script>
         const dropdown = document.querySelector(".dropdown");
         const selected = document.querySelector(".dropdown-selected");
         const options = document.querySelectorAll(".option");
         const outroInput = document.getElementById("outroAssunto");
+        const hiddenInput = document.getElementById("assuntoSelecionado");
 
         selected.addEventListener("click", () => {
             dropdown.classList.toggle("active");
         });
 
         options.forEach(option => {
+
             option.addEventListener("click", () => {
+
                 selected.textContent = option.textContent;
+                hiddenInput.value = option.textContent;
+
                 dropdown.classList.remove("active");
 
-                // MOSTRAR input se for "Outro"
                 if (option.textContent === "Outro") {
+
                     outroInput.style.display = "block";
+                    outroInput.setAttribute("required", "required");
+
                 } else {
+
                     outroInput.style.display = "none";
+                    outroInput.removeAttribute("required");
+                    outroInput.value = "";
                 }
+
             });
+
         });
 
-        /* fechar ao clicar fora */
         document.addEventListener("click", (e) => {
+
             if (!dropdown.contains(e.target)) {
                 dropdown.classList.remove("active");
             }
+
         });
+
+
+        // contador textarea
 
         const textarea = document.getElementById("mensagem");
         const contador = document.getElementById("contador");
         const limite = 500;
 
         textarea.addEventListener("input", () => {
-            let tamanho = textarea.value.length;
 
+            let tamanho = textarea.value.length;
             contador.textContent = `${tamanho} / ${limite} caracteres`;
 
-            // limitar caracteres
             if (tamanho > limite) {
                 textarea.value = textarea.value.substring(0, limite);
             }
+
         });
+
+
+
+        // VALIDAÇÃO
+
+        document
+            .querySelector(".form-cadastro")
+            .addEventListener("submit", function(e) {
+
+                let valido = true;
+
+                document
+                    .querySelectorAll(".erro")
+                    .forEach(el => {
+                        el.classList.remove("erro");
+                    });
+
+                const campos = this.querySelectorAll("[required]");
+
+                campos.forEach(campo => {
+
+                    if (
+                        !campo.value ||
+                        (
+                            campo.type !== "file" &&
+                            campo.value.trim() === ""
+                        )
+                    ) {
+
+                        if (campo.type === "hidden") {
+
+                            campo
+                                .closest(".dropdown")
+                                .classList.add("erro");
+
+                        } else {
+
+                            campo.classList.add("erro");
+                        }
+
+                        valido = false;
+                    }
+
+                });
+
+                if (!valido) {
+
+                    e.preventDefault();
+
+                    alert(
+                        "Preencha todos os campos obrigatórios!"
+                    );
+                }
+
+            });
     </script>
+
 </body>

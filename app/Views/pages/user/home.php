@@ -11,6 +11,7 @@ include './../../components/head/head.php';
     include './../../components/nav/navBar.php';
     ?>
 
+
     <!-- header -->
 
     <?php
@@ -33,12 +34,10 @@ include './../../components/head/head.php';
         </div>
     </section>
 
-    <dialog id="modal-acessibilidade">
-        <?php
-        include './teste2.php';
-        ?>
-    </dialog>
 
+    <?php
+    include './acessibilidade.php';
+    ?>
     <?php include './../../components/footer/footer.php'; ?>
 </body>
 

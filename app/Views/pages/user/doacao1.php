@@ -45,8 +45,12 @@ include './../../components/head/head.php';
                 placeholder="Ex: Vira-lata">
 
             <label class="form-cadastro">Idade aproximada</label>
-            <input type="date"
+
+            <input
+                type="date"
                 name="idade"
+                id="idade"
+                max="<?= date('Y-m-d'); ?>"
                 required>
 
             <div class="campo">
@@ -190,9 +194,12 @@ include './../../components/head/head.php';
 
             <label class="form-cadastro">Telefone</label>
 
-            <input type="text"
+            <input
+                type="text"
                 name="telefone"
+                id="telefone"
                 placeholder="Ex: (67) 99999-9999"
+                maxlength="15"
                 required>
 
             <label class="form-cadastro">Localização</label>
@@ -407,6 +414,81 @@ include './../../components/head/head.php';
                 }
 
             });
+
+        const data = document.getElementById("idade");
+
+        if (data.value) {
+
+            const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+
+            const escolhida = new Date(data.value);
+
+            if (escolhida > hoje) {
+
+                data.classList.add("erro");
+                valido = false;
+            }
+        }
+    </script>
+
+    <script>
+        const telefone = document.getElementById("telefone");
+
+        telefone.addEventListener("input", function() {
+
+            // remove tudo que não for número
+            let valor = this.value.replace(/\D/g, "");
+
+            // aplica máscara
+            if (valor.length > 11) {
+                valor = valor.substring(0, 11);
+            }
+
+            if (valor.length > 10) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{5})(\d{4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 6) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 2) {
+                valor = valor.replace(
+                    /^(\d{2})(\d+)/,
+                    "($1) $2"
+                );
+            } else if (valor.length > 0) {
+                valor = valor.replace(
+                    /^(\d+)/,
+                    "($1"
+                );
+            }
+
+            this.value = valor;
+        });
+    </script>
+
+    <script>
+        const campoData = document.getElementById("idade");
+
+        campoData.addEventListener("change", function() {
+
+            const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+
+            const dataEscolhida = new Date(this.value);
+
+            if (dataEscolhida > hoje) {
+
+                alert("Não é permitido selecionar uma data futura.");
+
+                this.value = "";
+            }
+
+        });
     </script>
 
 </body>

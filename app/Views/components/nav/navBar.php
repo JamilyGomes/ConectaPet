@@ -28,15 +28,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <li><a href="#"><img src="https://img.icons8.com/ios/50/facebook-f.png" alt="facebook-f" /></a></li>
         <li><a href="#"><img src="https://img.icons8.com/ios/50/tiktok--v1.png" alt="tiktok" /></a></li>
         <li><a href="#"><img src="https://img.icons8.com/ios/50/instagram-new--v1.png" alt="instagram" /></a></li>
-        <li>
-            <a href="#"
-                id="acc-trigger"
-                aria-label="Abrir painel de acessibilidade"
-                aria-expanded="false"
-                aria-controls="acc-panel">
-                <img src="https://img.icons8.com/ios/50/accessibility2.png" alt="accessibility" />
-            </a>
-        </li>
+        
     </ul>
 
     <span class="material-symbols-outlined" id="navbar-sandwich">menu</span>
@@ -61,15 +53,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <img src="../../assets/img/user.png" class="nav-icon" alt="user-icon">
             </a>
         </li>
-        <li>
-            <a href="#"
-                id="acc-trigger"
-                aria-label="Abrir painel de acessibilidade"
-                aria-expanded="false"
-                aria-controls="acc-panel">
-                <img src="https://img.icons8.com/ios/50/accessibility2.png" alt="accessibility" />
-            </a>
-        </li>
+       
         <button onclick="logout()">Sair</button>
 
     </div>
