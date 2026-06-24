@@ -33,7 +33,12 @@ include './../../components/head/head.php';
 
         <main class="content">
 
-            <h2>Perfil</h2>
+            <div class="header-home-mod">
+                <div class="overlay-home-mod">
+                    <h1>Perfil Moderador</h1>
+                    <p>Painel de gerenciamento das publicações e solicitações.</p>
+                </div>
+            </div>
 
             <!-- INFORMAÇÕES -->
             <section class="card perfil-box">

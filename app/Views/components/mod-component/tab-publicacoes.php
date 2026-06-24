@@ -5,8 +5,12 @@ $publicacoes = $publicacoes ?? [];
 
 <div class="admin-container-mod">
 
-    <h2><?= $tituloTabela ?></h2>
-
+    <div class="header-home-mod">
+        <div class="overlay-home-mod">
+            <h1>Publicações</h1>
+            <p>Painel de gerenciamento das publicações e solicitações.</p>
+        </div>
+    </div>
     <div class="topo-tabela-mod">
 
         <div class="filtro-mod">

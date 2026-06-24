@@ -12,8 +12,12 @@ include './../../components/head/head.php';
         <?php
         $tipo = $_GET['tipo'] ?? 'usuarios';
         ?>
-
-        <h2>Administrar Contas</h2>
+        <div class="header-home-mod">
+            <div class="overlay-home-mod">
+                <h1>Administrar Contasr</h1>
+                <p>Painel de gerenciamento das publicações e solicitações.</p>
+            </div>
+        </div>
 
         <div class="topo-tabela">
             <div class="filtro">

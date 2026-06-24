@@ -18,10 +18,15 @@ include './../../components/head/head.php';
     <div class="relatorio-conteudo">
 
 
+        <div class="header-home-mod">
+            <div class="overlay-home-mod">
+                <h1>Relatórios</h1>
+                <p>Painel de gerenciamento das publicações e solicitações.</p>
+            </div>
+        </div>
         <div class="relatorio-cabecalho">
 
             <div>
-                <h1>Relatórios</h1>
 
                 <select>
                     <option>PERÍODO</option>

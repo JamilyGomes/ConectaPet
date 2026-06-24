@@ -1,141 +1,67 @@
-/* ===================== CONTAINER ===================== */
+/* ===== CONTAINER PRINCIPAL ===== */
 
 .favoritos-container {
-    padding: 110px 30px 30px;
-    background: #fffaf7;
-    min-height: 100vh;
+    width: 75%;
+    margin: 40px auto;
+    background: #f8f3e8;
+    border-radius: 20px;
+    padding: 30px;
+    border: 2px solid #f1c84c;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* ===================== TOPO ===================== */
+
+/* ===== TOPO ===== */
 
 .topo-favoritos {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .filtros-favoritos {
     display: flex;
-    justify-content: space-between;
     gap: 20px;
+    align-items: center;
     flex-wrap: wrap;
 }
 
-/* ===================== PESQUISA ===================== */
+
+/* ===== PESQUISA ===== */
 
 .box-pesquisa {
-    display: flex;
-    align-items: center;
-    width: 280px;
-    height: 44px;
-    background: #fff;
-    border-radius: 40px;
-    overflow: hidden;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, .10);
+    position: relative;
+    width: 450px;
 }
 
 .input-pesquisa-fav {
-    flex: 1;
-    height: 44px !important;
-    font-size: 15px !important;
-    padding: 0 14px !important;
-    border: none;
-    outline: none;
-    background: transparent;
+    width: 100%;
+    height: 45px;
+    border: 2px solid #e3b120;
+    border-radius: 12px;
+    padding: 12px 45px 12px 15px;
     resize: none;
+    outline: none;
+    background: white;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.input-pesquisa-fav::placeholder {
+    color: #999;
 }
 
 .btn-pesquisa-fav {
-    width: 60px;
-    height: 44px;
+    position: absolute;
+    right: 10px;
+    top: 7px;
     border: none;
-    background: #FFD471;
+    background: none;
+    cursor: pointer;
     font-size: 18px;
-    cursor: pointer;
+    color: #555;
 }
 
-/* ===================== DROPDOWN (mantido simples) ===================== */
 
-.select-animal {
-    border: none;
-    padding: 10px 14px;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, .08);
-    cursor: pointer;
-}
-
-/* ===================== CARDS ===================== */
-
-.favoritos-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 18px;
-}
-
-.card-favorito {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
-}
-
-.card-favorito img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.card-info {
-    padding: 14px;
-}
-
-.card-info h3 {
-    font-size: 18px;
-    margin-bottom: 6px;
-}
-
-.card-info p {
-    font-size: 14px;
-    color: #666;
-}
-
-.card-info span {
-    font-size: 13px;
-    color: #999;
-    display: block;
-    margin-top: 5px;
-}
-
-/* ===================== BOTÕES ===================== */
-
-.acoes {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-.btn-ver,
-.btn-remover {
-    flex: 1;
-    padding: 8px;
-    font-size: 13px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn-ver {
-    background: #f4ae19;
-    color: white;
-}
-
-.btn-remover {
-    background: #fdf2eb;
-    color: #f4ae19;
-    border: 2px solid #f4ae19;
-}
-
-/* ===================== FAVORITOS DROPDOWN ===================== */
+/* ===== DROPDOWN ===== */
 
 .fav-dd {
     position: relative;
@@ -144,24 +70,27 @@
 
 .fav-dd-selected {
     background: #fff;
-    padding: 10px 14px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    padding: 12px 15px;
+    border: 2px solid #e3b120;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 14px;
-    user-select: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.fav-dd-selected:hover {
+    background: #fff8e6;
 }
 
 .fav-dd-menu {
     position: absolute;
-    top: 110%;
-    left: 0;
+    top: 55px;
     width: 100%;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    display: none;
+    background: white;
+    border: 2px solid #e3b120;
+    border-radius: 12px;
     overflow: hidden;
+    display: none;
     z-index: 20;
 }
 
@@ -170,12 +99,139 @@
 }
 
 .fav-dd-option {
-    padding: 10px 14px;
+    padding: 12px;
     cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 .fav-dd-option:hover {
-    background: #fff3d6;
+    background: #ffe89c;
+}
+
+
+/* ===== ÁREA DOS CARDS ===== */
+
+.favoritos-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+
+/* ===== CARD ===== */
+
+.card-favorito {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid #f1c84c;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+}
+
+.card-favorito:hover {
+    transform: translateY(-5px);
+}
+
+
+/* ===== IMAGEM ===== */
+
+.card-favorito img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+
+/* ===== INFORMAÇÕES ===== */
+
+.card-info {
+    padding: 18px;
+}
+
+.card-info h3 {
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 22px;
+}
+
+.card-info p {
+    margin-bottom: 6px;
+    color: #777;
+    font-size: 14px;
+}
+
+.card-info span {
+    display: block;
+    margin-bottom: 18px;
+    color: #b68a00;
+    font-size: 14px;
+}
+
+
+/* ===== BOTÕES ===== */
+
+.acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-ver,
+.btn-remover {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+
+/* botão amarelo */
+
+.btn-ver {
+    background: #f3c12c;
+    color: #222;
+}
+
+.btn-ver:hover {
+    background: #e0af19;
+}
+
+
+/* botão vermelho */
+
+.btn-remover {
+    background: #ff5b5b;
+    color: white;
+}
+
+.btn-remover:hover {
+    background: #e34343;
+}
+
+
+/* ===== RESPONSIVO ===== */
+
+@media(max-width: 768px){
+
+    .favoritos-container{
+        width: 95%;
+        padding: 20px;
+    }
+
+    .filtros-favoritos{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .box-pesquisa{
+        width: 100%;
+    }
+
+    .fav-dd{
+        width: 100%;
+    }
+
 }

@@ -2,14 +2,20 @@
 
     <div class="solicitacao-pi-header">
 
-        <h2>Solicitações de Adoção</h2>
+        <h2></h2>
+        <div class="header-home-mod">
+            <div class="overlay-home-mod">
+                <h1>Solicitações de Adoção</h1>
+                <p>Painel de gerenciamento das publicações e solicitações.</p>
+            </div>
+        </div>
 
-        <select class="solicitacao-pi-filtro">
+       <!--  <select class="solicitacao-pi-filtro">
             <option>Todos</option>
             <option>Pendente</option>
             <option>Aprovado</option>
             <option>Recusado</option>
-        </select>
+        </select> -->
 
     </div>
 

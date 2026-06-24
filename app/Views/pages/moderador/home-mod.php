@@ -13,8 +13,13 @@ include './../../components/head/head.php';
         <div class="dashboard">
 
             <!-- CARDS TOPO -->
-            <h3>Historico de Publicação</h3>
-
+            <!-- HEADER DA PÁGINA -->
+            <div class="header-home-mod">
+                <div class="overlay-home-mod">
+                    <h1>Home Moderador</h1>
+                    <p>Painel de gerenciamento das publicações e solicitações.</p>
+                </div>
+            </div>
             <div class="cards_ADM">
                 <div class="card roxo">
                     <span>1.500</span>
