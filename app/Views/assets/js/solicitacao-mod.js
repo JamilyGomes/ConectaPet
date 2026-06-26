@@ -16,37 +16,44 @@ function fecharModalRecusa() {
     document.getElementById("modalRecusa").style.display = "none";
 }
 
+function abrirModalQuestionario() {
+    document.getElementById("modalQuestionario").style.display = "flex";
+}
+
+function fecharModalQuestionario() {
+    document.getElementById("modalQuestionario").style.display = "none";
+}
 document.addEventListener("DOMContentLoaded", function () {
 
     let linhaSelecionadaAdocao = null;
 
     const modalRecusaAdocao =
-    document.getElementById("modalRecusaAdocao");
+        document.getElementById("modalRecusaAdocao");
 
 
     /* RECUSAR */
     document.querySelectorAll(".recusar-adocao")
-    .forEach(botao => {
+        .forEach(botao => {
 
-        botao.addEventListener("click", function () {
+            botao.addEventListener("click", function () {
 
-            linhaSelecionadaAdocao =
-            this.closest(".solicitacao-pi-linha");
+                linhaSelecionadaAdocao =
+                    this.closest(".solicitacao-pi-linha");
 
-            modalRecusaAdocao.style.display = "flex";
+                modalRecusaAdocao.style.display = "flex";
+
+            });
 
         });
-
-    });
 
 
     /* FECHAR */
     document.getElementById("fecharRecusaAdocao")
-    .addEventListener("click", function () {
+        .addEventListener("click", function () {
 
-        modalRecusaAdocao.style.display = "none";
+            modalRecusaAdocao.style.display = "none";
 
-    });
+        });
 
 
     /* FECHAR FORA */
@@ -61,43 +68,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* CONFIRMAR RECUSA */
     document.querySelector(".confirmar-recusa-adocao")
-    .addEventListener("click", function () {
+        .addEventListener("click", function () {
 
-        if (!linhaSelecionadaAdocao) return;
+            if (!linhaSelecionadaAdocao) return;
 
-        let status =
-        linhaSelecionadaAdocao.querySelector(".solicitacao-pi-status");
+            let status =
+                linhaSelecionadaAdocao.querySelector(".solicitacao-pi-status");
 
-        status.textContent = "Recusado";
+            status.textContent = "Recusado";
 
-        status.classList.remove("pendente", "aprovado");
-        status.classList.add("recusado");
+            status.classList.remove("pendente", "aprovado");
+            status.classList.add("recusado");
 
-        modalRecusaAdocao.style.display = "none";
+            modalRecusaAdocao.style.display = "none";
 
-    });
+        });
 
 
     /* APROVAR */
     document.querySelectorAll(".aprovar-adocao")
-    .forEach(botao => {
+        .forEach(botao => {
 
-        botao.addEventListener("click", function () {
+            botao.addEventListener("click", function () {
 
-            let linha =
-            this.closest(".solicitacao-pi-linha");
+                let linha =
+                    this.closest(".solicitacao-pi-linha");
 
-            let status =
-            linha.querySelector(".solicitacao-pi-status");
+                let status =
+                    linha.querySelector(".solicitacao-pi-status");
 
-            status.textContent = "Aprovado";
+                status.textContent = "Aprovado";
 
-            status.classList.remove("pendente", "recusado");
-            status.classList.add("aprovado");
+                status.classList.remove("pendente", "recusado");
+                status.classList.add("aprovado");
+
+            });
 
         });
-
-    });
 
 });
 

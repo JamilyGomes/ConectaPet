@@ -1,6 +1,6 @@
 <?php
 $titulo = "Notificações";
-include './../../components/head/head.php';
+include './../../components/head/head2.php';
 ?>
 
 <body>

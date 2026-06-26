@@ -58,6 +58,10 @@ $publicacoes = $publicacoes ?? [];
                         <i class="fas fa-eye"></i>
                     </button>
 
+                    <button class="btn-acao-mod" onclick="abrirModalFormulario()">
+                        <i class="fas fa-clipboard-list"></i>
+                    </button>
+
                     <button class="btn-acao-mod aprovar-mod">
                         <i class="fas fa-check"></i>
                     </button>

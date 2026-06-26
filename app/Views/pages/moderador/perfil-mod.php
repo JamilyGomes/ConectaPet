@@ -20,7 +20,7 @@ $posts = [
 
 <?php
 $titulo = "Perfil Moderador";
-include './../../components/head/head.php';
+include './../../components/head/head2.php';
 ?>
 
 <body>

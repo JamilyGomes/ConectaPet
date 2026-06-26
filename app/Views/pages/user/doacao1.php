@@ -34,8 +34,10 @@ include './../../components/head/head.php';
             <legend>Informações básicas</legend>
 
             <label class="form-cadastro">Nome do pet</label>
-            <input type="text"
-                name="nome_pet"
+            <input
+                type="text"
+                name="nome"
+                id="nome"
                 placeholder="Ex: Thor"
                 required>
 
@@ -487,6 +489,17 @@ include './../../components/head/head.php';
 
                 this.value = "";
             }
+
+        });
+    </script>
+
+    <script>
+        const nome = document.getElementById("nome");
+
+        nome.addEventListener("input", function() {
+
+            // só letras
+            this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
 
         });
     </script>

@@ -19,19 +19,25 @@ include './../../components/head/head.php';
 
         <div class="campo">
             <label>Nome Completo</label>
-            <input type="text" placeholder="Digite seu nome" required>
+            <input type="text" id="nome" placeholder="Digite seu nome" required>
         </div>
 
         <div class="campo">
             <label>CPF</label>
-            <input type="text" placeholder="Digite seu CPF">
+            <input type="text" id="cpf" placeholder="Digite seu CPF" maxlength="14" required>
         </div>
 
         <div class="campo">
             <label>Telefone</label>
-            <input type="text" placeholder="Digite seu telefone">
-        </div>
 
+            <input
+                type="text"
+                name="telefone"
+                id="telefone"
+                placeholder="Ex: (67) 99999-9999"
+                maxlength="15"
+                required>
+        </div>
         <div class="campo">
             <label>E-mail</label>
             <input type="email" placeholder="Digite seu email" required>
@@ -44,7 +50,7 @@ include './../../components/head/head.php';
             <div class="campo-senha">
 
                 <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
-                <span class="material-icons olho" onclick="toggleSenha()">
+                <span class="material-icons olho" onclick="toggleSenha('senha', this)">
                     visibility
                 </span>
 
@@ -57,8 +63,8 @@ include './../../components/head/head.php';
 
             <div class="campo-senha">
 
-                <input type="password" id="senha" name="senha" placeholder="Confirme sua senha" required>
-                <span class="material-icons olho" onclick="toggleSenha()">
+                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha" required>
+                <span class="material-icons olho" onclick="toggleSenha('confirmarSenha', this)">
                     visibility
                 </span>
 
@@ -76,23 +82,23 @@ include './../../components/head/head.php';
             </p>
 
         </div>
+    </form>
 
+    <div class="botoes">
 
-        <div class="botoes">
-
+        <a href="./login.php">
             <button type="submit" class="btn-voltar">
                 Voltar
             </button>
+        </a>
 
+        <a href="">
             <button type="submit" class="btn-concluir">
                 Concluir 🐾
             </button>
+        </a>
 
-        </div>
-
-
-
-    </form>
+    </div>
     <?php
     $modalConteudo = ob_get_clean();
 
@@ -100,19 +106,87 @@ include './../../components/head/head.php';
     ?>
 
     <script>
-        function toggleSenha() {
+        function toggleSenha(id, icone) {
 
-            const senha = document.getElementById("senha");
-            const icone = document.querySelector(".olho");
+            const input = document.getElementById(id);
 
-            if (senha.type === "password") {
-                senha.type = "text";
+            if (input.type === "password") {
+                input.type = "text";
                 icone.textContent = "visibility_off";
             } else {
-                senha.type = "password";
+                input.type = "password";
                 icone.textContent = "visibility";
             }
-
         }
+    </script>
+
+    <script>
+        const cpf = document.getElementById("cpf");
+
+        cpf.addEventListener("input", function() {
+
+            // deixa só números
+            let valor = this.value.replace(/\D/g, "");
+
+            // limita 11 dígitos
+            valor = valor.substring(0, 11);
+
+            // aplica máscara
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+            this.value = valor;
+        });
+    </script>
+
+    <script>
+        const nome = document.getElementById("nome");
+
+        nome.addEventListener("input", function() {
+
+            // remove tudo que NÃO for letra ou espaço
+            this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
+
+        });
+    </script>
+
+    <script>
+        const telefone = document.getElementById("telefone");
+
+        telefone.addEventListener("input", function() {
+
+            // remove tudo que não for número
+            let valor = this.value.replace(/\D/g, "");
+
+            // aplica máscara
+            if (valor.length > 11) {
+                valor = valor.substring(0, 11);
+            }
+
+            if (valor.length > 10) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{5})(\d{4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 6) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 2) {
+                valor = valor.replace(
+                    /^(\d{2})(\d+)/,
+                    "($1) $2"
+                );
+            } else if (valor.length > 0) {
+                valor = valor.replace(
+                    /^(\d+)/,
+                    "($1"
+                );
+            }
+
+            this.value = valor;
+        });
     </script>
 </body>

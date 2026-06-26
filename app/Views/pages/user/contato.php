@@ -51,8 +51,10 @@ include './../../components/head/head.php';
         <input
             type="text"
             name="nome"
+            id="nome"
             placeholder="Digite seu nome"
             required>
+
 
         <label>Mensagem</label>
         <textarea
@@ -85,7 +87,16 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
+    <script>
+        const nome = document.getElementById("nome");
 
+        nome.addEventListener("input", function() {
+
+            // permite letras + acentos + espaços
+            this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
+
+        });
+    </script>
     <script>
         const dropdown = document.querySelector(".dropdown");
         const selected = document.querySelector(".dropdown-selected");

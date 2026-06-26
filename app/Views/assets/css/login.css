@@ -150,6 +150,16 @@ form a {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #555;
+    color: black;
     font-size: 22px;
+}
+.bt_login_adm {
+    display: block;
+    margin: 25px auto 0 auto;
+    padding: 12px 80px;
+    border-radius: 25px;
+    border: none;
+    background: #f4a623;
+    font-weight: 600;
+    cursor: pointer;
 }

@@ -20,9 +20,8 @@ $posts = [
 
 <?php
 $titulo = "Perfil adm";
-include './../../components/head/head.php';
+include './../../components/head/head2.php';
 ?>
-
 <body>
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 

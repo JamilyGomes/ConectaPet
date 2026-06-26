@@ -1,6 +1,6 @@
 <?php
 $titulo = 'Publicações';
-include './../../components/head/head.php';
+include './../../components/head/head2.php';
 ?>
 
 <body>
@@ -199,218 +199,90 @@ include './../../components/head/head.php';
             </fieldset>
 
         </div>
-
     </div>
 
-    <script>
-        const modalRecusa = document.getElementById("modalRecusa");
+    <div class="modal-formulario-mod" id="modalFormulario">
 
-        let linhaSelecionada = null;
+        <div class="caixa-formulario-mod">
 
+            <div class="header-formulario-mod">
 
-        /* ABRIR MODAL */
+                <h2>Questionário da Publicação</h2>
 
-        document.querySelectorAll(".recusar-mod")
-            .forEach(botao => {
+                <button onclick="fecharModalFormulario()">
+                    <i class="fas fa-times"></i>
+                </button>
 
-                botao.addEventListener("click", function() {
+            </div>
 
-                    // guarda a linha clicada
-                    linhaSelecionada = this.closest(".linha-mod");
+            <!-- DADOS DO PET -->
 
-                    // abre modal
-                    modalRecusa.style.display = "flex";
+            <div class="grupo-formulario-mod">
 
-                });
+                <h3>🐶 Dados do Animal</h3>
 
-            });
+                <p><strong>Nome:</strong> Theo</p>
+                <p><strong>Raça:</strong> Vira-lata</p>
+                <p><strong>Tipo:</strong> Cachorro</p>
+                <p><strong>Gênero:</strong> Macho</p>
+                <p><strong>Vacinação:</strong> Vacinas em dia</p>
+                <p><strong>Peso:</strong> 11-23kg</p>
+                <p><strong>Castrado:</strong> Sim</p>
 
+            </div>
 
-        /* FECHAR BOTÃO */
 
-        document
-            .getElementById("fecharRecusa")
-            .addEventListener("click", function() {
+            <!-- COMPORTAMENTO -->
 
-                modalRecusa.style.display = "none";
+            <div class="grupo-formulario-mod">
 
-            });
+                <h3>🐾 Comportamento</h3>
 
+                <p><strong>Interação com pessoas:</strong> Sociável e amigável</p>
 
-        /* FECHAR CLICANDO FORA */
+                <p><strong>Convive com outros animais:</strong> Sim, com todos</p>
 
-        modalRecusa.addEventListener("click", function(e) {
+                <p><strong>Convive com crianças:</strong> Sim</p>
 
-            if (e.target === modalRecusa) {
+                <p><strong>Ambiente:</strong> Casa com quintal</p>
 
-                modalRecusa.style.display = "none";
+                <p><strong>Problemas de saúde:</strong> Não, saudável</p>
 
-            }
+            </div>
 
-        });
 
+            <!-- HISTÓRICO -->
 
-        /* CONFIRMAR */
+            <div class="grupo-formulario-mod">
 
-        document
-            .querySelector(".confirmar-recusa-mod")
-            .addEventListener("click", function(e) {
+                <h3>📜 Histórico</h3>
 
-                e.preventDefault();
+                <p><strong>Motivo da doação:</strong> Falta de tempo</p>
 
-                if (!linhaSelecionada) {
-                    return;
-                }
+                <p><strong>Como adquiriu:</strong> Resgate da rua</p>
 
-                let status = linhaSelecionada.querySelector(".status-mod");
+                <p><strong>Tempo com o animal:</strong> 1 a 3 anos</p>
 
-                let textarea = document.querySelector(
-                    ".caixa-recusa-mod textarea"
-                );
+            </div>
 
-                let checkSelecionado = document.querySelectorAll(
-                    ".motivos-mod input:checked"
-                );
 
+            <!-- COMPROMISSOS -->
 
-                // precisa escolher algo
-                if (
-                    checkSelecionado.length === 0 &&
-                    textarea.value.trim() === ""
-                ) {
+            <div class="grupo-formulario-mod">
 
-                    alert(
-                        "Selecione um motivo ou escreva uma observação"
-                    );
+                <h3>🏥 Cuidados e Compromissos</h3>
 
-                    return;
-                }
+                <p><strong>Itens fornecidos:</strong> Ração + Carteira vacinação</p>
 
+                <p><strong>Levou ao veterinário:</strong> Sim</p>
 
-                // muda status
-                status.textContent = "Recusado";
+                <p><strong>Aceita fornecer info adicional:</strong> Sim</p>
 
-                status.classList.remove(
-                    "pendente-mod",
-                    "aprovado-mod"
-                );
+                <p><strong>Quer atualizações:</strong> Sim</p>
 
-                status.classList.add(
-                    "recusado-mod"
-                );
+            </div>
+        </div>
+    </div>
 
-
-                // limpa checkbox
-                document
-                    .querySelectorAll(".motivos-mod input")
-                    .forEach(item => {
-
-                        item.checked = false;
-
-                    });
-
-
-                // limpa textarea
-                textarea.value = "";
-
-
-                // fecha modal
-                modalRecusa.style.display = "none";
-
-            });
-
-        /* APROVAR PUBLICAÇÃO */
-
-        document.querySelectorAll(".aprovar-mod")
-            .forEach(botao => {
-
-                botao.addEventListener("click", function() {
-
-                    let linha = this.closest(".linha-mod");
-
-                    let status = linha.querySelector(".status-mod");
-
-                    // muda texto
-                    status.textContent = "Aprovado";
-
-                    // remove outras classes
-                    status.classList.remove(
-                        "pendente-mod",
-                        "recusado-mod"
-                    );
-
-                    // adiciona aprovado
-                    status.classList.add(
-                        "aprovado-mod"
-                    );
-
-                });
-
-            });
-
-        /* MODAL VISUALIZAR */
-
-        const modalPublicacao =
-            document.getElementById(
-                "modalPublicacao"
-            );
-
-
-        document
-            .querySelectorAll(
-                ".visualizar-mod"
-            )
-
-            .forEach(botao => {
-
-                botao.addEventListener(
-                    "click",
-
-                    function(e) {
-
-                        e.preventDefault();
-
-                        modalPublicacao.style.display =
-                            "flex";
-
-                    });
-
-            });
-
-
-        document
-            .getElementById(
-                "fecharPublicacao"
-            )
-
-            .addEventListener(
-                "click",
-
-                () => {
-
-                    modalPublicacao.style.display =
-                        "none";
-
-                });
-
-
-        modalPublicacao
-            .addEventListener(
-                "click",
-
-                function(e) {
-
-                    if (
-                        e.target === modalPublicacao
-                    ) {
-
-                        modalPublicacao.style.display =
-                            "none";
-
-                    }
-
-                });
-    </script>
-
-
+    <script src="../../assets/js/publi.js"></script>
 </body>

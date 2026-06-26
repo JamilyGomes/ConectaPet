@@ -1,6 +1,6 @@
 <?php
 $titulo = 'Home Administrador';
-include './../../components/head/head.php';
+include './../../components/head/head2.php';
 ?>
 
 <body>
@@ -52,15 +52,7 @@ include './../../components/head/head.php';
                         <canvas id="graficoPizza"></canvas>
                     </div>
 
-                    <div class="recentes">
-                        <h3>Solicitações Recentes</h3>
-
-                        <div class="item">Sandy Carvalho</div>
-                        <div class="item">Sandy Carvalho</div>
-                        <div class="item">Sandy Carvalho</div>
-                        <div class="item">Sandy Carvalho</div>
-                    </div>
-
+                    
                 </div>
             </div>
 

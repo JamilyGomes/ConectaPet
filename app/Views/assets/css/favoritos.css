@@ -1,14 +1,27 @@
 /* ===== CONTAINER PRINCIPAL ===== */
-
 .favoritos-container {
     width: 75%;
-    margin: 40px auto;
-    background: #f8f3e8;
+    margin: 110px auto 40px;
+    /* 👈 DESCE A TELA (resolve navbar) */
+
+    background: rgba(248, 243, 232, 0.92);
+    backdrop-filter: blur(6px);
+
     border-radius: 20px;
     padding: 30px;
+
     border: 2px solid #f1c84c;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+    position: relative;
+    z-index: 1;
+
+    background: rgba(248, 243, 232, 0.92);
+    backdrop-filter: blur(6px);
 }
+
+
 
 
 /* ===== TOPO ===== */
@@ -52,7 +65,7 @@
 .btn-pesquisa-fav {
     position: absolute;
     right: 10px;
-    top: 7px;
+    top: 15px;
     border: none;
     background: none;
     cursor: pointer;
@@ -126,7 +139,7 @@
     overflow: hidden;
     border: 2px solid #f1c84c;
     transition: 0.3s;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .card-favorito:hover {
@@ -214,23 +227,23 @@
 
 /* ===== RESPONSIVO ===== */
 
-@media(max-width: 768px){
+@media(max-width: 768px) {
 
-    .favoritos-container{
+    .favoritos-container {
         width: 95%;
         padding: 20px;
     }
 
-    .filtros-favoritos{
+    .filtros-favoritos {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .box-pesquisa{
+    .box-pesquisa {
         width: 100%;
     }
 
-    .fav-dd{
+    .fav-dd {
         width: 100%;
     }
 

@@ -103,3 +103,85 @@
     </div>
 
 </div>
+
+<div class="modal-questionario" id="modalQuestionario">
+
+    <div class="modal-questionario-box">
+
+        <div class="modal-questionario-topo">
+
+            <h2>Questionário do Adotante</h2>
+
+            <button onclick="fecharModalQuestionario()">
+                <i class="fas fa-times"></i>
+            </button>
+
+        </div>
+
+
+        <!-- RESIDÊNCIA -->
+
+        <div class="grupo-questionario">
+
+            <h3>🏠 Residência</h3>
+
+            <p><strong>Tipo de moradia:</strong> Casa</p>
+
+            <p><strong>Situação do imóvel:</strong> Próprio</p>
+
+            <p><strong>Permite animais:</strong> Sim</p>
+
+            <p><strong>Estrutura:</strong> Quintal + Jardim</p>
+
+        </div>
+
+
+        <!-- FAMÍLIA -->
+
+        <div class="grupo-questionario">
+
+            <h3>👨‍👩‍👧 Família</h3>
+
+            <p><strong>Pessoas na casa:</strong> 4 pessoas</p>
+
+            <p><strong>Há crianças:</strong> Sim (2 crianças)</p>
+
+            <p><strong>Todos concordam:</strong> Sim</p>
+
+        </div>
+
+
+        <!-- EXPERIÊNCIA -->
+
+        <div class="grupo-questionario">
+
+            <h3>🐶 Experiência</h3>
+
+            <p><strong>Já teve animais:</strong> Sim</p>
+
+            <p><strong>Possui outros animais:</strong> Sim</p>
+
+            <p><strong>Quais:</strong> 2 gatos e 1 cachorro</p>
+
+            <p><strong>Vacinação:</strong> Todos vacinados e castrados</p>
+
+        </div>
+
+
+        <!-- ROTINA -->
+
+        <div class="grupo-questionario">
+
+            <h3>📅 Rotina</h3>
+
+            <p><strong>Tempo sozinho:</strong> 4 a 8 horas</p>
+
+            <p><strong>Responsável:</strong> Eu</p>
+
+            <p><strong>Condição financeira:</strong> Sim</p>
+
+        </div>
+
+    </div>
+
+</div>

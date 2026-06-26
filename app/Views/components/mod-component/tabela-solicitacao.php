@@ -10,7 +10,7 @@
             </div>
         </div>
 
-       <!--  <select class="solicitacao-pi-filtro">
+        <!--  <select class="solicitacao-pi-filtro">
             <option>Todos</option>
             <option>Pendente</option>
             <option>Aprovado</option>
@@ -58,6 +58,10 @@
 
                     <button onclick="abrirModalAdocao()">
                         <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button onclick="abrirModalQuestionario()">
+                        <i class="fas fa-clipboard-list"></i>
                     </button>
 
                     <button class="aprovar-adocao">

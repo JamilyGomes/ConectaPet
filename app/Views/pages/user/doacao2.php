@@ -36,7 +36,6 @@ include './../../components/head/head.php';
                     <div class="option">Sociável e amigável</div>
                     <div class="option">Tímido, mas se adapta</div>
                     <div class="option">Medroso ou agressivo</div>
-                    <div class="option">Outro</div>
                 </div>
 
                 <!-- valor enviado -->

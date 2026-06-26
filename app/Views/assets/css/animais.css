@@ -1,0 +1,197 @@
+/* ================= CONTAINER ================= */
+
+.adm-animais-container {
+/*     margin-left: 230px;
+
+    padding: 30px;
+    min-height: 100vh;
+    background: #f5f6fa; */
+    font-family: Arial, sans-serif;
+}
+
+
+/* ================= HEADER ================= */
+
+.adm-animal-header {
+    margin-bottom: 25px;
+}
+
+.adm-animal-banner {
+    background: #E8BE7D;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.adm-animal-banner h1 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.adm-animal-banner p {
+    color: #555;
+}
+
+
+/* ================= CARDS ================= */
+
+.adm-animal-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.adm-card-animal {
+    flex: 1;
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+}
+
+.adm-card-animal span {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.adm-card-animal h2 {
+    font-size: 38px;
+    margin: 10px 0;
+}
+
+.card-grande {
+    background: #4A90E2;
+}
+
+.card-medio {
+    background: #9B51E0;
+}
+
+.card-pequeno {
+    background: #27AE60;
+}
+
+
+/* ================= CONTADOR ================= */
+
+.adm-animal-total {
+    width: fit-content;
+    margin-left: auto;
+    margin-bottom: 15px;
+
+    padding: 8px 18px;
+    border: 1px solid #E8BE7D;
+    border-radius: 20px;
+}
+
+
+/* ================= TABELA ================= */
+
+.adm-animal-tabela {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+
+/* topo */
+
+.adm-animal-head {
+    display: grid;
+    grid-template-columns: .5fr 2fr 1fr 1fr 1fr;
+
+    background: #E8BE7D;
+    padding: 15px;
+    font-weight: 600;
+}
+
+
+/* linhas */
+
+.adm-animal-linha {
+    display: grid;
+    grid-template-columns: .5fr 2fr 1fr 1fr 1fr;
+
+    align-items: center;
+    padding: 15px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.adm-animal-linha:nth-child(even) {
+    background: #faf8f3;
+}
+
+
+/* id */
+
+.adm-animal-id {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+}
+
+
+/* info animal */
+
+.adm-animal-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.adm-animal-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.adm-animal-info small {
+    color: #777;
+}
+
+
+/* status */
+
+.adm-status-animal {
+    padding: 6px 14px;
+    border-radius: 20px;
+    width: fit-content;
+
+    background: #d8f0d4;
+    color: #2e7d32;
+}
+
+
+/* ações */
+
+.adm-animal-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.adm-animal-acoes button {
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    border-radius: 8px;
+
+    /*     background: #E8BE7D;
+ */
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adm-animal-acoes .material-icons {
+    font-size: 18px;
+    color: #333;
+}

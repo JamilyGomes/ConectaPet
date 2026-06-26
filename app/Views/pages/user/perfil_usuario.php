@@ -124,10 +124,9 @@ include './../../components/head/head.php';
 
   </main>
 
-
-
   <!-- MODAL EDITAR PERFIL -->
-  <div class="modaladm" id="modalEditar">
+  <!-- MODAL EDITAR PERFIL -->
+  <div class="modaluser" id="modalEditar">
 
     <div class="modal2">
 
@@ -136,16 +135,53 @@ include './../../components/head/head.php';
       <form id="formEditarPerfil">
 
         <label>Telefone</label>
-        <input type="text" id="editTelefone" value="(67) 9999-9999" maxlength="15" required>
+
+        <input
+          type="text"
+          name="telefone"
+          id="telefone"
+          value="(67) 9999-9999"
+          maxlength="15"
+          required>
 
         <label>E-mail</label>
         <input type="email" id="editEmail" value="exemplo@gmail.com" required>
 
+        <!-- NOVA SENHA -->
         <label>Nova Senha</label>
-        <input type="password" id="editSenha" placeholder="Digite a nova senha">
+        <div class="campo-senha">
+          <input type="password" id="editSenha" placeholder="Digite a nova senha" required>
 
+          <span class="material-symbols-outlined olho" onclick="toggleSenha('editSenha', this)">
+            visibility
+          </span>
+        </div>
+
+        <!-- CONFIRMAR SENHA -->
         <label>Confirmar Senha</label>
-        <input type="password" id="editConfirmar" placeholder="Confirme a senha">
+        <div class="campo-senha">
+          <input type="password" id="editConfirmar" placeholder="Confirme a senha" required>
+
+          <span class="material-symbols-outlined olho" onclick="toggleSenha('editConfirmar', this)">
+            visibility
+          </span>
+        </div>
+
+        <div class="perfil-foto">
+
+          <img id="previewFoto"
+            src="https://img.freepik.com/fotos-premium/garota-feliz-segura-seu-amado-animal-de-estimacao-um-gato-britanico-escoces-vermelho-no-colo-e-acaricia-seu-pelo_121837-9908.jpg?semt=ais_hybrid&w=740&q=80"
+            alt="Foto do usuário">
+
+          <!-- botão editar foto -->
+          <button type="button" class="btn-foto" onclick="document.getElementById('inputFoto').click()">
+            <i class="fa-solid fa-camera"></i>
+          </button>
+
+          <!-- input escondido -->
+          <input type="file" id="inputFoto" accept="image/*" hidden>
+
+        </div>
 
         <div class="botoes-modal">
           <button type="button" class="btn-voltar" id="fecharEditar">Cancelar</button>
@@ -158,6 +194,65 @@ include './../../components/head/head.php';
 
   </div>
 
+  <script>
+    function toggleSenha(idInput, icon) {
+
+      const input = document.getElementById(idInput);
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "visibility_off";
+      } else {
+        input.type = "password";
+        icon.textContent = "visibility";
+      }
+    }
+
+    function login() {
+      localStorage.setItem('login', 'true');
+      window.location.href = "./home.php";
+    }
+  </script>
+
+
+  <script>
+    const telefone = document.getElementById("telefone");
+
+    telefone.addEventListener("input", function() {
+
+      // remove tudo que não for número
+      let valor = this.value.replace(/\D/g, "");
+
+      // aplica máscara
+      if (valor.length > 11) {
+        valor = valor.substring(0, 11);
+      }
+
+      if (valor.length > 10) {
+        valor = valor.replace(
+          /^(\d{2})(\d{5})(\d{4}).*/,
+          "($1) $2-$3"
+        );
+      } else if (valor.length > 6) {
+        valor = valor.replace(
+          /^(\d{2})(\d{4,5})(\d{0,4}).*/,
+          "($1) $2-$3"
+        );
+      } else if (valor.length > 2) {
+        valor = valor.replace(
+          /^(\d{2})(\d+)/,
+          "($1) $2"
+        );
+      } else if (valor.length > 0) {
+        valor = valor.replace(
+          /^(\d+)/,
+          "($1"
+        );
+      }
+
+      this.value = valor;
+    });
+  </script>
 
   <script>
     function trocarAba(id, botao) {
@@ -223,6 +318,24 @@ include './../../components/head/head.php';
         alert("Dados atualizados com sucesso!");
         fechar(modalEditar);
       });
+
+    });
+  </script>
+  <!-- foto -->
+  <script>
+    document.getElementById("inputFoto").addEventListener("change", function() {
+
+      const file = this.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          document.getElementById("previewFoto").src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
 
     });
   </script>

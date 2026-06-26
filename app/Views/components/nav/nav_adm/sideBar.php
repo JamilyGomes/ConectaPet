@@ -31,12 +31,6 @@ $totalNotificacoes = 3; // exemplo
             </a>
         </li>
 
-        <li class="<?= $currentPage == 'animais.php' ? 'active' : '' ?>">
-            <a href="./animais.php">
-                <i class="fas fa-paw"></i> Animais
-            </a>
-        </li>
-
         <!-- NOTIFICAÇÕES -->
         <li class="<?= $currentPage == 'not_adm.php' ? 'active' : '' ?>">
             <a href="./not_adm.php">
