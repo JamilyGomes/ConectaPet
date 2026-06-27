@@ -256,6 +256,13 @@ HOVER BOTÕES
 }
 
 /* botão */
+.botoes-acoes {
+    display: flex;
+    justify-content: flex-end; /* joga para direita */
+    gap: 15px;
+    margin-top: 20px;
+}
+
 .btn-adotar {
     background: #f3b21c;
     border: none;
@@ -264,10 +271,23 @@ HOVER BOTÕES
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
-    align-self: flex-end;
 }
 
 .btn-adotar:hover {
+    background: #e19f0c;
+}
+
+.btn-voltar {
+    background: #f3b21c;
+    border: none;
+    padding: 12px 31.7px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-voltar:hover {
     background: #e19f0c;
 }
 

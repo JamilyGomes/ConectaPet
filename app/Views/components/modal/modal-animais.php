@@ -35,9 +35,18 @@ include './../../components/head/head.php';
                     A adoção está disponível em <b><?= $cidade ?></b>
                 </p>
 
-                <button class="btn-adotar" onclick="abrirModal()">
-                    Adotar 🐾
-                </button>
+                <div class="botoes-acoes">
+
+                    <button class="btn-voltar" onclick="voltarPagina()">
+                        ← Voltar
+                    </button>
+
+
+                    <button class="btn-adotar" onclick="abrirModal()">
+                        Adotar 🐾
+                    </button>
+
+                </div>
             </div>
 
         </div>
@@ -68,6 +77,10 @@ include './../../components/head/head.php';
     </div>
 
     <script>
+        function voltarPagina() {
+            window.history.back();
+        }
+
         function abrirModal() {
             document.getElementById("modalAdocao").style.display = "flex";
         }
