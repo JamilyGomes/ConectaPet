@@ -16,10 +16,3 @@
 
 </div>
 
-<script>
-    document.querySelectorAll(".fav").forEach(fav => {
-        fav.onclick = () => {
-            fav.classList.toggle("active");
-        };
-    });
-</script>

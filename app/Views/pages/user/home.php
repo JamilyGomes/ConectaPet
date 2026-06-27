@@ -39,6 +39,48 @@ include './../../components/head/head.php';
     include './acessibilidade.php';
     ?>
     <?php include './../../components/footer/footer.php'; ?>
+
+    <script>
+        document.querySelectorAll(".fav").forEach(fav => {
+
+            fav.addEventListener("click", () => {
+
+                const card = fav.closest(".card-home");
+                const nome = card.querySelector("h3").textContent;
+
+
+                let favoritos = JSON.parse(
+                    localStorage.getItem("favoritos")
+                ) || [];
+
+
+                if (favoritos.includes(nome)) {
+
+                    favoritos = favoritos.filter(
+                        item => item !== nome
+                    );
+
+                    fav.classList.remove("active");
+
+
+                } else {
+
+                    favoritos.push(nome);
+
+                    fav.classList.add("active");
+
+                }
+
+
+                localStorage.setItem(
+                    "favoritos",
+                    JSON.stringify(favoritos)
+                );
+
+            });
+
+        });
+    </script>
 </body>
 
 </html>
