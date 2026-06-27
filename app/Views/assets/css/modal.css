@@ -412,7 +412,6 @@ input:focus {
     cursor: pointer;
     position: relative;
     text-align: left;
-
     white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;
