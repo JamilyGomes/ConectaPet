@@ -21,7 +21,7 @@ include './../../components/head/head.php';
         <span>5</span>
     </div>
 
-    <h2>Apresente seu Aumigo 🐾</h2>
+    <h2>Apresente seu Amigo 🐾</h2>
 
     <form class="form-animal"
         action="doacao2.php"

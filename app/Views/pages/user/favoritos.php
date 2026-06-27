@@ -111,6 +111,22 @@ include './../../components/head/head.php';
                 favMenu.classList.remove("active");
             }
         });
+
+        const pesquisaFav = document.querySelector(".input-pesquisa-fav");
+        pesquisaFav.addEventListener("keyup", () => {
+            const texto = pesquisaFav.value.toLowerCase().trim();
+            const cardsFav = document.querySelectorAll(".card-favorito");
+            cardsFav.forEach(card => {
+                const nome = card.querySelector("h3")
+                    .textContent
+                    .toLowerCase();
+                if (nome.includes(texto)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
     </script>
 
 </body>

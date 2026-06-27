@@ -14,7 +14,7 @@ include './../../components/head/head2.php';
         ?>
         <div class="header-home-mod">
             <div class="overlay-home-mod">
-                <h1>Administrar Contasr</h1>
+                <h1>Administrar Contas</h1>
                 <p>Painel de gerenciamento das publicações e solicitações.</p>
             </div>
         </div>
@@ -63,16 +63,27 @@ include './../../components/head/head2.php';
             <h3>Novo Moderador</h3>
             <form id="formCriar">
                 <label>Nome</label>
-                <input type="text" placeholder="Ex: João" required>
-
+                <input
+                    type="text"
+                    name="nome"
+                    id="nome"
+                    placeholder="Digite seu nome"
+                    required>
                 <label>Email</label>
                 <input type="email" placeholder="Ex: joao@gmail.com" required>
 
                 <label>Telefone</label>
-                <input type="text" id="telefone" name="telefone" maxlength="15" placeholder="Ex: (67) 99999-9999" required>
+
+                <input
+                    type="text"
+                    name="telefone"
+                    id="telefone"
+                    placeholder="Ex: (67) 99999-9999"
+                    maxlength="15"
+                    required>
 
                 <label>CPF</label>
-                <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="Ex: 000.000.000-00" required>
+                <input type="text" id="cpf" placeholder="Digite seu CPF" maxlength="14" required>
 
                 <div class="botoes-modal">
                     <button type="button" class="btn-voltar" id="fecharCriar">Cancelar</button>
@@ -90,14 +101,26 @@ include './../../components/head/head2.php';
                 <input type="hidden" id="editId">
 
                 <label>Nome</label>
-                <input type="text" id="editNome" required>
+                <input
+                    type="text"
+                    name="nome"
+                    id="nome"
+                    placeholder="Digite seu nome"
+                    required>
+
 
                 <label>Email</label>
                 <input type="email" id="editEmail" required>
 
                 <label>Telefone</label>
-                <input type="text" id="editTelefone" required>
 
+                <input
+                    type="text"
+                    name="telefone"
+                    id="telefone"
+                    placeholder="Ex: (67) 99999-9999"
+                    maxlength="15"
+                    required>
                 <div class="botoes-modal">
                     <button type="button" class="btn-voltar" id="fecharEditar">Cancelar</button>
                     <button type="submit" class="btn-concluir">Salvar</button>
@@ -138,6 +161,75 @@ include './../../components/head/head2.php';
             <button class="btn-voltar" id="fecharHistorico">Fechar</button>
         </div>
     </div>
+
+    <script>
+        const cpf = document.getElementById("cpf");
+
+        cpf.addEventListener("input", function() {
+
+            // deixa só números
+            let valor = this.value.replace(/\D/g, "");
+
+            // limita 11 dígitos
+            valor = valor.substring(0, 11);
+
+            // aplica máscara
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+            this.value = valor;
+        });
+    </script>
+    <script>
+        const nome = document.getElementById("nome");
+
+        nome.addEventListener("input", function() {
+
+            // permite letras + acentos + espaços
+            this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
+
+        });
+    </script>
+
+    <script>
+        const telefone = document.getElementById("telefone");
+
+        telefone.addEventListener("input", function() {
+
+            // remove tudo que não for número
+            let valor = this.value.replace(/\D/g, "");
+
+            // aplica máscara
+            if (valor.length > 11) {
+                valor = valor.substring(0, 11);
+            }
+
+            if (valor.length > 10) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{5})(\d{4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 6) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 2) {
+                valor = valor.replace(
+                    /^(\d{2})(\d+)/,
+                    "($1) $2"
+                );
+            } else if (valor.length > 0) {
+                valor = valor.replace(
+                    /^(\d+)/,
+                    "($1"
+                );
+            }
+
+            this.value = valor;
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

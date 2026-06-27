@@ -279,3 +279,24 @@
 .tabela-historico .linha {
     background: #f2f2f2;
 }
+
+.campo-senha {
+    position: relative;
+    width: 100%;
+}
+
+.campo-senha input {
+    width: 100%;
+    padding: 12px 45px 12px 12px; /* espaço para o ícone */
+    box-sizing: border-box;
+}
+
+.campo-senha .olho {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    user-select: none;
+}

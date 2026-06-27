@@ -24,7 +24,6 @@ include './../../components/head/head2.php';
 ?>
 
 <body>
-
     <?php
     include './../../components/nav/nav-mod/side-mod.php';
     ?>
@@ -39,6 +38,7 @@ include './../../components/head/head2.php';
                     <p>Painel de gerenciamento das publicações e solicitações.</p>
                 </div>
             </div>
+
 
             <!-- INFORMAÇÕES -->
             <section class="card perfil-box">
@@ -140,9 +140,11 @@ include './../../components/head/head2.php';
 
                 <label>Telefone</label>
 
-                <input type="text"
-                    id="editTelefone"
-                    value="(67) 9999-9999"
+                <input
+                    type="text"
+                    name="telefone"
+                    id="telefone"
+                    placeholder="Ex: (67) 99999-9999"
                     maxlength="15"
                     required>
 
@@ -153,17 +155,33 @@ include './../../components/head/head2.php';
                     value="exemplo@gmail.com"
                     required>
 
-                <label>Nova Senha</label>
+                <label for="senha">Senha</label>
 
-                <input type="password"
-                    id="editSenha"
-                    placeholder="Digite a nova senha">
+                <div class="senha-group">
 
-                <label>Confirmar Senha</label>
+                    <div class="campo-senha">
 
-                <input type="password"
-                    id="editConfirmar"
-                    placeholder="Confirme a senha">
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                        <span class="material-icons olho" onclick="toggleSenha('senha', this)">
+                            visibility
+                        </span>
+
+                    </div>
+                </div>
+
+                <label for="senha">Confirmar Senha</label>
+
+                <div class="senha-group">
+
+                    <div class="campo-senha">
+
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha" required>
+                        <span class="material-icons olho" onclick="toggleSenha('confirmarSenha', this)">
+                            visibility
+                        </span>
+
+                    </div>
+                </div>
 
                 <!-- BOTÕES -->
                 <div class="botoes-modal">
@@ -201,6 +219,60 @@ include './../../components/head/head2.php';
             document.getElementById(id).classList.add('ativo');
 
             botao.classList.add('ativa');
+        }
+    </script>
+
+    <script>
+        const telefone = document.getElementById("telefone");
+
+        telefone.addEventListener("input", function() {
+
+            // remove tudo que não for número
+            let valor = this.value.replace(/\D/g, "");
+
+            // aplica máscara
+            if (valor.length > 11) {
+                valor = valor.substring(0, 11);
+            }
+
+            if (valor.length > 10) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{5})(\d{4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 6) {
+                valor = valor.replace(
+                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
+                    "($1) $2-$3"
+                );
+            } else if (valor.length > 2) {
+                valor = valor.replace(
+                    /^(\d{2})(\d+)/,
+                    "($1) $2"
+                );
+            } else if (valor.length > 0) {
+                valor = valor.replace(
+                    /^(\d+)/,
+                    "($1"
+                );
+            }
+
+            this.value = valor;
+        });
+    </script>
+
+    <script>
+        function toggleSenha(id, icone) {
+
+            const input = document.getElementById(id);
+
+            if (input.type === "password") {
+                input.type = "text";
+                icone.textContent = "visibility_off";
+            } else {
+                input.type = "password";
+                icone.textContent = "visibility";
+            }
         }
     </script>
 

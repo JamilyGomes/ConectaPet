@@ -42,3 +42,23 @@
             </svg>
         </div>
     </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const input = document.querySelector("#input_pesquisa input");
+            const cards = document.querySelectorAll(".card-home");
+            input.addEventListener("keyup", function() {
+                const texto = input.value.toLowerCase();
+                cards.forEach(card => {
+                    const nome = card.querySelector("h3")
+                        .textContent
+                        .toLowerCase();
+                    if (nome.includes(texto)) {
+                        card.style.display = "";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
