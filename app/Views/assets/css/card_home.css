@@ -31,14 +31,33 @@
     z-index: 100;
   }
 
-  .fav {
-    width: 25%;
-    height: 25%;
+.fav {
     position: absolute;
-    top: 0;
-    right: 10px;
-    object-fit: contain;
-  }
+    top: 15px;
+    right: 15px;
+
+    font-size: 45px;
+
+    color: transparent;
+    -webkit-text-stroke: 2px #000;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    z-index: 10;
+}
+
+
+.fav.active {
+    color: #000;
+    -webkit-text-stroke: 0;
+}
+
+
+.fav:hover {
+    transform: scale(1.1);
+}
 
   /* ===================== BOTÃO ===================== */
 

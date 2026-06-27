@@ -47,18 +47,24 @@
         document.addEventListener("DOMContentLoaded", function() {
             const input = document.querySelector("#input_pesquisa input");
             const cards = document.querySelectorAll(".card-home");
-            input.addEventListener("keyup", function() {
-                const texto = input.value.toLowerCase();
+            function atualizarPesquisa() {
+                const texto = input.value.toLowerCase().trim();
                 cards.forEach(card => {
                     const nome = card.querySelector("h3")
                         .textContent
                         .toLowerCase();
                     if (nome.includes(texto)) {
-                        card.style.display = "";
+                        card.style.display = "flex";
                     } else {
                         card.style.display = "none";
                     }
                 });
-            });
+                window.atualizarPaginacao(
+                    Array.from(cards).filter(card =>
+                        card.style.display !== "none"
+                    )
+                );
+            }
+            input.addEventListener("keyup", atualizarPesquisa);
         });
     </script>

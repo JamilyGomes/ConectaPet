@@ -6,10 +6,20 @@
         <h3>Theo - 1 ano</h3>
     </span>
 
-    <img class="fav" src="./../../assets/img/pata.png" alt="favorito">
+    <span class="material-symbols-outlined fav">
+        pets
+    </span>
 
     <a href="../../pages/user/info-animais.php" class="btn-ver-card">
         Ver perfil <span>→</span>
     </a>
 
 </div>
+
+<script>
+    document.querySelectorAll(".fav").forEach(fav => {
+        fav.onclick = () => {
+            fav.classList.toggle("active");
+        };
+    });
+</script>

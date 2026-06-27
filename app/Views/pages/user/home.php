@@ -21,7 +21,7 @@ include './../../components/head/head.php';
     <section class="cards-container">
         <div class="cards">
             <?php
-            for ($i = 0; $i < 16; $i++) {
+            for ($i = 0; $i < 17; $i++) {
                 include './../../components/card_home/card_home.php';
             }
             ?>
@@ -42,4 +42,3 @@ include './../../components/head/head.php';
 </body>
 
 </html>
-00
