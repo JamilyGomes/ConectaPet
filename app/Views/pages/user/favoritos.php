@@ -84,8 +84,10 @@ include './../../components/head/head.php';
 <div class="acoes">
 
 
-<button class="btn-ver">
-Ver Perfil
+<button
+    class="btn-ver"
+    onclick="window.location.href='../../pages/user/info-animais.php'">
+    Ver Perfil
 </button>
 
 
@@ -188,8 +190,11 @@ Remover
                         nome.includes(texto) ?
                         "" :
                         "none";
-
                 });
         });
     </script>
+
+    <?php
+    include './acessibilidade.php';
+    ?>
 </body>
