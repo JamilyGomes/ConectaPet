@@ -131,15 +131,6 @@
     cursor: help;
 }
 
-
-.modo-leitura *:hover:not(.fab-acessibilidade):not(.fab-acessibilidade *) {
-
-    outline: 2px solid #f4ae19;
-    outline-offset: 3px;
-
-}
-
-
 .fab-menu button.ativo {
 
     background:#f4ae19;
