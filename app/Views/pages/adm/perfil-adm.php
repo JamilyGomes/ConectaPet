@@ -183,24 +183,27 @@ include './../../components/head/head2.php';
                 </div>
 
                 <!-- BOTÕES -->
+
                 <div class="botoes-modal">
 
-                    <button type="button"
-                        class="btn-cancelar-perfil"
+                    <button
+                        type="button"
+                        class="btn-voltar"
                         id="fecharEditar">
                         Cancelar
                     </button>
 
-                    <button type="submit"
-                        class="btn-salvar-perfil">
-                        Salvar
+                    <button type="submit" class="btn-concluir">
+                        Salvar 🐾
                     </button>
 
                 </div>
 
             </form>
-
         </div>
+
+
+    </div>
 
     </div>
 

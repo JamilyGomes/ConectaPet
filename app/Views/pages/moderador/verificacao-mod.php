@@ -5,9 +5,6 @@ include './../../components/head/head.php';
 
 <body>
 
-    <?php
-    include './../../components/nav/navBar.php';
-    ?>
 
     <?php
     ob_start();
@@ -15,7 +12,7 @@ include './../../components/head/head.php';
 
     <h2>Confirme seu acesso 🐾</h2>
 
-    <form class="form-cadastro" action="./veri-senha.php">
+    <form class="form-cadastro" action="./atua-senha-mod.php">
 
         <div class="confirmacao-box">
             <p>
@@ -41,7 +38,7 @@ include './../../components/head/head.php';
             <button
                 type="button"
                 class="btn-voltar"
-                onclick="window.location.href='recuperar-senha.php'">
+                onclick="window.location.href='senha-mod.php'">
                 Voltar
             </button>
 

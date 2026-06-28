@@ -28,9 +28,7 @@
         let timerLeitura;
 
 
-        /* ==========================
-           ABRIR MENU
-        ========================== */
+        // abrir menu 
         const fabBtn = document.getElementById("fabBtn");
 
         fabBtn.addEventListener("click", function() {
@@ -39,9 +37,8 @@
         });
 
 
-        /* ==========================
-           LEITOR
-        ========================== */
+        // leitor
+
         window.lerPagina = function() {
             leituraAtiva = !leituraAtiva;
             speechSynthesis.cancel();
@@ -56,27 +53,19 @@
 
 
 
-        /* ==========================
-           DARK MODE
-        ========================== */
+        // dark mode
 
         window.toggleDark = function() {
             document.body.classList.toggle("dark-mode");
         };
 
 
-        /* ==========================
-           CONTRASTE
-        ========================== */
+        // contraste 
         window.toggleContraste = function() {
             document.body.classList.toggle("contraste");
         };
 
-
-
-        /* ==========================
-           AUMENTAR FONTE
-        ========================== */
+        // aumentar fonte 
 
         window.aumentarFonte = function() {
             if (nivelFonte >= maxFonte) return;
@@ -102,9 +91,7 @@
         };
 
 
-        /* ==========================
-           DIMINUIR FONTE
-        ========================== */
+        // diminuir fonte 
 
         window.diminuirFonte = function() {
 
@@ -129,9 +116,7 @@
             nivelFonte--;
         };
 
-        /* ==========================
-           LEITURA POR HOVER
-        ========================== */
+        // leitura por hover
 
         document.body.addEventListener("mousemove", function(e) {
 
@@ -146,10 +131,44 @@
             timerLeitura = setTimeout(() => {
 
                 let elemento = e.target;
+                const tagsPermitidas = [
+                    "H1", "H2", "H3", "H4", "H5", "H6",
+                    "P", "SPAN", "BUTTON",
+                    "A", "LABEL",
+                    "INPUT", "TEXTAREA",
+                    "IMG"
+                ];
 
-                // ignora containers grandes (cards/divs)
-                if (elemento.children.length > 1)
+                // Permite a div do dropdown
+                if (
+                    elemento.tagName !== "DIV" &&
+                    !tagsPermitidas.includes(elemento.tagName)
+                ) {
                     return;
+                }
+
+                // Se for uma DIV, somente a fav-dd-selected pode ser lida
+                if (
+                    elemento.tagName === "DIV" &&
+                    !elemento.classList.contains("fav-dd-selected")
+                ) {
+                    return;
+                }
+
+                // Se estiver em um card, lê apenas quando o mouse estiver
+                // realmente sobre um elemento do card.
+                if (elemento.classList.contains("favoritos-cards")) {
+                    return;
+                }
+
+                // Se o alvo for apenas o container do card, ignora.
+                if (
+                    elemento.classList.contains("card-favorito") &&
+                    elemento === document.elementFromPoint(e.clientX, e.clientY)
+                ) {
+                    return;
+                }
+
                 let texto =
                     elemento.innerText ||
                     elemento.alt ||
@@ -177,11 +196,7 @@
         });
 
 
-        /* ==========================
-           PARAR AO SAIR DO ELEMENTO
-        ========================== */
-
-
+        // parar ao sair do elemento 
         document.body.addEventListener("mouseleave", function() {
             speechSynthesis.cancel();
             ultimoTexto = "";

@@ -49,7 +49,7 @@ include './../../components/head/head2.php';
                 ["id" => 1, "nome" => "João", "data" => "01/01", "status" => "Ativo"],
                 ["id" => 2, "nome" => "Maria", "data" => "02/02", "status" => "Ativo"]
             ];
-            $acoes = ['editar', 'suspender'];
+            $acoes = [ 'suspender'];
         }
 
         include './../../components/adm_component/tabela.php';
@@ -100,27 +100,35 @@ include './../../components/head/head2.php';
             <form id="formEditar">
                 <input type="hidden" id="editId">
 
-                <label>Nome</label>
-                <input
-                    type="text"
-                    name="nome"
-                    id="nome"
-                    placeholder="Digite seu nome"
-                    required>
+                <div class="campo">
+                    <label>Nome</label>
+                    <input
+                        type="text"
+                        name="editNome"
+                        id="editNome"
+                        placeholder="Digite seu nome"
+                        required>
+                </div>
 
+                <div class="campo">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        id="editEmail"
+                        name="editEmail"
+                        required>
+                </div>
 
-                <label>Email</label>
-                <input type="email" id="editEmail" required>
-
-                <label>Telefone</label>
-
-                <input
-                    type="text"
-                    name="telefone"
-                    id="telefone"
-                    placeholder="Ex: (67) 99999-9999"
-                    maxlength="15"
-                    required>
+                <div class="campo">
+                    <label>Telefone</label>
+                    <input
+                        type="text"
+                        name="editTelefone"
+                        id="editTelefone"
+                        placeholder="Ex: (67) 99999-9999"
+                        maxlength="15"
+                        required>
+                </div>
                 <div class="botoes-modal">
                     <button type="button" class="btn-voltar" id="fecharEditar">Cancelar</button>
                     <button type="submit" class="btn-concluir">Salvar</button>
@@ -148,14 +156,16 @@ include './../../components/head/head2.php';
         <div class="modal2">
             <h3>Histórico de <span id="nomeHistorico"></span></h3>
 
-            <div class="topo">
-                <div class="tabela-header">
+            <div class="tabela-historico">
+
+                <div class="topo">
                     <span>Ação</span>
                     <span>Descrição</span>
                     <span>Data</span>
                 </div>
 
                 <div id="conteudoHistorico"></div>
+
             </div>
 
             <button class="btn-voltar" id="fecharHistorico">Fechar</button>
@@ -283,14 +293,20 @@ include './../../components/head/head2.php';
 
             // EDITAR
             document.querySelectorAll('.btn-acao.editar').forEach(botao => {
+
                 botao.addEventListener('click', function() {
+
                     document.getElementById("editId").value = this.dataset.id;
                     document.getElementById("editNome").value = this.dataset.nome;
                     document.getElementById("editEmail").value = this.dataset.email;
                     document.getElementById("editTelefone").value = this.dataset.telefone;
+
                     document.getElementById("nomeEditar").textContent = this.dataset.nome;
+
                     abrir(modalEditar);
+
                 });
+
             });
             document.getElementById("fecharEditar").onclick = () => fechar(modalEditar);
             document.getElementById("fecharHistorico").onclick = () => fechar(modalHist);

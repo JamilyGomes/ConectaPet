@@ -149,11 +149,11 @@
     color: #555;
 }
 
-.acoes {
+/* .acoes {
     display: flex;
     justify-content: center;
     gap: 15px;
-}
+} */
 
 .acoes button {
     border: none;

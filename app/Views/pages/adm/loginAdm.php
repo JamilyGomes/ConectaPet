@@ -21,7 +21,7 @@ include './../../components/head/head.php';
 
         <!-- LADO direito -->
         <div class="direita">
-            <h1>Login</h1>
+            <h1>Login - Administrador</h1>
             <form method="POST" action="" onsubmit="return validarLogin()">
 
                 <label for="email">E-mail</label>

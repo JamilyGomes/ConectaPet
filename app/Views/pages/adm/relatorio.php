@@ -201,14 +201,14 @@ include './../../components/head/head2.php';
 
             </div>
 
-            <div class="acoes-modal">
+            <div class="botoes-modal">
 
-                <button class="btn-cancelar" onclick="fecharModal()">
+                <button class="btn-voltar" onclick="fecharModal()">
                     Cancelar
                 </button>
 
-                <button class="btn-salvar" onclick="exportarRelatorio()">
-                    Confirmar exportação
+                <button class="btn-concluir" onclick="exportarRelatorio()">
+                    Confirmar
                 </button>
 
             </div>

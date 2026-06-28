@@ -68,11 +68,14 @@ include './../../components/head/head.php';
 
         <div class="botoes-modal">
 
-            <a href="home.php">
-                <button type="button" class="btn-voltar">
-                    Voltar
-                </button>
-            </a>
+
+
+            <button
+                type="button"
+                class="btn-voltar"
+                onclick="window.location.href='home.php'">
+                Voltar
+            </button>
 
             <button type="submit" class="btn-concluir">
                 Enviar Mensagem 🐾

@@ -41,7 +41,7 @@
     padding: 12px 22px;
     border: none;
     border-radius: 25px;
-    background:#f4a623;
+    background: #f4a623;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -283,8 +283,8 @@
 }
 
 .relatorio-modal-box p {
-    font-size: 13px;
-    color: #555;
+/*     font-size: 13px;
+ */    color: #555;
     margin-bottom: 15px;
     line-height: 1.3;
 }

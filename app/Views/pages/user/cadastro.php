@@ -15,8 +15,7 @@ include './../../components/head/head.php';
 
     <h2>Dados Pessoais</h2>
 
-    <form class="form-cadastro">
-
+    <form class="form-cadastro" action="./cadastro2.php">
         <div class="campo">
             <label>Nome Completo</label>
             <input type="text" id="nome" placeholder="Digite seu nome" required>
@@ -38,6 +37,7 @@ include './../../components/head/head.php';
                 maxlength="15"
                 required>
         </div>
+
         <div class="campo">
             <label>E-mail</label>
             <input type="email" placeholder="Digite seu email" required>
@@ -82,23 +82,17 @@ include './../../components/head/head.php';
             </p>
 
         </div>
-    </form>
-
-    <div class="botoes">
-
-        <a href="./login.php">
-            <button type="submit" class="btn-voltar">
+        <div class="botoes-modal">
+            <button type="button" class="btn-voltar" onclick="window.location.href='login.php'">
                 Voltar
             </button>
-        </a>
 
-        <a href="">
             <button type="submit" class="btn-concluir">
-                Concluir 🐾
+                Continuar 🐾
             </button>
-        </a>
+        </div>
+    </form>
 
-    </div>
     <?php
     $modalConteudo = ob_get_clean();
 

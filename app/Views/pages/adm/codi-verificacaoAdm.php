@@ -1,9 +1,10 @@
 <?php
 $titulo = 'Envio de codigo para recuperar senha';
-include './../../components/head/head2.php';
+include './../../components/head/head.php';
 ?>
 
 <body>
+
 
     <?php
     ob_start();
@@ -11,42 +12,43 @@ include './../../components/head/head2.php';
 
     <h2>Confirme seu acesso 🐾</h2>
 
-    <div class="confirmacao-box">
+    <form class="form-cadastro" action="./atua-senha-adm.php">
 
-        <p>
-            Você irá receber um código de verificação no e-mail usua*****@gmail.com
-        </p>
-
-    </div>
-
-    <h4>Digite o codigo</h4>
-    
-    <div class="codigo-container">
-
-
-        <div class="codigo">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
+        <div class="confirmacao-box">
+            <p>
+                Você irá receber um código de verificação no e-mail usua*****@gmail.com
+            </p>
         </div>
 
-    </div>
+        <h4>Digite o código</h4>
 
+        <div class="codigo-container">
+            <div class="codigo">
+                <input type="text" maxlength="1" required>
+                <input type="text" maxlength="1" required>
+                <input type="text" maxlength="1" required>
+                <input type="text" maxlength="1" required>
+                <input type="text" maxlength="1" required>
+                <input type="text" maxlength="1" required>
+            </div>
+        </div>
 
-    <div class="botoes">
+        <div class="botoes">
 
-        <button type="submit" class="btn-voltar">
-            Voltar
-        </button>
+            <button
+                type="button"
+                class="btn-voltar"
+                onclick="window.location.href='senha-mod.php'">
+                Voltar
+            </button>
 
-        <button type="submit" class="btn-concluir">
-            Concluir 🐾
-        </button>
+            <button type="submit" class="btn-concluir">
+                Concluir 🐾
+            </button>
 
-    </div>
+        </div>
+
+    </form>
 
     <a class="reenvio" href="">Reenviar código</a>
 
