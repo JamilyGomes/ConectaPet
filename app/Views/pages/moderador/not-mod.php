@@ -8,9 +8,8 @@ include './../../components/head/head2.php';
     include './../../components/nav/nav-mod/side-mod.php';
     ?>
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include './../../components/ace/acss.php';
     ?>
-    
     <div class="main-content">
 
         <div class="notificacoes-container">

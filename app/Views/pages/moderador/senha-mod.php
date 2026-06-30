@@ -10,9 +10,9 @@ include './../../components/head/head.php';
     ?>
 
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include '../user/acessibilidade.php';
     ?>
-    
+
     <h2>Recuperar senha Moderador</h2>
 
     <form class="form-cadastro" action="./verificacao-mod.php">
@@ -43,7 +43,7 @@ include './../../components/head/head.php';
             <button type="button" class="btn-voltar" onclick="window.location.href='login-mod.php'">
                 Voltar
             </button>
-    
+
             <button type="submit" class="btn-concluir">
                 Continuar 🐾
             </button>

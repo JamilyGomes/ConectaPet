@@ -250,6 +250,10 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
+    <?php
+    include './acessibilidade.php';
+    ?>
+
     <!-- DROPDOWN -->
     <script>
         const dropdowns = document.querySelectorAll(".dropdown");

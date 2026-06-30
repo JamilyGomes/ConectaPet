@@ -25,9 +25,8 @@ include './../../components/head/head2.php';
 
 <body>
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
-
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include './../../components/ace/acss.php';
     ?>
 
     <div class="container">
@@ -37,7 +36,7 @@ include './../../components/head/head2.php';
             <div class="header-home-mod">
                 <div class="overlay-home-mod">
                     <h1>Perfil Administrador</h1>
-                    <p>Painel de gerenciamento das publicações e solicitações.</p>
+                    <p>Consulte e atualize suas informações pessoais e configurações da conta.</p>
                 </div>
             </div>
 
@@ -54,9 +53,25 @@ include './../../components/head/head2.php';
 
                 <div class="perfil-info">
 
-                    <img src="./../../assets/img/adm-foto.jpg"
-                        class="foto-adm"
-                        alt="">
+                    <div class="foto-perfil">
+
+                        <img
+                            src="./../../assets/img/adm-foto.jpg"
+                            class="foto-adm"
+                            id="previewFoto"
+                            alt="Foto do administrador">
+
+                        <label for="inputFoto" class="editar-foto">
+                            <i class="fa-solid fa-camera"></i>
+                        </label>
+
+                        <input
+                            type="file"
+                            id="inputFoto"
+                            accept="image/*"
+                            hidden>
+
+                    </div>
 
                     <div class="dados">
 

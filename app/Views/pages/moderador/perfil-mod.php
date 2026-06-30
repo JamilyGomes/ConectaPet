@@ -19,29 +19,26 @@ $posts = [
 ?>
 
 <?php
-$titulo = "Perfil Moderador";
+$titulo = "Perfil adm";
 include './../../components/head/head2.php';
 ?>
 
 <body>
-    <?php
-    include './../../components/nav/nav-mod/side-mod.php';
-    ?>
-    <?php
-    include './../../components/ace/acessibilidade.php';
-    ?>
+    <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
-    
+    <?php
+    include './../../components/ace/acss.php';
+    ?>
     <div class="container">
 
         <main class="content">
 
             <div class="header-home-mod">
-                <div class="overlay-home-mod">
-                    <h1>Perfil Moderador</h1>
-                    <p>Consulte e atualize suas informações pessoais e configurações da conta.</p>
-                </div>
+                <h1>Perfil Moderador</h1>
+                <p>Consulte e atualize suas informações pessoais e configurações da conta.</p>
+
             </div>
+
 
 
             <!-- INFORMAÇÕES -->
@@ -56,9 +53,25 @@ include './../../components/head/head2.php';
 
                 <div class="perfil-info">
 
-                    <img src="./../../assets/img/adm-foto.jpg"
-                        class="foto-adm"
-                        alt="">
+                    <div class="foto-perfil">
+
+                        <img
+                            src="./../../assets/img/adm-foto.jpg"
+                            class="foto-adm"
+                            id="previewFoto"
+                            alt="Foto do administrador">
+
+                        <label for="inputFoto" class="editar-foto">
+                            <i class="fa-solid fa-camera"></i>
+                        </label>
+
+                        <input
+                            type="file"
+                            id="inputFoto"
+                            accept="image/*"
+                            hidden>
+
+                    </div>
 
                     <div class="dados">
 
@@ -188,24 +201,27 @@ include './../../components/head/head2.php';
                 </div>
 
                 <!-- BOTÕES -->
+
                 <div class="botoes-modal">
 
-                    <button type="button"
-                        class="btn-cancelar-perfil"
+                    <button
+                        type="button"
+                        class="btn-voltar"
                         id="fecharEditar">
                         Cancelar
                     </button>
 
-                    <button type="submit"
-                        class="btn-salvar-perfil">
-                        Salvar
+                    <button type="submit" class="btn-concluir">
+                        Salvar 🐾
                     </button>
 
                 </div>
 
             </form>
-
         </div>
+
+
+    </div>
 
     </div>
 
@@ -354,6 +370,5 @@ include './../../components/head/head2.php';
 
         });
     </script>
-
 
 </body>

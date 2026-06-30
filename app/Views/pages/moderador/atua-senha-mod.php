@@ -11,7 +11,7 @@ include './../../components/head/head.php';
     ?>
 
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include '../user/acessibilidade.php';
     ?>
 
     <div class="confirmacao-box">

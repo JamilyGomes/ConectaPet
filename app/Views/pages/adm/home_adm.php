@@ -8,10 +8,6 @@ include './../../components/head/head2.php';
     include './../../components/nav/nav_adm/sideBar.php';
     ?>
 
-    <?php
-    include './../../components/ace/acessibilidade.php';
-    ?>
-
     <div class="main-content">
         <!-- seu conteúdo -->
         <div class="dashboard">
@@ -56,7 +52,7 @@ include './../../components/head/head2.php';
                         <canvas id="graficoPizza"></canvas>
                     </div>
 
-                    
+
                 </div>
             </div>
 
@@ -96,4 +92,8 @@ include './../../components/head/head2.php';
 
         });
     </script>
+
+    <?php
+    include './../../components/ace/acss.php';
+    ?>
 </body>

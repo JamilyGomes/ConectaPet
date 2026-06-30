@@ -8,7 +8,7 @@ include './../../components/head/head2.php';
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include './../../components/ace/acss.php';
     ?>
 
     <div class="main-content">
@@ -16,65 +16,129 @@ include './../../components/head/head2.php';
         <?php
         $tipo = $_GET['tipo'] ?? 'usuarios';
         ?>
+
         <div class="header-home-mod">
             <div class="overlay-home-mod">
                 <h1>Administrar Contas</h1>
-                <p>Painel de gerenciamento das publicações e solicitações.</p>
+                <p>Gerencie as contas dos usuários, atualize informações e controle os acessos ao sistema.</p>
             </div>
         </div>
 
         <div class="topo-tabela">
+
             <div class="filtro">
+
                 <a href="?tipo=usuarios">
-                    <button class="<?= $tipo == 'usuarios' ? 'ativo' : '' ?>">Usuário</button>
+                    <button class="<?= $tipo == 'usuarios' ? 'ativo' : '' ?>">
+                        Usuário
+                    </button>
                 </a>
 
                 <a href="?tipo=moderadores">
-                    <button class="<?= $tipo == 'moderadores' ? 'ativo' : '' ?>">Moderador</button>
+                    <button class="<?= $tipo == 'moderadores' ? 'ativo' : '' ?>">
+                        Moderador
+                    </button>
                 </a>
+
             </div>
 
             <?php if ($tipo == 'moderadores'): ?>
-                <button class="btn-criar" id="abrirModal">Criar novo Moderador</button>
+                <button class="btn-criar" id="abrirModal">
+                    Criar novo Moderador
+                </button>
             <?php endif; ?>
+
         </div>
 
         <?php
+
         if ($tipo == 'moderadores') {
+
             $tituloTabela = "Moderadores";
+
             $usuarios = [
-                ["id" => 10, "nome" => "Carlos", "data" => "05/02", "status" => "Ativo", "email" => "carlos@email.com", "telefone" => "(67)99999-9999"],
-                ["id" => 11, "nome" => "Ana", "data" => "06/02", "status" => "Ativo", "email" => "ana@email.com", "telefone" => "(67)98888-8888"]
+                [
+                    "id" => 10,
+                    "nome" => "Carlos",
+                    "data" => "05/02",
+                    "status" => "Ativo",
+                    "email" => "carlos@email.com",
+                    "telefone" => "(67)99999-9999"
+                ],
+                [
+                    "id" => 11,
+                    "nome" => "Ana",
+                    "data" => "06/02",
+                    "status" => "Ativo",
+                    "email" => "ana@email.com",
+                    "telefone" => "(67)98888-8888"
+                ]
             ];
-            $acoes = ['suspender', 'historico', 'mensagem', 'editar'];
+
+            $acoes = [
+                'suspender',
+                'historico',
+                'mensagem',
+                'editar'
+            ];
         } else {
+
             $tituloTabela = "Usuários";
+
             $usuarios = [
-                ["id" => 1, "nome" => "João", "data" => "01/01", "status" => "Ativo"],
-                ["id" => 2, "nome" => "Maria", "data" => "02/02", "status" => "Ativo"]
+                [
+                    "id" => 1,
+                    "nome" => "João",
+                    "data" => "01/01",
+                    "status" => "Ativo"
+                ],
+                [
+                    "id" => 2,
+                    "nome" => "Maria",
+                    "data" => "02/02",
+                    "status" => "Ativo"
+                ]
             ];
-            $acoes = ['suspender'];
+
+            $acoes = [
+                'suspender'
+            ];
         }
 
         include './../../components/adm_component/tabela.php';
+
         ?>
 
     </div>
 
-    <!-- MODAL CRIAR -->
+    <!-- ===========================
+            MODAL CRIAR
+    ============================ -->
+
     <div class="modaladm" id="modalCriar">
+
         <div class="modal2">
+
             <h3>Novo Moderador</h3>
-            <form id="formCriar">
+
+            <form id="formCriar" action="?tipo=moderadores" method="POST">
                 <label>Nome</label>
+
                 <input
                     type="text"
                     name="nome"
                     id="nome"
                     placeholder="Digite seu nome"
                     required>
+
                 <label>Email</label>
-                <input type="email" placeholder="Ex: joao@gmail.com" required>
+
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Ex: joao@gmail.com"
+                    required>
 
                 <label>Telefone</label>
 
@@ -87,44 +151,84 @@ include './../../components/head/head2.php';
                     required>
 
                 <label>CPF</label>
-                <input type="text" id="cpf" placeholder="Digite seu CPF" maxlength="14" required>
+
+                <input
+                    type="text"
+                    id="cpf"
+                    name="cpf"
+                    placeholder="Digite seu CPF"
+                    maxlength="14"
+                    required>
 
                 <div class="botoes-modal">
-                    <button type="button" class="btn-voltar" id="fecharCriar">Cancelar</button>
-                    <button type="submit" class="btn-concluir">Cadastrar</button>
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                        id="fecharCriar">
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-concluir">
+                        Cadastrar
+                    </button>
+
                 </div>
+
             </form>
+
         </div>
+
     </div>
 
-    <!-- MODAL EDITAR -->
+    <!-- ===========================
+        MODAL EDITAR
+=========================== -->
+
     <div class="modaladm" id="modalEditar">
+
         <div class="modal2">
+
             <h3>Editando <span id="nomeEditar"></span></h3>
-            <form id="formEditar">
-                <input type="hidden" id="editId">
+
+            <form id="formEditar" action="?tipo=moderadores" method="POST">
+
+                <input
+                    type="hidden"
+                    id="editId">
 
                 <div class="campo">
+
                     <label>Nome</label>
+
                     <input
                         type="text"
                         name="editNome"
                         id="editNome"
                         placeholder="Digite seu nome"
                         required>
+
                 </div>
 
                 <div class="campo">
+
                     <label>Email</label>
+
                     <input
                         type="email"
-                        id="editEmail"
                         name="editEmail"
+                        id="editEmail"
+                        placeholder="Digite o e-mail"
                         required>
+
                 </div>
 
                 <div class="campo">
+
                     <label>Telefone</label>
+
                     <input
                         type="text"
                         name="editTelefone"
@@ -132,13 +236,30 @@ include './../../components/head/head2.php';
                         placeholder="Ex: (67) 99999-9999"
                         maxlength="15"
                         required>
+
                 </div>
+
                 <div class="botoes-modal">
-                    <button type="button" class="btn-voltar" id="fecharEditar">Cancelar</button>
-                    <button type="submit" class="btn-concluir">Salvar</button>
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                        id="fecharEditar">
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-concluir">
+                        Salvar
+                    </button>
+
                 </div>
+
             </form>
+
         </div>
+
     </div>
 
     <!-- MODAL MENSAGEM -->
@@ -179,72 +300,89 @@ include './../../components/head/head2.php';
     <script>
         const cpf = document.getElementById("cpf");
 
-        cpf.addEventListener("input", function() {
+        if (cpf) {
+            cpf.addEventListener("input", function() {
 
-            // deixa só números
-            let valor = this.value.replace(/\D/g, "");
-
-            // limita 11 dígitos
-            valor = valor.substring(0, 11);
-
-            // aplica máscara
-            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-            valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
-            this.value = valor;
-        });
-    </script>
-    <script>
-        const nome = document.getElementById("nome");
-
-        nome.addEventListener("input", function() {
-
-            // permite letras + acentos + espaços
-            this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
-
-        });
-    </script>
-
-    <script>
-        const telefone = document.getElementById("telefone");
-
-        telefone.addEventListener("input", function() {
-
-            // remove tudo que não for número
-            let valor = this.value.replace(/\D/g, "");
-
-            // aplica máscara
-            if (valor.length > 11) {
+                let valor = this.value.replace(/\D/g, "");
                 valor = valor.substring(0, 11);
-            }
 
-            if (valor.length > 10) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{5})(\d{4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 6) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 2) {
-                valor = valor.replace(
-                    /^(\d{2})(\d+)/,
-                    "($1) $2"
-                );
-            } else if (valor.length > 0) {
-                valor = valor.replace(
-                    /^(\d+)/,
-                    "($1"
-                );
-            }
+                valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+                valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+                valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 
-            this.value = valor;
+                this.value = valor;
+
+            });
+        }
+
+        // ---------------- NOME ----------------
+
+        ["nome", "editNome"].forEach(id => {
+
+            const campo = document.getElementById(id);
+
+            if (!campo) return;
+
+            campo.addEventListener("input", function() {
+
+                this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
+
+            });
+
         });
-    </script>
 
+        // ---------------- TELEFONE ----------------
+
+        function mascaraTelefone(input) {
+
+            input.addEventListener("input", function() {
+
+                let valor = this.value.replace(/\D/g, "");
+
+                valor = valor.substring(0, 11);
+
+                if (valor.length > 10) {
+
+                    valor = valor.replace(
+                        /^(\d{2})(\d{5})(\d{4}).*/,
+                        "($1) $2-$3"
+                    );
+
+                } else if (valor.length > 6) {
+
+                    valor = valor.replace(
+                        /^(\d{2})(\d{4,5})(\d{0,4}).*/,
+                        "($1) $2-$3"
+                    );
+
+                } else if (valor.length > 2) {
+
+                    valor = valor.replace(
+                        /^(\d{2})(\d+)/,
+                        "($1) $2"
+                    );
+
+                } else if (valor.length > 0) {
+
+                    valor = valor.replace(
+                        /^(\d+)/,
+                        "($1"
+                    );
+
+                }
+
+                this.value = valor;
+
+            });
+
+        }
+
+        const telefone = document.getElementById("telefone");
+        const editTelefone = document.getElementById("editTelefone");
+
+        if (telefone) mascaraTelefone(telefone);
+        if (editTelefone) mascaraTelefone(editTelefone);
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
@@ -388,12 +526,12 @@ include './../../components/head/head2.php';
 
                     dados.forEach(item => {
                         conteudo.innerHTML += `
-                <div class="linha">
-                    <span>${item.acao}</span>
-                    <span>${item.desc}</span>
-                    <span>${item.data}</span>
-                </div>
-            `;
+                    <div class="linha">
+                        <span>${item.acao}</span>
+                        <span>${item.desc}</span>
+                        <span>${item.data}</span>
+                    </div>
+                `;
                     });
 
                 });

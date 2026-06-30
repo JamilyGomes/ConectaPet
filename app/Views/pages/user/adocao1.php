@@ -19,8 +19,10 @@ include './../../components/head/head.php';
 
     <h2>Sobre a residência</h2>
 
-    <form class="form-cadastro" id="formResidencia">
-
+    <form class="form-cadastro"
+        id="formResidencia"
+        action="./adocao2.php"
+        method="POST">
         <!-- MORADIA -->
 
         <p>Você mora em casa, apartamento ou chácara/sítio?
@@ -125,7 +127,7 @@ include './../../components/head/head.php';
             </button>
 
             <button type="submit" class="btn-concluir">
-                <a href="./adocao2.php">Continuar 🐾</a>
+                Continuar 🐾
             </button>
 
         </div>
@@ -135,6 +137,11 @@ include './../../components/head/head.php';
     <?php
     $modalConteudo = ob_get_clean();
     include './../../components/modal/modal.php';
+    ?>
+
+
+    <?php
+    include './acessibilidade.php';
     ?>
 
 
@@ -179,9 +186,6 @@ include './../../components/head/head.php';
             if (!valido) {
                 e.preventDefault();
                 alert("Preencha todas as perguntas!");
-            } else {
-                e.preventDefault();
-                window.location.href = "./adocao2.php";
             }
 
         });

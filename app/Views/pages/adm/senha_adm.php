@@ -10,7 +10,7 @@ include './../../components/head/head.php';
     ?>
 
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include '../user/acessibilidade.php';
     ?>
 
     <h2>Recuperar senha Administrador</h2>

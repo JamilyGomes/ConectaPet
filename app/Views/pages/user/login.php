@@ -57,6 +57,10 @@ include './../../components/head/head.php';
         </div>
     </section>
 
+    <?php
+    include './acessibilidade.php';
+    ?>
+
     <script>
         function toggleSenha() {
 

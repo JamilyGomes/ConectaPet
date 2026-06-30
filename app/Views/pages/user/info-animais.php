@@ -28,4 +28,8 @@ include './../../components/head/head.php';
     include('../../components/modal/modal-animais.php');
 
     ?>
+
+    <?php
+    include './acessibilidade.php';
+    ?>
 </body>

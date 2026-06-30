@@ -194,6 +194,10 @@ include './../../components/head/head.php';
 
   </div>
 
+  <?php
+    include './acessibilidade.php';
+    ?>
+
   <script>
     function toggleSenha(idInput, icon) {
 

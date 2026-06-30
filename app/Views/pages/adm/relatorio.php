@@ -8,9 +8,9 @@ include './../../components/head/head2.php';
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include './../../components/ace/acss.php';
     ?>
-    
+
     <?php
     // futuramente você pode puxar esses dados do banco
     $acessos = "23.450K";
@@ -26,7 +26,7 @@ include './../../components/head/head2.php';
         <div class="header-home-mod">
             <div class="overlay-home-mod">
                 <h1>Relatórios</h1>
-                <p>Painel de gerenciamento das publicações e solicitações.</p>
+                <p>Visualize relatórios e acompanhe as informações e estatísticas do sistema.</p>
             </div>
         </div>
         <div class="relatorio-cabecalho">

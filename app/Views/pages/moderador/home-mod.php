@@ -9,7 +9,7 @@ include './../../components/head/head2.php';
     ?>
 
     <?php
-    include './../../components/ace/acessibilidade.php';
+    include './../../components/ace/acss.php';
     ?>
     <div class="main-content">
         <!-- seu conteúdo -->

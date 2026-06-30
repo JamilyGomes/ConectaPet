@@ -53,6 +53,10 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
+    <?php
+    include './acessibilidade.php';
+    ?>
+
     <script>
         const nome = document.getElementById("nome");
 

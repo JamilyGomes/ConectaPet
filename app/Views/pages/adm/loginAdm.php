@@ -7,8 +7,8 @@ include './../../components/head/head.php';
 
 <body>
 
-    <?php
-    include './../../components/ace/acessibilidade.php';
+     <?php
+    include '../user/acessibilidade.php';
     ?>
 
     <section id="login-form">

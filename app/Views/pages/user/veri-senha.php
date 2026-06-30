@@ -66,6 +66,10 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
+    <?php
+    include './acessibilidade.php';
+    ?>
+
     <script>
         function toggleSenha(id, icone) {
 
