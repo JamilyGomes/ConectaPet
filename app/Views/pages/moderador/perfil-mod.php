@@ -27,7 +27,11 @@ include './../../components/head/head2.php';
     <?php
     include './../../components/nav/nav-mod/side-mod.php';
     ?>
+    <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
 
+    
     <div class="container">
 
         <main class="content">
@@ -35,7 +39,7 @@ include './../../components/head/head2.php';
             <div class="header-home-mod">
                 <div class="overlay-home-mod">
                     <h1>Perfil Moderador</h1>
-                    <p>Painel de gerenciamento das publicações e solicitações.</p>
+                    <p>Consulte e atualize suas informações pessoais e configurações da conta.</p>
                 </div>
             </div>
 
@@ -350,5 +354,6 @@ include './../../components/head/head2.php';
 
         });
     </script>
+
 
 </body>

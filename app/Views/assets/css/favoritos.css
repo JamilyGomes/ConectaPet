@@ -7,6 +7,11 @@
     background: rgba(248, 243, 232, 0.92);
     backdrop-filter: blur(6px);
 
+    background-image:url('../img/fundo.png');
+    background-size: cover;
+
+    
+
     border-radius: 20px;
     padding: 30px;
 
@@ -28,6 +33,7 @@
 
 .topo-favoritos {
     margin-bottom: 30px;
+    
 }
 
 .filtros-favoritos {

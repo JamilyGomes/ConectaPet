@@ -1,15 +1,14 @@
 /* =========================
 FUNDO DO MODAL
 ========================= */
-
 .modal-bg {
-
     width: 100%;
     min-height: 100vh;
 
-    padding-top: 80px;
+    padding-top: 100px;
+    padding-bottom: 80px;
 
-    background-image: url('../img/fundo.png');
+    background-image:url('../img/fundo.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -17,7 +16,7 @@ FUNDO DO MODAL
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* começa no topo */
 }
 
 

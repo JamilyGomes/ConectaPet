@@ -6,7 +6,10 @@ include './../../components/head/head.php';
 ?>
 
 <body>
-
+    <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
+    
     <section id="login-form">
         <!-- LADO ESQUERDO-->
 

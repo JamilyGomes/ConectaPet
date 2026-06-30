@@ -6,7 +6,7 @@
         <div class="header-home-mod">
             <div class="overlay-home-mod">
                 <h1>Solicitações de Adoção</h1>
-                <p>Painel de gerenciamento das publicações e solicitações.</p>
+                <p>Acompanhe as solicitações de adoção e gerencie a aprovação ou recusa dos pedidos.</p>
             </div>
         </div>
 
@@ -54,21 +54,21 @@
                     Pendente
                 </span>
 
-                <div class="solicitacao-pi-acoes">
+                <div class="acoes-mod">
 
-                    <button onclick="abrirModalAdocao()">
+                    <button class="btn-acao-mod visualizar-mod" onclick="abrirModalAdocao()">
                         <i class="fas fa-eye"></i>
                     </button>
 
-                    <button onclick="abrirModalQuestionario()">
+                    <button class="btn-acao-mod" onclick="abrirModalQuestionario()">
                         <i class="fas fa-clipboard-list"></i>
                     </button>
 
-                    <button class="aprovar-adocao">
+                    <button class="btn-acao-mod aprovar-mod">
                         <i class="fas fa-check"></i>
                     </button>
 
-                    <button class="recusar-adocao">
+                    <button class="btn-acao-mod recusar-mod">
                         <i class="fas fa-times"></i>
                     </button>
 
@@ -82,7 +82,7 @@
 
     <div class="modal-recusa-adocao" id="modalRecusaAdocao">
 
-        <div class="caixa-recusa-adocao">
+        <div class="caixa-recusa-mod">
 
             <h3>⚠ Confirmar recusa da solicitação?</h3>
 
@@ -114,16 +114,19 @@
 
             <textarea placeholder="Observação adicional..."></textarea>
 
-            <div>
+            <div class="botoes-recusa-mod">
 
-                <button id="fecharRecusaAdocao">
+                <button
+                    class="cancelar-recusa-mod"
+                    id="fecharRecusa">
+
                     Cancelar
+
                 </button>
 
-                <button class="confirmar-recusa-adocao">
-                    Confirmar recusa
+                <button type="button" class="confirmar-recusa-mod">
+                    Confirmar suspensão
                 </button>
-
             </div>
 
         </div>

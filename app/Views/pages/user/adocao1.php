@@ -23,9 +23,8 @@ include './../../components/head/head.php';
 
         <!-- MORADIA -->
 
-
+        <p>Você mora em casa, apartamento ou chácara/sítio?
         <div class="campo">
-            <label class="form-cadastro">Você mora em casa, apartamento ou chácara/sítio?</label>
 
             <div class="dropdown">
                 <div class="dropdown-selected">

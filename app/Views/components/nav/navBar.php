@@ -1,90 +1,205 @@
 <?php
-$currentPage = basename($_SERVER['PHP_SELF']);
+$currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 ?>
 
-<nav class="navbar" id="navbar-deslogado">
-    <div class="navbar-logo">
-        <img src="./../../assets/img/logo.png" alt="Logo">
+<body>
+
+    <nav class="navbar">
+
+        <div class="navbar-logo">
+            <img src="./../../assets/img/logo.png" alt="Logo">
+        </div>
+
+
+        <ul class="navbar-menu">
+
+            <li>
+                <a href="./../../pages/user/home.php"
+                    class="<?= $currentPage == 'home.php' ? 'active' : '' ?>">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="./../../pages/user/sobre.php"
+                    class="<?= $currentPage == 'sobre.php' ? 'active' : '' ?>">
+                    Sobre
+                </a>
+            </li>
+
+            <!-- protegido -->
+            <li>
+                <a href="./../../pages/user/favoritos.php"
+                    class="link-protegido <?= $currentPage == 'favoritos.php' ? 'active' : '' ?>">
+                    Favoritos
+                </a>
+            </li>
+
+            <!-- protegido -->
+            <li>
+                <a href="./../../pages/user/contato.php"
+                    class="link-protegido <?= $currentPage == 'contato.php' ? 'active' : '' ?>">
+                    Contato
+                </a>
+            </li>
+
+            <!-- aparece sem login -->
+            <li id="menu-login">
+                <a href="./../../pages/user/login.php">
+                    Login
+                </a>
+            </li>
+
+            <!-- aparece com login -->
+            <li id="menu-publicar" style="display:none;">
+                <a href="./../../pages/user/doacao1.php">
+                    Publicar
+                </a>
+            </li>
+
+        </ul>
+
+
+        <ul class="navbar-social">
+
+            <!-- perfil só aparece logado -->
+            <li id="menu-perfil" style="display:none;">
+                <a href="./../../pages/user/perfil_usuario.php">
+                    <img src="../../assets/img/user.png" class="nav-icon">
+                </a>
+            </li>
+
+            <!-- sair só aparece logado -->
+            <li id="menu-sair" style="display:none;">
+                <button class="btn-sair-nav" onclick="logout()">
+                    Sair
+                </button>
+            </li>
+
+
+        </ul>
+
+    </nav>
+
+
+
+    <!-- MODAL -->
+    <div class="modal-login-aviso" id="modalLoginAviso">
+        <div class="modal-login-box">
+            <h3>Acesso restrito</h3>
+
+            <p>
+                Você precisa fazer login para acessar essa área.
+            </p>
+
+            <div class="modal-botoes">
+
+                <button id="fecharModalLogin" class="btn-modal secundario">
+                    Entendi
+                </button>
+
+                <a href="./../../pages/user/login.php" class="btn-modal primario">
+                    Ir para login
+                </a>
+
+            </div>
+
+        </div>
     </div>
 
-    <ul class="navbar-menu">
-        <li><a href="./../../pages/user/home.php">Home</a></li>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
 
-        <?php if ($currentPage !== 'login.php') : ?>
-            <li><a href="sobre.php">Sobre</a></li>
-        <?php endif; ?>
+            const logado = localStorage.getItem("login");
 
-        <li><a href="./../../pages/user/favoritos.php">Favoritos</a></li>
+            const loginMenu = document.getElementById("menu-login");
+            const publicarMenu = document.getElementById("menu-publicar");
 
-        <?php if ($currentPage !== 'login.php') : ?>
-            <li><a href="./../../pages/user/contato.php">Contato</a></li>
-            <li><a href="./../../pages/user/login.php">Login</a></li>
-        <?php endif; ?>
+            const perfil = document.getElementById("menu-perfil");
+            const sair = document.getElementById("menu-sair");
+
+            const modal = document.getElementById("modalLoginAviso");
+            const fechar = document.getElementById("fecharModalLogin");
 
 
-    </ul>
 
-    <ul class="navbar-social">
-        <li><a href="#"><img src="https://img.icons8.com/ios/50/facebook-f.png" alt="facebook-f" /></a></li>
-        <li><a href="#"><img src="https://img.icons8.com/ios/50/tiktok--v1.png" alt="tiktok" /></a></li>
-        <li><a href="#"><img src="https://img.icons8.com/ios/50/instagram-new--v1.png" alt="instagram" /></a></li>
-        
-    </ul>
+            /* se estiver logado */
 
-    <span class="material-symbols-outlined" id="navbar-sandwich">menu</span>
-</nav>
+            if (logado === "true") {
 
-<nav class="navbar" id="navbar-logado" style="display: none;">
+                loginMenu.style.display = "none";
 
-    <div class="navbar-menu">
-        <img src="../../assets/img/logo.png" class="logo">
+                publicarMenu.style.display = "block";
 
-        <li><a href="./../../pages/user/home.php">Home</a></li>
-        <li><a href="sobre.php">Sobre</a></li>
-        <li><a href="./../../pages/user/favoritos.php">Favoritos</a></li>
-        <li><a href="./../../pages/user/contato.php">Contato</a></li>
-        <li><a href="./../../pages/user/doacao1.php">Publicar</a></li>
+                perfil.style.display = "block";
 
-    </div>
+                sair.style.display = "block";
+            }
 
-    <div class="navbar-social">
-        <li>
-            <a href="./perfil_usuario.php">
-                <img src="../../assets/img/user.png" class="nav-icon" alt="user-icon">
-            </a>
-        </li>
-       
-        <button onclick="logout()">Sair</button>
 
-    </div>
-</nav>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const acess = document.getElementById('acc-trigger');
-        const modal_acess = document.getElementById('modal-acessibilidade');
-        const logado = localStorage.getItem("login");
+            /* bloquear favoritos e contato */
 
-        const navDeslogado = document.getElementById("navbar-deslogado");
-        const navLogado = document.getElementById("navbar-logado");
+            const linksProtegidos =
+                document.querySelectorAll(".link-protegido");
 
-        if (acess) {
-            acess.addEventListener('click', () => {
-                modal_acess.showModal();
-            })
+
+            linksProtegidos.forEach(link => {
+
+                link.addEventListener("click", function(e) {
+
+                    const logado = localStorage.getItem("login");
+
+                    if (logado !== "true") {
+
+                        e.preventDefault();
+
+                        modal.style.display = "flex";
+                    }
+
+                });
+
+            });
+
+            fechar.addEventListener("click", function() {
+
+                modal.style.display = "none";
+
+            });
+
+        });
+
+
+
+        function logout() {
+
+            localStorage.removeItem("login");
+
+            window.location.href = "./home.php";
+
         }
 
-        if (logado === "true") {
-            navDeslogado.style.display = "none";
-            navLogado.style.display = "flex";
-        } else {
-            navDeslogado.style.display = "flex";
-            navLogado.style.display = "none";
-        }
-    });
+        document.addEventListener("DOMContentLoaded", () => {
 
-    function logout() {
-        localStorage.removeItem('login');
-        window.location.href = "./home.php";
-    }
-</script>
+            const modal = document.getElementById("modalLoginAviso");
+
+            document.addEventListener("click", function(e) {
+
+                // botão "Entendi"
+                if (e.target && e.target.id === "fecharModalLogin") {
+                    modal.style.display = "none";
+                }
+
+                // clicar fora do box (opcional)
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+
+            });
+
+        });
+    </script>
+
+
+
+</body>

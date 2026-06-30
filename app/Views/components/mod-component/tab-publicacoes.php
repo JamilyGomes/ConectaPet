@@ -8,7 +8,7 @@ $publicacoes = $publicacoes ?? [];
     <div class="header-home-mod">
         <div class="overlay-home-mod">
             <h1>Publicações</h1>
-            <p>Painel de gerenciamento das publicações e solicitações.</p>
+            <p>Visualize, analise e modere as publicações enviadas antes de sua aprovação.</p>
         </div>
     </div>
     <div class="topo-tabela-mod">

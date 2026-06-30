@@ -7,6 +7,10 @@ include './../../components/head/head2.php';
 
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
+    <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
+
     <div class="main-content">
 
         <?php
@@ -49,7 +53,7 @@ include './../../components/head/head2.php';
                 ["id" => 1, "nome" => "João", "data" => "01/01", "status" => "Ativo"],
                 ["id" => 2, "nome" => "Maria", "data" => "02/02", "status" => "Ativo"]
             ];
-            $acoes = [ 'suspender'];
+            $acoes = ['suspender'];
         }
 
         include './../../components/adm_component/tabela.php';

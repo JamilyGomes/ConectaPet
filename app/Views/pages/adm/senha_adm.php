@@ -9,6 +9,10 @@ include './../../components/head/head.php';
     ob_start();
     ?>
 
+    <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
+
     <h2>Recuperar senha Administrador</h2>
 
     <form class="form-cadastro" action="./codi-verificacaoAdm.php">
@@ -39,7 +43,7 @@ include './../../components/head/head.php';
             <button type="button" class="btn-voltar" onclick="window.location.href='loginAdm.php'">
                 Voltar
             </button>
-    
+
             <button type="submit" class="btn-concluir">
                 Continuar 🐾
             </button>

@@ -8,6 +8,10 @@ include './../../components/head/head2.php';
     include './../../components/nav/nav_adm/sideBar.php';
     ?>
 
+    <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
+
     <div class="main-content">
         <!-- seu conteúdo -->
         <div class="dashboard">

@@ -6,6 +6,9 @@ include './../../components/head/head2.php';
 <body>
 
     <?php include './../../components/nav/nav-mod/side-mod.php'; ?>
+    <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
     <div class="main-content">
 
         <?php

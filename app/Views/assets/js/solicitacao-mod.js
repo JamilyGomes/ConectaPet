@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* RECUSAR */
-    document.querySelectorAll(".recusar-adocao")
+    document.querySelectorAll(".recusar-mod")
         .forEach(botao => {
 
             botao.addEventListener("click", function () {
@@ -86,25 +86,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* APROVAR */
-    document.querySelectorAll(".aprovar-adocao")
-        .forEach(botao => {
+    document.querySelectorAll(".aprovar-mod")
+    .forEach(botao => {
 
-            botao.addEventListener("click", function () {
+        botao.addEventListener("click", function () {
 
-                let linha =
-                    this.closest(".solicitacao-pi-linha");
+            let linha =
+                this.closest(".solicitacao-pi-linha");
 
-                let status =
-                    linha.querySelector(".solicitacao-pi-status");
+            let status =
+                linha.querySelector(".solicitacao-pi-status");
 
-                status.textContent = "Aprovado";
+            status.textContent = "Aprovado";
 
-                status.classList.remove("pendente", "recusado");
-                status.classList.add("aprovado");
-
-            });
+            status.classList.remove("pendente", "recusado");
+            status.classList.add("aprovado");
 
         });
+
+    });
 
 });
 

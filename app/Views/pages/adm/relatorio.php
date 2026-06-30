@@ -8,12 +8,17 @@ include './../../components/head/head2.php';
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
     <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
+    
+    <?php
     // futuramente você pode puxar esses dados do banco
     $acessos = "23.450K";
     $adocoes = 45;
     $animais = 35;
     $pendentes = 10;
     ?>
+
 
     <div class="relatorio-conteudo">
 

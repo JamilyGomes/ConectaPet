@@ -5,7 +5,11 @@ $titulo = 'Login Administrador';
 include './../../components/head/head.php';
 ?>
 
-<body>  
+<body>
+
+    <?php
+    include './../../components/ace/acessibilidade.php';
+    ?>
 
     <section id="login-form">
         <!-- LADO ESQUERDO-->
@@ -68,7 +72,7 @@ include './../../components/head/head.php';
             window.location.href = "./home.php";
         }
     </script>
-    
+
     <!-- validacao dos campos email e senha  -->
     <script>
         function validarLogin() {
