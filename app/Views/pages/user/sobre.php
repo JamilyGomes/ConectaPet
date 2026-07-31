@@ -103,10 +103,6 @@ include './../../components/head/head.php';
 
     </section>
 
-    <?php
-    include './acessibilidade.php';
-    ?>
-
     <?php include './../../components/footer/footer.php'; ?>
 
 

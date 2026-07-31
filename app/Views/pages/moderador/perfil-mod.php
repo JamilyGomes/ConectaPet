@@ -26,9 +26,6 @@ include './../../components/head/head2.php';
 <body>
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
-    <?php
-    include './../../components/ace/acss.php';
-    ?>
     <div class="container">
 
         <main class="content">

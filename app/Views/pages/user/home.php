@@ -1,5 +1,5 @@
 <?php
-$titulo = 'Home';
+$titulo = 'Home Usuario';
 ?>
 <?php
 include './../../components/head/head.php';
@@ -35,9 +35,6 @@ include './../../components/head/head.php';
     </section>
 
 
-    <?php
-    include './acessibilidade.php';
-    ?>
     <?php include './../../components/footer/footer.php'; ?>
 
     <script>

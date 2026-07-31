@@ -7,9 +7,6 @@ include './../../components/head/head2.php';
 
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
-   <?php
-    include './../../components/ace/acss.php';
-    ?>
     <div class="main-content">
 
         <div class="notificacoes-container">

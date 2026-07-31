@@ -199,7 +199,5 @@ $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
         });
     </script>
-
-
-
+    <?php include __DIR__ . '/../acessibilidade/acessibilidade.php'; ?>
 </body>

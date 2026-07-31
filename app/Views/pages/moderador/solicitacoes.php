@@ -7,10 +7,6 @@ include './../../components/head/head2.php';
 
 <body>
 
-
-    <?php
-    include './../../components/ace/acss.php';
-    ?>
     
     <?php include './../../components/nav/nav-mod/side-mod.php'; ?>
 

@@ -6,11 +6,6 @@ include './../../components/head/head.php';
 ?>
 
 <body>
-
-     <?php
-    include '../user/acessibilidade.php';
-    ?>
-
     <section id="login-form">
         <!-- LADO ESQUERDO-->
 

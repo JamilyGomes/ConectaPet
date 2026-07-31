@@ -9,11 +9,7 @@ include './../../components/head/head.php';
     <?php
     ob_start();
     ?>
-
-    <?php
-    include './../../components/ace/acessibilidade.php';
-    ?>
-    
+     
     <div class="confirmacao-box">
 
         <h2>Senha atualizada com sucesso! 🐾</h2>

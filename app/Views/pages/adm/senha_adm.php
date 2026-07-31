@@ -9,10 +9,6 @@ include './../../components/head/head.php';
     ob_start();
     ?>
 
-    <?php
-    include '../user/acessibilidade.php';
-    ?>
-
     <h2>Recuperar senha Administrador</h2>
 
     <form class="form-cadastro" action="./codi-verificacaoAdm.php">

@@ -10,9 +10,6 @@ include './../../components/head/head.php';
     ob_start();
     ?>
 
-    <?php
-    include '../user/acessibilidade.php';
-    ?>
     <h2>Confirme seu acesso 🐾</h2>
 
     <form class="form-cadastro" action="./atua-senha-mod.php">

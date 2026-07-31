@@ -8,10 +8,6 @@ include './../../components/head/head2.php';
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
 
     <?php
-    include './../../components/ace/acss.php';
-    ?>
-
-    <?php
     // futuramente você pode puxar esses dados do banco
     $acessos = "23.450K";
     $adocoes = 45;

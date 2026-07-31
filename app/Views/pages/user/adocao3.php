@@ -96,10 +96,6 @@ include './../../components/head/head.php';
     ?>
 
     
-    <?php
-    include './acessibilidade.php';
-    ?>
-
     <!-- SCRIPT DROPDOWN -->
     <script>
         const dropdowns = document.querySelectorAll(".dropdown");

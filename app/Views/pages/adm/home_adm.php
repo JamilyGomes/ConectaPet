@@ -92,8 +92,4 @@ include './../../components/head/head2.php';
 
         });
     </script>
-
-    <?php
-    include './../../components/ace/acss.php';
-    ?>
 </body>

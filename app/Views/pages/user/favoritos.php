@@ -193,8 +193,4 @@ Remover
                 });
         });
     </script>
-
-    <?php
-    include './acessibilidade.php';
-    ?>
 </body>

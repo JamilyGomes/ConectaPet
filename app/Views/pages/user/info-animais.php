@@ -29,7 +29,4 @@ include './../../components/head/head.php';
 
     ?>
 
-    <?php
-    include './acessibilidade.php';
-    ?>
 </body>
