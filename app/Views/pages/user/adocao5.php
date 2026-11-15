@@ -65,7 +65,7 @@ include './../../components/head/head.php';
         <!-- BOTÕES -->
         <div class="botoes-modal">
 
-            <button type="button" onclick="window.location.href='./adocao4.php'" class="btn-voltar">
+            <button type="button" class="btn-voltar">
                 Voltar
             </button>
 
@@ -82,34 +82,5 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
-
-    <!-- 🔥 VALIDAÇÃO -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            const form = document.getElementById("formTermo");
-            const checkbox = document.getElementById("aceite");
-            const label = document.getElementById("label-termo");
-
-            form.addEventListener("submit", function(e) {
-
-                // remove erro antigo
-                label.classList.remove("erro");
-
-                if (!checkbox.checked) {
-                    e.preventDefault();
-
-                    label.classList.add("erro");
-
-                    alert("Você precisa aceitar os termos para continuar!");
-                } else {
-                    e.preventDefault();
-                    window.location.href = "./solicitacao.php";
-                }
-
-            });
-
-        });
-    </script>
-
+    <script src="./../../assets/js/adocao.js" defer></script>
 </body>

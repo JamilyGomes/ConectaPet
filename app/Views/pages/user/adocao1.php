@@ -23,8 +23,8 @@ include './../../components/head/head.php';
         id="formResidencia"
         action="./adocao2.php"
         method="POST">
-        <!-- MORADIA -->
 
+        <!-- MORADIA -->
         <p>Você mora em casa, apartamento ou chácara/sítio?
         <div class="campo">
 
@@ -88,7 +88,6 @@ include './../../components/head/head.php';
         </div>
 
         <!-- CHECKBOX -->
-        <!-- CHECKBOX -->
         <p>A residência tem quintal, jardim, área externa ou telas nas janelas?</p>
 
         <div class="radio-group" id="checkboxGroup">
@@ -122,7 +121,7 @@ include './../../components/head/head.php';
 
         <!-- BOTÕES -->
         <div class="botoes-modal">
-            <button type="button" class="btn-voltar" onclick="window.location.href='./home.php'">
+            <button type="button" class="btn-voltar">
                 Voltar
             </button>
 
@@ -139,147 +138,5 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
-
-
-    <!-- 🔥 VALIDAÇÃO -->
-    <script>
-        document.getElementById("formResidencia").addEventListener("submit", function(e) {
-
-            let valido = true;
-
-            document.querySelectorAll(".erro").forEach(el => el.classList.remove("erro"));
-
-            // valida dropdowns
-            const campos = this.querySelectorAll("input[type='hidden'][required]");
-
-            campos.forEach(campo => {
-                if (!campo.value) {
-                    campo.closest(".dropdown").classList.add("erro");
-                    valido = false;
-                }
-            });
-
-            // valida campo "Outro"
-            const tipoMoradia = document.querySelector("input[name='tipoAnimal']").value;
-            const outro = document.querySelector("input[name='outro_tipo']");
-
-            if (tipoMoradia === "Outro") {
-                if (!outro.value.trim()) {
-                    outro.classList.add("erro");
-                    valido = false;
-                }
-            }
-
-            // valida checkbox
-            const checkboxes = document.querySelectorAll("input[name='estrutura[]']");
-            const algumMarcado = [...checkboxes].some(c => c.checked);
-
-            if (!algumMarcado) {
-                document.getElementById("checkboxGroup").classList.add("erro");
-                valido = false;
-            }
-
-            if (!valido) {
-                e.preventDefault();
-                alert("Preencha todas as perguntas!");
-            }
-
-        });
-    </script>
-
-    <!-- DROPDOWN -->
-    <script>
-        const dropdowns = document.querySelectorAll(".dropdown");
-
-        dropdowns.forEach(dropdown => {
-
-            const selected = dropdown.querySelector(".dropdown-selected");
-
-            const options = dropdown.querySelectorAll(".option");
-
-            const hidden = dropdown.querySelector("input[type='hidden']");
-
-            selected.addEventListener("click", () => {
-                dropdown.classList.toggle("active");
-            });
-
-            options.forEach(option => {
-
-                option.addEventListener("click", () => {
-
-                    selected.textContent = option.textContent;
-
-                    dropdown.classList.remove("active");
-
-                    if (hidden) {
-                        hidden.value = option.textContent;
-                    }
-
-                    // Campo "Outro"
-                    const outroInput = document.querySelector(".outroAssunto");
-
-                    if (option.textContent === "Outro") {
-
-                        outroInput.style.display = "block";
-
-                        outroInput.required = true;
-
-                    } else {
-
-                        outroInput.style.display = "none";
-
-                        outroInput.required = false;
-                    }
-                });
-            });
-
-            document.addEventListener("click", (e) => {
-
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove("active");
-                }
-
-            });
-
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-
-            const checkboxes = document.querySelectorAll("input[name='estrutura[]']");
-
-            checkboxes.forEach(checkbox => {
-
-                checkbox.addEventListener("change", () => {
-
-                    // Se marcou "Nenhum dos anteriores"
-                    if (checkbox.value === "Nenhum dos anteriores" && checkbox.checked) {
-
-                        checkboxes.forEach(cb => {
-                            if (cb !== checkbox) {
-                                cb.checked = false;
-                            }
-                        });
-
-                    }
-
-                    // Se marcou qualquer outra opção
-                    else if (checkbox.checked) {
-
-                        checkboxes.forEach(cb => {
-                            if (cb.value === "Nenhum dos anteriores") {
-                                cb.checked = false;
-                            }
-                        });
-
-                    }
-
-                });
-
-            });
-
-        });
-    </script>
-
+    <script src="./../../assets/js/adocao.js" defer></script>
 </body>
