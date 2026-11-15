@@ -27,20 +27,30 @@ include './../../components/head/head.php';
 
         <!-- PERGUNTA 1 -->
         <div class="campo">
-            <label class="form-cadastro">Quais itens você pode fornecer com o animal? (Marque todas que se aplicam)</label>
+            <label class="form-cadastro">
+                Quais itens você pode fornecer com o animal? (Marque todas que se aplicam)
+            </label>
 
-            <div class="dropdown">
-                <div class="dropdown-selected">Selecione um tipo</div>
+            <div class="opcoes-checkbox">
+                <label>
+                    <input type="checkbox" name="itens[]" value="Ração">
+                    <span>Ração</span>
+                </label>
 
-                <div class="dropdown-options">
-                    <div class="option">Ração</div>
-                    <div class="option">Acessórios (ex.: coleira, gaiola, caixa de areia)</div>
-                    <div class="option">Carteira de vacinação</div>
-                    <div class="option">Nenhum</div>
-                </div>
+                <label>
+                    <input type="checkbox" name="itens[]" value="Acessórios">
+                    <span>Acessórios (ex.: coleira, gaiola, caixa de areia)</span>
+                </label>
 
-                <!-- valor enviado -->
-                <input type="hidden" name="tipoAnimal" required>
+                <label>
+                    <input type="checkbox" name="itens[]" value="Carteira de vacinação">
+                    <span>Carteira de vacinação</span>
+                </label>
+
+                <label>
+                    <input type="checkbox" name="itens[]" value="Nenhum">
+                    <span>Nenhum</span>
+                </label>
             </div>
         </div>
 
@@ -82,91 +92,7 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
-    
-    <script>
-        const dropdowns = document.querySelectorAll(".dropdown");
 
-        dropdowns.forEach(dropdown => {
-            const selected = dropdown.querySelector(".dropdown-selected");
-            const options = dropdown.querySelectorAll(".option");
-            const hidden = dropdown.querySelector("input[type='hidden']");
-
-            selected.addEventListener("click", () => {
-                dropdown.classList.toggle("active");
-            });
-
-            options.forEach(option => {
-                option.addEventListener("click", () => {
-                    selected.textContent = option.textContent;
-                    dropdown.classList.remove("active");
-
-                    if (hidden) hidden.value = option.textContent;
-
-                    const outroInput = document.querySelector(".outroAssunto");
-
-                    if (option.textContent === "Outro" && outroInput) {
-                        outroInput.style.display = "block";
-                        outroInput.required = true;
-                    } else if (outroInput) {
-                        outroInput.style.display = "none";
-                        outroInput.required = false;
-                    }
-                });
-            });
-
-            document.addEventListener("click", (e) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove("active");
-                }
-            });
-        });
-    </script>
-
-    <script>
-        document.querySelector(".form-animal").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            let valido = true;
-
-            this.querySelectorAll(".erro").forEach(el => el.classList.remove("erro"));
-
-            const campos = this.querySelectorAll("[required]");
-
-            campos.forEach(campo => {
-                if (!campo.value || campo.value.trim() === "") {
-                    valido = false;
-
-                    if (campo.type === "hidden") {
-                        campo.closest(".dropdown").classList.add("erro");
-                    } else {
-                        campo.classList.add("erro");
-                    }
-                }
-            });
-
-            const radios = this.querySelectorAll("input[type='radio'][required]");
-            const nomes = [...new Set([...radios].map(r => r.name))];
-
-            nomes.forEach(nome => {
-                const grupo = this.querySelectorAll(`input[name="${nome}"]`);
-                const marcado = this.querySelector(`input[name="${nome}"]:checked`);
-
-                if (!marcado) {
-                    valido = false;
-
-                    grupo.forEach(r => {
-                        r.closest(".radio-group").classList.add("erro");
-                    });
-                }
-            });
-
-            if (!valido) {
-                alert("Preencha todos os campos obrigatórios!");
-                return;
-            }
-
-            window.location.href = "doacao5.php";
-        });
-    </script>
+    <script src="./../../assets/js/user/doacao.js" defer></script>
 
 </body>

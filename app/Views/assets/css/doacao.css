@@ -27,7 +27,7 @@ legend {
     /* font-size: 14px; */
 
 
-input,
+input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea {
     padding: 8px;
@@ -90,4 +90,29 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.opcoes-checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.opcoes-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.opcoes-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: #fbbf24;
 }

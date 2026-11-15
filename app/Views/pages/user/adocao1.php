@@ -138,5 +138,5 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
 
-    <script src="./../../assets/js/adocao.js" defer></script>
+    <script src="./../../assets/js/user/adocao.js" defer></script>
 </body>
