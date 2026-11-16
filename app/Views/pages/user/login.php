@@ -12,8 +12,8 @@ include './../../components/head/head.php';
     ?>
 
     <section id="login-form">
-        <!-- LADO ESQUERDO-->
 
+        <!-- lado esquerdo  -->
         <div id="esquerda">
             <p>Olá, Usuário! 🐾</p>
             <p>Bem-vindo ao <strong>Conecta Pet</strong>.</p>
@@ -23,7 +23,7 @@ include './../../components/head/head.php';
 
         </div>
 
-        <!-- LADO direito -->
+        <!-- lado direito  -->
         <div class="direita">
             <h1>Login</h1>
             <form method="POST" action="">
@@ -36,7 +36,7 @@ include './../../components/head/head.php';
                 <div class="campo-senha">
 
                     <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
-                    <span class="material-icons olho" onclick="toggleSenha()">
+                    <span class="material-icons olho">
                         visibility
                     </span>
 
@@ -49,7 +49,7 @@ include './../../components/head/head.php';
                         Cadastrar-se</button>
                 </a>
 
-                <button type="button" class="bt-entrar" onclick="login()">
+                <button type="button" class="bt-entrar">
                     Entrar 🐾
                 </button>
             </div>
@@ -57,25 +57,5 @@ include './../../components/head/head.php';
         </div>
     </section>
 
-    <script>
-        function toggleSenha() {
-
-            const senha = document.getElementById("senha");
-            const icone = document.querySelector(".olho");
-
-            if (senha.type === "password") {
-                senha.type = "text";
-                icone.textContent = "visibility_off";
-            } else {
-                senha.type = "password";
-                icone.textContent = "visibility";
-            }
-
-        }
-
-        function login() {
-            localStorage.setItem('login', 'true');
-            window.location.href = "./home.php";
-        }
-    </script>
+    <script src="./../../assets/js/user/login.js" defer></script>
 </body>

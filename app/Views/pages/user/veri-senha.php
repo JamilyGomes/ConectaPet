@@ -66,18 +66,5 @@ include './../../components/head/head.php';
     include './../../components/modal/modal.php';
     ?>
     
-    <script>
-        function toggleSenha(id, icone) {
-
-            const input = document.getElementById(id);
-
-            if (input.type === "password") {
-                input.type = "text";
-                icone.textContent = "visibility_off";
-            } else {
-                input.type = "password";
-                icone.textContent = "visibility";
-            }
-        }
-    </script>
+   <script src="./../../assets/js/user/veri_senha.js" defer></script>
 </body>

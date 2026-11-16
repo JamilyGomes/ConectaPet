@@ -25,25 +25,27 @@ include './../../components/head/head.php';
       <div class="perfil-grid">
 
         <div class="perfil-foto">
-          <img src="https://img.freepik.com/fotos-premium/garota-feliz-segura-seu-amado-animal-de-estimacao-um-gato-britanico-escoces-vermelho-no-colo-e-acaricia-seu-pelo_121837-9908.jpg?semt=ais_hybrid&w=740&q=80"
-            alt="Foto do usuário">
+          <img
+            src="https://img.freepik.com/fotos-premium/garota-feliz-segura-seu-amado-animal-de-estimacao-um-gato-britanico-escoces-vermelho-no-colo-e-acaricia-seu-pelo_121837-9908.jpg?semt=ais_hybrid&w=740&q=80"
+            alt="Foto do usuário"
+            id="fotoPerfil">
         </div>
 
         <div class="perfil-dados">
 
           <div class="campo">
             <span class="label">Nome:</span>
-            <span class="valor">Julia Rocha</span>
+            <span class="valor" id="perfilNome">Julia Rocha</span>
           </div>
 
           <div class="campo">
             <span class="label">Telefone:</span>
-            <span class="valor">(67) 9999-9999</span>
+            <span class="valor" id="perfilTelefone">(67) 9999-9999</span>
           </div>
 
           <div class="campo">
             <span class="label">E-mail:</span>
-            <span class="valor">exemplo@gmail.com</span>
+            <span class="valor" id="perfilEmail">exemplo@gmail.com</span>
           </div>
 
         </div>
@@ -56,9 +58,11 @@ include './../../components/head/head.php';
     <!-- MENU -->
     <section class="abas">
 
-      <button class="aba ativa" onclick="trocarAba('notificacoes', this)">Notificações</button>
-      <button class="aba" onclick="trocarAba('adocao', this)">Adoção</button>
-      <button class="aba" onclick="trocarAba('doacao', this)">Doação</button>
+      <button class="aba ativa" data-aba="notificacoes">Notificações</button>
+
+      <button class="aba" data-aba="adocao">Adoção</button>
+
+      <button class="aba" data-aba="doacao">Doação</button>
 
     </section>
 
@@ -150,9 +154,9 @@ include './../../components/head/head.php';
         <!-- NOVA SENHA -->
         <label>Nova Senha</label>
         <div class="campo-senha">
-          <input type="password" id="editSenha" placeholder="Digite a nova senha" required>
+          <input type="password" id="editSenha" placeholder="Digite a nova senha">
 
-          <span class="material-symbols-outlined olho" onclick="toggleSenha('editSenha', this)">
+          <span class="material-symbols-outlined olho" data-senha="editSenha">
             visibility
           </span>
         </div>
@@ -160,9 +164,9 @@ include './../../components/head/head.php';
         <!-- CONFIRMAR SENHA -->
         <label>Confirmar Senha</label>
         <div class="campo-senha">
-          <input type="password" id="editConfirmar" placeholder="Confirme a senha" required>
+          <input type="password" id="editConfirmar" placeholder="Confirme a senha">
 
-          <span class="material-symbols-outlined olho" onclick="toggleSenha('editConfirmar', this)">
+          <span class="material-symbols-outlined olho" data-senha="editConfirmar">
             visibility
           </span>
         </div>
@@ -174,7 +178,7 @@ include './../../components/head/head.php';
             alt="Foto do usuário">
 
           <!-- botão editar foto -->
-          <button type="button" class="btn-foto" onclick="document.getElementById('inputFoto').click()">
+          <button type="button" class="btn-foto" id="abrirInputFoto">
             <i class="fa-solid fa-camera"></i>
           </button>
 
@@ -194,150 +198,6 @@ include './../../components/head/head.php';
 
   </div>
 
-  <script>
-    function toggleSenha(idInput, icon) {
-
-      const input = document.getElementById(idInput);
-
-      if (input.type === "password") {
-        input.type = "text";
-        icon.textContent = "visibility_off";
-      } else {
-        input.type = "password";
-        icon.textContent = "visibility";
-      }
-    }
-
-    function login() {
-      localStorage.setItem('login', 'true');
-      window.location.href = "./home.php";
-    }
-  </script>
-
-
-  <script>
-    const telefone = document.getElementById("telefone");
-
-    telefone.addEventListener("input", function() {
-
-      // remove tudo que não for número
-      let valor = this.value.replace(/\D/g, "");
-
-      // aplica máscara
-      if (valor.length > 11) {
-        valor = valor.substring(0, 11);
-      }
-
-      if (valor.length > 10) {
-        valor = valor.replace(
-          /^(\d{2})(\d{5})(\d{4}).*/,
-          "($1) $2-$3"
-        );
-      } else if (valor.length > 6) {
-        valor = valor.replace(
-          /^(\d{2})(\d{4,5})(\d{0,4}).*/,
-          "($1) $2-$3"
-        );
-      } else if (valor.length > 2) {
-        valor = valor.replace(
-          /^(\d{2})(\d+)/,
-          "($1) $2"
-        );
-      } else if (valor.length > 0) {
-        valor = valor.replace(
-          /^(\d+)/,
-          "($1"
-        );
-      }
-
-      this.value = valor;
-    });
-  </script>
-
-  <script>
-    function trocarAba(id, botao) {
-
-      document.querySelectorAll('.painel').forEach(item => {
-        item.classList.remove('ativo');
-      });
-
-      document.querySelectorAll('.aba').forEach(item => {
-        item.classList.remove('ativa');
-      });
-
-      document.getElementById(id).classList.add('ativo');
-      botao.classList.add('ativa');
-    }
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-
-      const modalEditar = document.getElementById("modalEditar");
-
-      function abrir(modal) {
-        modal.style.display = "flex";
-      }
-
-      function fechar(modal) {
-        modal.style.display = "none";
-      }
-
-      function fecharFora(modal) {
-        modal.addEventListener("click", function(e) {
-          if (e.target === modal) {
-            fechar(modal);
-          }
-        });
-      }
-
-      /* abrir modal */
-      document.getElementById("abrirEditar").addEventListener("click", function() {
-        abrir(modalEditar);
-      });
-
-      /* fechar modal */
-      document.getElementById("fecharEditar").addEventListener("click", function() {
-        fechar(modalEditar);
-      });
-
-      fecharFora(modalEditar);
-
-      /* salvar */
-      document.getElementById("formEditarPerfil").addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        let senha = document.getElementById("editSenha").value;
-        let confirmar = document.getElementById("editConfirmar").value;
-
-        if (senha !== confirmar) {
-          alert("As senhas não coincidem.");
-          return;
-        }
-
-        alert("Dados atualizados com sucesso!");
-        fechar(modalEditar);
-      });
-
-    });
-  </script>
-  <!-- foto -->
-  <script>
-    document.getElementById("inputFoto").addEventListener("change", function() {
-
-      const file = this.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-          document.getElementById("previewFoto").src = e.target.result;
-        };
-
-        reader.readAsDataURL(file);
-      }
-
-    });
-  </script>
+  <script src="./../../assets/js/user/perfil_usuario.js" defer></script>
 
 </body>
