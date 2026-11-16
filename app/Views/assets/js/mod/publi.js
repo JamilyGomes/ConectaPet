@@ -115,7 +115,7 @@ document
 
     });
 
-/* APROVAR PUBLICAÇÃO */
+/* APROVAR PUBLICAÇÃO */  
 
 document.querySelectorAll(".aprovar-mod")
     .forEach(botao => {
@@ -236,5 +236,30 @@ modalFormulario.addEventListener("click", function (e) {
         modalFormulario.style.display = "none";
 
     }
+
+});
+
+window.abrirModalFormulario = abrirModalFormulario;
+window.fecharModalFormulario = fecharModalFormulario;
+
+/* FILTRAR PUBLICAÇÕES */
+
+const filtroStatus = document.getElementById("filtroStatus");
+
+filtroStatus.addEventListener("change", function () {
+
+    const statusSelecionado = this.value;
+
+    document.querySelectorAll(".publicacao-linha-mod").forEach(linha => {
+
+        const status = linha.querySelector(".status-mod").textContent.trim();
+
+        if (statusSelecionado === "todos" || status === statusSelecionado) {
+            linha.style.display = "grid";
+        } else {
+            linha.style.display = "none";
+        }
+
+    });
 
 });

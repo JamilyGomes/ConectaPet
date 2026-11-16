@@ -15,11 +15,11 @@ $publicacoes = $publicacoes ?? [];
 
         <div class="filtro-mod">
 
-            <select>
-                <option>Status</option>
-                <option>Pendente</option>
-                <option>Aprovado</option>
-                <option>Recusado</option>
+            <select id="filtroStatus">
+                <option value="todos">Todos</option>
+                <option value="Pendente">Pendente</option>
+                <option value="Aprovado">Aprovado</option>
+                <option value="Recusado">Recusado</option>
             </select>
 
         </div>

@@ -285,5 +285,6 @@ include './../../components/head/head2.php';
         </div>
     </div>
 
-    <script src="../../assets/js/publi.js"></script>
+    <script src="../../assets/js/mod/publi.js"></script>
+    
 </body>

@@ -484,77 +484,7 @@ include './../../components/head/head2.php';
         </div>
     </div>
 
-    <script>
-        function abrirModalAnimal() {
-
-
-            document
-                .getElementById("modalAnimal")
-                .style.display = "flex";
-
-
-        }
-
-        function fecharModalAnimal() {
-
-
-            document
-                .getElementById("modalAnimal")
-                .style.display = "none";
-
-
-        }
-
-        function abrirModalQuestionarioAnimal() {
-
-
-            document
-                .getElementById("modalQuestionarioAnimal")
-                .style.display = "flex";
-
-
-        }
-
-        function fecharModalQuestionarioAnimal() {
-
-
-            document
-                .getElementById("modalQuestionarioAnimal")
-                .style.display = "none";
-
-
-        }
-        // MARCAR ADOTADO
-
-        document.querySelectorAll(".adotar-animal")
-            .forEach(botao => {
-
-
-                botao.addEventListener("click", function() {
-
-
-
-                    let linha =
-                        this.closest(".adm-animal-linha");
-
-
-
-                    let status =
-                        linha.querySelector(".adm-status-animal");
-
-
-
-                    status.innerHTML = "Adotado";
-
-
-
-                    status.classList.add("adotado");
-
-                });
-
-            });
-    </script>
+    <script src="./../../assets/js/mod/animais.js" defer></script>
 
 </body>
-
 </html>

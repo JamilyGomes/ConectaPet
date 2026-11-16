@@ -19,7 +19,7 @@ $posts = [
 ?>
 
 <?php
-$titulo = "Perfil adm";
+$titulo = "Perfil moderador";
 include './../../components/head/head2.php';
 ?>
 
@@ -72,39 +72,41 @@ include './../../components/head/head2.php';
 
                     <div class="dados">
 
-                        <p>
-                            <strong>Nome:</strong>
-                            <?= $usuario['nome'] ?>
-                        </p>
+                        <div class="dados">
 
-                        <p>
-                            <strong>Email:</strong>
-                            <?= $usuario['email'] ?>
-                        </p>
+                            <p>
+                                <strong>Nome:</strong>
+                                <span id="perfilNome"><?= $usuario['nome'] ?></span>
+                            </p>
 
-                        <p>
-                            <strong>CPF:</strong>
-                            <?= $usuario['cpf'] ?>
-                        </p>
+                            <p>
+                                <strong>Email:</strong>
+                                <span id="perfilEmail"><?= $usuario['email'] ?></span>
+                            </p>
 
-                        <p>
-                            <strong>Senha:</strong>
-                            <?= $usuario['senha'] ?>
-                        </p>
+                            <p>
+                                <strong>CPF:</strong>
+                                <span id="perfilCpf"><?= $usuario['cpf'] ?></span>
+                            </p>
 
-                        <p>
-                            <strong>Endereço:</strong>
-                            <?= $usuario['endereco'] ?>
-                        </p>
+                            <p>
+                                <strong>Senha:</strong>
+                                <span id="perfilSenha"><?= $usuario['senha'] ?></span>
+                            </p>
 
-                        <p>
-                            <strong>Telefone:</strong>
-                            <?= $usuario['telefone'] ?>
-                        </p>
+                            <p>
+                                <strong>Endereço:</strong>
+                                <span id="perfilEndereco"><?= $usuario['endereco'] ?></span>
+                            </p>
+
+                            <p>
+                                <strong>Telefone:</strong>
+                                <span id="perfilTelefone"><?= $usuario['telefone'] ?></span>
+                            </p>
+
+                        </div>
 
                     </div>
-
-                </div>
 
             </section>
 
@@ -222,150 +224,6 @@ include './../../components/head/head2.php';
 
     </div>
 
-    <script>
-        function trocarAba(id, botao) {
-
-            document.querySelectorAll('.painel').forEach(item => {
-                item.classList.remove('ativo');
-            });
-
-            document.querySelectorAll('.aba').forEach(item => {
-                item.classList.remove('ativa');
-            });
-
-            document.getElementById(id).classList.add('ativo');
-
-            botao.classList.add('ativa');
-        }
-    </script>
-
-    <script>
-        const telefone = document.getElementById("telefone");
-
-        telefone.addEventListener("input", function() {
-
-            // remove tudo que não for número
-            let valor = this.value.replace(/\D/g, "");
-
-            // aplica máscara
-            if (valor.length > 11) {
-                valor = valor.substring(0, 11);
-            }
-
-            if (valor.length > 10) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{5})(\d{4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 6) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 2) {
-                valor = valor.replace(
-                    /^(\d{2})(\d+)/,
-                    "($1) $2"
-                );
-            } else if (valor.length > 0) {
-                valor = valor.replace(
-                    /^(\d+)/,
-                    "($1"
-                );
-            }
-
-            this.value = valor;
-        });
-    </script>
-
-    <script>
-        function toggleSenha(id, icone) {
-
-            const input = document.getElementById(id);
-
-            if (input.type === "password") {
-                input.type = "text";
-                icone.textContent = "visibility_off";
-            } else {
-                input.type = "password";
-                icone.textContent = "visibility";
-            }
-        }
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            const modalEditar =
-                document.getElementById("modalEditar");
-
-            function abrir(modal) {
-                modal.style.display = "flex";
-            }
-
-            function fechar(modal) {
-                modal.style.display = "none";
-            }
-
-            function fecharFora(modal) {
-
-                modal.addEventListener("click", function(e) {
-
-                    if (e.target === modal) {
-                        fechar(modal);
-                    }
-
-                });
-
-            }
-
-            /* abrir modal */
-            document
-                .getElementById("abrirEditar")
-                .addEventListener("click", function() {
-
-                    abrir(modalEditar);
-
-                });
-
-            /* fechar modal */
-            document
-                .getElementById("fecharEditar")
-                .addEventListener("click", function() {
-
-                    fechar(modalEditar);
-
-                });
-
-            fecharFora(modalEditar);
-
-            /* salvar */
-            document
-                .getElementById("formEditarPerfil")
-                .addEventListener("submit", function(e) {
-
-                    e.preventDefault();
-
-                    let senha =
-                        document.getElementById("editSenha").value;
-
-                    let confirmar =
-                        document.getElementById("editConfirmar").value;
-
-                    if (senha !== confirmar) {
-
-                        alert("As senhas não coincidem.");
-
-                        return;
-                    }
-
-                    alert("Dados atualizados com sucesso!");
-
-                    fechar(modalEditar);
-
-                });
-
-        });
-    </script>
+    <script src="./../../assets/js/mod/perfil.js" defer></script>
 
 </body>

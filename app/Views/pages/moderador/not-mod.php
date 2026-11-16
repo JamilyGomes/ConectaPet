@@ -106,4 +106,6 @@ include './../../components/head/head2.php';
 
     </div>
 
+    <script src="./../../assets/js/mod/not.js" defer></script>
+    
 </body>
