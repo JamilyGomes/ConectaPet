@@ -216,27 +216,6 @@ include './../../components/head/head2.php';
         </div>
     </div>
 
-    <script>
-        function abrirModal() {
-            document.getElementById("modalExport").style.display = "flex";
-        }
-
-        function fecharModal() {
-            document.getElementById("modalExport").style.display = "none";
-        }
-
-        function exportarRelatorio() {
-            const csv = document.getElementById("csvCheck").checked;
-
-            if (csv) {
-                alert("Exportando relatório em CSV...");
-                // aqui depois você liga no backend PHP
-            } else {
-                alert("Selecione um formato de exportação!");
-            }
-
-            fecharModal();
-        }
-    </script>
+    <script src="./../../assets/js/adm/relatorio.js" defer></script>
 
 </body>

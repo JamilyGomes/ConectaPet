@@ -46,46 +46,6 @@ include './../../components/head/head.php';
         </div>
     </section>
 
-    <script>
-        function toggleSenha() {
-
-            const senha = document.getElementById("senha");
-            const icone = document.querySelector(".olho");
-
-            if (senha.type === "password") {
-                senha.type = "text";
-                icone.textContent = "visibility_off";
-            } else {
-                senha.type = "password";
-                icone.textContent = "visibility";
-            }
-
-        }
-
-        function login() {
-            localStorage.setItem('login', 'true');
-            window.location.href = "./home.php";
-        }
-    </script>
-
-    <!-- validacao dos campos email e senha  -->
-    <script>
-        function validarLogin() {
-            const email = document.getElementById("email").value.trim();
-            const senha = document.getElementById("senha").value.trim();
-
-            if (email === "" || senha === "") {
-                alert("Preencha email e senha!");
-                return false; // NÃO envia o formulário
-            }
-
-            // Se estiver tudo preenchido
-            localStorage.setItem('login', 'true');
-            window.location.href = "./home_adm.php";
-
-            return false; // impede envio padrão já que você redireciona manualmente
-        }
-    </script>
-
+    <script src="./../../assets/js/adm/login.js" defer></script>
 
 </body>

@@ -105,4 +105,6 @@ include './../../components/head/head2.php';
 
     </div>
 
+    <script src="./../../assets/js/adm/notificacoes.js" defer></script>
+    
 </body>

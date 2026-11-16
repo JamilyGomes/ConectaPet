@@ -74,12 +74,12 @@ include './../../components/head/head2.php';
 
                         <p>
                             <strong>Nome:</strong>
-                            <?= $usuario['nome'] ?>
+                            <span id="perfilNome"><?= htmlspecialchars($usuario['nome']) ?></span>
                         </p>
 
                         <p>
                             <strong>Email:</strong>
-                            <?= $usuario['email'] ?>
+                            <span id="perfilEmail"><?= htmlspecialchars($usuario['email']) ?></span>
                         </p>
 
                         <p>
@@ -94,12 +94,12 @@ include './../../components/head/head2.php';
 
                         <p>
                             <strong>Endereço:</strong>
-                            <?= $usuario['endereco'] ?>
+                            <span id="perfilEndereco"><?= htmlspecialchars($usuario['endereco']) ?></span>
                         </p>
 
                         <p>
                             <strong>Telefone:</strong>
-                            <?= $usuario['telefone'] ?>
+                            <span id="perfilTelefone"><?= htmlspecialchars($usuario['telefone']) ?></span>
                         </p>
 
                     </div>
@@ -150,7 +150,22 @@ include './../../components/head/head2.php';
 
             <h3>Editar Perfil</h3>
 
+            <div class="editar-foto-modal">
+                <label for="editFoto">Alterar foto do perfil</label>
+                <input
+                    type="file"
+                    id="editFoto"
+                    accept="image/*">
+            </div>
+
             <form id="formEditarPerfil">
+
+                <label>Nome</label>
+                <input
+                    type="text"
+                    id="editNome"
+                    value="<?= htmlspecialchars($usuario['nome']) ?>"
+                    required>
 
                 <label>Telefone</label>
 
@@ -158,15 +173,24 @@ include './../../components/head/head2.php';
                     type="text"
                     name="telefone"
                     id="telefone"
+                    value="<?= htmlspecialchars($usuario['telefone']) ?>"
                     placeholder="Ex: (67) 99999-9999"
                     maxlength="15"
                     required>
 
                 <label>E-mail</label>
 
-                <input type="email"
+                <input
+                    type="email"
                     id="editEmail"
-                    value="exemplo@gmail.com"
+                    value="<?= htmlspecialchars($usuario['email']) ?>"
+                    required>
+
+                <label>Endereço</label>
+                <input
+                    type="text"
+                    id="editEndereco"
+                    value="<?= htmlspecialchars($usuario['endereco']) ?>"
                     required>
 
                 <label for="senha">Senha</label>
@@ -175,7 +199,7 @@ include './../../components/head/head2.php';
 
                     <div class="campo-senha">
 
-                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
                         <span class="material-icons olho" onclick="toggleSenha('senha', this)">
                             visibility
                         </span>
@@ -189,7 +213,7 @@ include './../../components/head/head2.php';
 
                     <div class="campo-senha">
 
-                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha" required>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha">
                         <span class="material-icons olho" onclick="toggleSenha('confirmarSenha', this)">
                             visibility
                         </span>
@@ -222,150 +246,6 @@ include './../../components/head/head2.php';
 
     </div>
 
-    <script>
-        function trocarAba(id, botao) {
-
-            document.querySelectorAll('.painel').forEach(item => {
-                item.classList.remove('ativo');
-            });
-
-            document.querySelectorAll('.aba').forEach(item => {
-                item.classList.remove('ativa');
-            });
-
-            document.getElementById(id).classList.add('ativo');
-
-            botao.classList.add('ativa');
-        }
-    </script>
-
-    <script>
-        const telefone = document.getElementById("telefone");
-
-        telefone.addEventListener("input", function() {
-
-            // remove tudo que não for número
-            let valor = this.value.replace(/\D/g, "");
-
-            // aplica máscara
-            if (valor.length > 11) {
-                valor = valor.substring(0, 11);
-            }
-
-            if (valor.length > 10) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{5})(\d{4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 6) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 2) {
-                valor = valor.replace(
-                    /^(\d{2})(\d+)/,
-                    "($1) $2"
-                );
-            } else if (valor.length > 0) {
-                valor = valor.replace(
-                    /^(\d+)/,
-                    "($1"
-                );
-            }
-
-            this.value = valor;
-        });
-    </script>
-
-    <script>
-        function toggleSenha(id, icone) {
-
-            const input = document.getElementById(id);
-
-            if (input.type === "password") {
-                input.type = "text";
-                icone.textContent = "visibility_off";
-            } else {
-                input.type = "password";
-                icone.textContent = "visibility";
-            }
-        }
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            const modalEditar =
-                document.getElementById("modalEditar");
-
-            function abrir(modal) {
-                modal.style.display = "flex";
-            }
-
-            function fechar(modal) {
-                modal.style.display = "none";
-            }
-
-            function fecharFora(modal) {
-
-                modal.addEventListener("click", function(e) {
-
-                    if (e.target === modal) {
-                        fechar(modal);
-                    }
-
-                });
-
-            }
-
-            /* abrir modal */
-            document
-                .getElementById("abrirEditar")
-                .addEventListener("click", function() {
-
-                    abrir(modalEditar);
-
-                });
-
-            /* fechar modal */
-            document
-                .getElementById("fecharEditar")
-                .addEventListener("click", function() {
-
-                    fechar(modalEditar);
-
-                });
-
-            fecharFora(modalEditar);
-
-            /* salvar */
-            document
-                .getElementById("formEditarPerfil")
-                .addEventListener("submit", function(e) {
-
-                    e.preventDefault();
-
-                    let senha =
-                        document.getElementById("editSenha").value;
-
-                    let confirmar =
-                        document.getElementById("editConfirmar").value;
-
-                    if (senha !== confirmar) {
-
-                        alert("As senhas não coincidem.");
-
-                        return;
-                    }
-
-                    alert("Dados atualizados com sucesso!");
-
-                    fechar(modalEditar);
-
-                });
-
-        });
-    </script>
+    <script src="./../../assets/js/adm/perfil.js" defer></script>
 
 </body>
