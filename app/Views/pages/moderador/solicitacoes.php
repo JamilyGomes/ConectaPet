@@ -18,6 +18,6 @@ include './../../components/head/head2.php';
 
     </main>
 
-    <script src="../../assets/js/solicitacao-mod.js"></script>
+    <script src="../../assets/js/mod/solicitacoes.js"></script>
 
 </body>

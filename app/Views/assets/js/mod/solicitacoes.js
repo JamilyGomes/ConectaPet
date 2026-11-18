@@ -1,5 +1,4 @@
 
-
 function abrirModalAdocao() {
     document.getElementById('modalAdocaoPi').style.display = 'flex';
 }
@@ -9,11 +8,11 @@ function fecharModalAdocao() {
 }
 
 function abrirModalRecusa() {
-    document.getElementById("modalRecusa").style.display = "flex";
+    document.getElementById("modalRecusaAdocao").style.display = "flex";
 }
 
 function fecharModalRecusa() {
-    document.getElementById("modalRecusa").style.display = "none";
+    document.getElementById("modalRecusaAdocao").style.display = "none";
 }
 
 function abrirModalQuestionario() {
@@ -23,15 +22,30 @@ function abrirModalQuestionario() {
 function fecharModalQuestionario() {
     document.getElementById("modalQuestionario").style.display = "none";
 }
+
 document.addEventListener("DOMContentLoaded", function () {
 
     let linhaSelecionadaAdocao = null;
+    let linhaDetalhesAdocao = null;
+
+    // ABRIR DETALHES DA SOLICITAÇÃO
+    document.querySelectorAll(".visualizar-mod")
+        .forEach(botao => {
+
+            botao.addEventListener("click", function () {
+
+                linhaDetalhesAdocao =
+                    this.closest(".solicitacao-pi-linha");
+
+            });
+
+        });
+
 
     const modalRecusaAdocao =
         document.getElementById("modalRecusaAdocao");
 
-
-    /* RECUSAR */
+    // RECUSAR
     document.querySelectorAll(".recusar-mod")
         .forEach(botao => {
 
@@ -46,8 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-
-    /* FECHAR */
+    // FECHAR
     document.getElementById("fecharRecusaAdocao")
         .addEventListener("click", function () {
 
@@ -55,8 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-
-    /* FECHAR FORA */
+    // FECHAR FORA
     modalRecusaAdocao.addEventListener("click", function (e) {
 
         if (e.target === modalRecusaAdocao) {
@@ -65,8 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
-    /* CONFIRMAR RECUSA */
+    // CONFIRMAR RECUSA
     document.querySelector(".confirmar-recusa-adocao")
         .addEventListener("click", function () {
 
@@ -82,30 +93,62 @@ document.addEventListener("DOMContentLoaded", function () {
 
             modalRecusaAdocao.style.display = "none";
 
+            linhaSelecionadaAdocao = null;
+
         });
 
-
-    /* APROVAR */
+    // APROVAR PELA TABELA
     document.querySelectorAll(".aprovar-mod")
-    .forEach(botao => {
+        .forEach(botao => {
 
-        botao.addEventListener("click", function () {
+            botao.addEventListener("click", function () {
 
-            let linha =
-                this.closest(".solicitacao-pi-linha");
+                let linha =
+                    this.closest(".solicitacao-pi-linha");
+
+                let status =
+                    linha.querySelector(".solicitacao-pi-status");
+
+                status.textContent = "Aprovado";
+
+                status.classList.remove("pendente", "recusado");
+                status.classList.add("aprovado");
+
+            });
+
+        });
+
+    // APROVAR PELO MODAL DE DETALHES
+    document.querySelector(".btn-aprovar-pi")
+        .addEventListener("click", function () {
+
+            if (!linhaDetalhesAdocao) return;
 
             let status =
-                linha.querySelector(".solicitacao-pi-status");
+                linhaDetalhesAdocao.querySelector(".solicitacao-pi-status");
 
             status.textContent = "Aprovado";
 
             status.classList.remove("pendente", "recusado");
             status.classList.add("aprovado");
 
+            fecharModalAdocao();
+
+            linhaDetalhesAdocao = null;
+
         });
 
-    });
+    // RECUSAR PELO MODAL DE DETALHES
+    document.querySelector(".btn-recusar-pi")
+        .addEventListener("click", function () {
 
+            if (!linhaDetalhesAdocao) return;
+
+            linhaSelecionadaAdocao = linhaDetalhesAdocao;
+
+            fecharModalAdocao();
+
+            abrirModalRecusa();
+
+        });
 });
-
-

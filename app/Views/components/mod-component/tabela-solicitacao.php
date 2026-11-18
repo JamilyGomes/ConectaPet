@@ -118,13 +118,13 @@
 
                 <button
                     class="cancelar-recusa-mod"
-                    id="fecharRecusa">
+                    id="fecharRecusaAdocao">
 
                     Cancelar
 
                 </button>
 
-                <button type="button" class="confirmar-recusa-mod">
+                <button type="button" class="confirmar-recusa-adocao">
                     Confirmar suspensão
                 </button>
             </div>

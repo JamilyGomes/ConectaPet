@@ -39,6 +39,12 @@ p {
 
 button {
   font-size: 16px;
+  border: none;
+  background: #f3b21c;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 
