@@ -1,36 +1,26 @@
 // cadastro user 
 document.addEventListener('DOMContentLoaded', function () {
 
-// mostrar/ocultar senha 
-    function toggleSenha(id, icone) {
-
-        const input = document.getElementById(id);
-
-        if (!input) return;
-
-        if (input.type === 'password') {
-
-            input.type = 'text';
-            icone.textContent = 'visibility_off';
-
-        } else {
-
-            input.type = 'password';
-            icone.textContent = 'visibility';
-
-        }
-
-    }
-
-    // Disponibiliza a função para os ícones
+    // mostrar/ocultar senha
     document.querySelectorAll('.olho').forEach(function (icone) {
 
         icone.addEventListener('click', function () {
 
-            const input = icone.parentElement.querySelector('input');
+            const id = this.getAttribute('data-target');
+            const input = document.getElementById(id);
 
-            if (input) {
-                toggleSenha(input.id, icone);
+            if (!input) return;
+
+            if (input.type === 'password') {
+
+                input.type = 'text';
+                this.textContent = 'visibility_off';
+
+            } else {
+
+                input.type = 'password';
+                this.textContent = 'visibility';
+
             }
 
         });
@@ -38,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-// mascara cpf 
+    // mascara cpf 
     const cpf = document.getElementById('cpf');
 
     if (cpf) {
@@ -60,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// permitir somente letras no nome 
+    // permitir somente letras no nome 
     const nome = document.getElementById('nome');
 
     if (nome) {
@@ -74,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// mascara tel 
+    // mascara tel 
     const telefone = document.getElementById('telefone');
 
     if (telefone) {
