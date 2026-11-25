@@ -1,7 +1,8 @@
 <?php
+session_start();
+
 $titulo = 'Login';
-?>
-<?php
+
 include './../../components/head/head.php';
 ?>
 
@@ -26,33 +27,58 @@ include './../../components/head/head.php';
         <!-- lado direito  -->
         <div class="direita">
             <h1>Login</h1>
-            <form method="POST" action="">
+
+            <?php if (isset($_SESSION['erro_login'])): ?>
+
+                <div class="mensagem-erro">
+                    <?= htmlspecialchars($_SESSION['erro_login']) ?>
+                </div>
+
+                <?php unset($_SESSION['erro_login']); ?>
+
+            <?php endif; ?>
+
+            <form method="POST" action="/ConectaPet/verificacoes/user/verificar-login.php">
 
                 <label for="email">E-mail</label>
-                <input type="email" name="email" placeholder="Digite seu email " required>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu email"
+                    required>
 
                 <label for="senha">Senha</label>
 
                 <div class="campo-senha">
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required>
 
-                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
                     <span class="material-icons olho">
                         visibility
                     </span>
+                </div>
+
+                <div class="botoes">
+
+                    <a href="./cadastro.php">
+                        <button type="button" class="bt-cadastro">
+                            Cadastrar-se
+                        </button>
+                    </a>
+
+                    <button type="submit" class="bt-entrar">
+                        Entrar 🐾
+                    </button>
 
                 </div>
 
             </form>
-            <div class="botoes">
-                <a href="./cadastro.php">
-                    <button type="submit" class="bt-cadastro">
-                        Cadastrar-se</button>
-                </a>
 
-                <button type="button" class="bt-entrar">
-                    Entrar 🐾
-                </button>
-            </div>
             <a class="esqueceu" href="./recuperar-senha.php">Esqueceu a senha?</a>
         </div>
     </section>

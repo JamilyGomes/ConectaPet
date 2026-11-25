@@ -32,7 +32,7 @@ include './../../components/head/head.php';
 
     <h2>Dados Pessoais</h2>
 
-    <form class="form-cadastro" action="./processa-cadastro.php" method="POST" enctype="multipart/form-data">
+    <form class="form-cadastro" action="/ConectaPet/verificacoes/user/processa-cadastro.php" method="POST" enctype="multipart/form-data">
         <div class="campo">
             <label>Nome Completo</label>
             <input type="text" id="nome" name="nome"

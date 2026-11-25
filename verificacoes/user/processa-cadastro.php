@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once __DIR__ . '/../../../../config/conexao.php';
+require_once __DIR__ . '/../../config/conexao.php';
 
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -257,8 +257,9 @@ try {
         ':foto_perfil' => $caminhoFoto
     ]);
 
-    header('Location: cadastro2.php');
+    header('Location: /ConectaPet/app/Views/pages/user/cadastro2.php');
     exit;
+    
 } catch (PDOException $erro) {
 
     // Remove a foto caso o cadastro falhe
