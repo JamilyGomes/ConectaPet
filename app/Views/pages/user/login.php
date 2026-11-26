@@ -38,7 +38,7 @@ include './../../components/head/head.php';
 
             <?php endif; ?>
 
-            <form method="POST" action="/ConectaPet/verificacoes/user/verificar-login.php">
+            <form method="POST" action="/ConectaPet/verificacoes/user/verificar-login.php" novalidate>
 
                 <label for="email">E-mail</label>
                 <input

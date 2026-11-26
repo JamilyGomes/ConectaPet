@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['id_usuario'])) {
-    header('Location: login.php');
+    header('Location: /ConectaPet/app/Views/pages/user/login.php');
     exit;
 }
 
@@ -19,29 +19,34 @@ include './../../components/head/head.php';
     include './../../components/nav/navBar.php';
     ?>
 
+    <!-- conteúdo principal -->
+    <main>
 
-    <!-- header -->
+        <!-- header -->
+        <?php
+        include './../../components/header_home/header_home.php';
+        ?>
 
-    <?php
-    include './../../components/header_home/header_home.php';
-    ?>
+        <section class="cards-container">
+            <div class="cards">
+                <?php
+                for ($i = 0; $i < 17; $i++) {
+                    include './../../components/card_home/card_home.php';
+                }
+                ?>
+            </div>
 
-    <section class="cards-container">
-        <div class="cards">
-            <?php
-            for ($i = 0; $i < 17; $i++) {
-                include './../../components/card_home/card_home.php';
-            }
-            ?>
-        </div>
+            <div class="pagination">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
 
-        <div class="pagination">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </section>
+    </main>
 
+
+    <script src="./../../assets/js/user/home.js" defer></script>
 
     <?php include './../../components/footer/footer.php'; ?>
 

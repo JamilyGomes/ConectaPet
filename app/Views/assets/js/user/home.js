@@ -1,11 +1,13 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-// buscar btn fav 
+    console.log("Quantidade de favoritos:", document.querySelectorAll(".fav").length);
+
+    // buscar btn fav 
 
     const botoesFavoritos = document.querySelectorAll(".fav");
 
-// buscarfav salvos 
+    // buscarfav salvos 
 
     function obterFavoritos() {
         try {
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-// atualizar oscoracoes ao atualizar a home 
+    // atualizar oscoracoes ao atualizar a home 
 
     let favoritos = obterFavoritos();
 
@@ -35,11 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-// add ou remover fav 
+    // add ou remover fav 
 
     botoesFavoritos.forEach(fav => {
 
-        fav.addEventListener("click", () => {
+        fav.addEventListener("click", (event) => {
+            console.log("Clique no favorito detectado!");
+            event.preventDefault();
+            event.stopPropagation();
 
             const card = fav.closest(".card-home");
 
@@ -73,6 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "favoritos",
                 JSON.stringify(favoritos)
             );
+
+            console.log("Favoritos salvos:", localStorage.getItem("favoritos"));
 
         });
 

@@ -15,7 +15,12 @@
                 </div>
                 <div id="input_pesquisa">
                     <span>
-                        <input type="text">
+                        <input
+                            type="text"
+                            id="pesquisa_animais"
+                            name="pesquisa_animais"
+                            aria-label="Pesquisar animais">
+
                         <span title="Filtro" id="icon-pesquisa" class="material-symbols-outlined">
                             instant_mix
                         </span>
@@ -47,6 +52,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const input = document.querySelector("#input_pesquisa input");
             const cards = document.querySelectorAll(".card-home");
+
             function atualizarPesquisa() {
                 const texto = input.value.toLowerCase().trim();
                 cards.forEach(card => {

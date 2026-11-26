@@ -65,7 +65,7 @@ $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
             <!-- perfil só aparece logado -->
             <li id="menu-perfil" style="display:none;">
                 <a href="./../../pages/user/perfil_usuario.php">
-                    <img src="../../assets/img/user.png" class="nav-icon">
+                    <img src="../../assets/img/user.png" class="nav-icon" alt="Meu perfil">
                 </a>
             </li>
 
