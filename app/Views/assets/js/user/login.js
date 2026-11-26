@@ -19,17 +19,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // realizar login 
-    const botaoEntrar = document.querySelector(".bt-entrar");
-
-    if (botaoEntrar) {
-        botaoEntrar.addEventListener("click", () => {
-
-            localStorage.setItem("login", "true");
-
-            window.location.href = "./home.php";
-
-        });
-    }
-
 });

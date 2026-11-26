@@ -70,13 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function fecharFora(modal) {
-        if (modal) {
-            modal.addEventListener("click", function (e) {
-                if (e.target === modal) {
-                    fechar(modal);
-                }
-            });
-        }
+        // Não fecha o modal ao clicar fora da janela.
     }
 
     // Elementos dos modais
@@ -86,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalHist = document.getElementById("modalHistorico");
 
 
-//  modal criar 
+    //  modal criar 
 
     const abrirModal = document.getElementById("abrirModal");
     const fecharCriar = document.getElementById("fecharCriar");
@@ -145,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-// modal msg 
+    // modal msg 
     document.querySelectorAll(".btn-acao.mensagem").forEach(function (botao) {
         botao.addEventListener("click", function () {
             const nome = this.dataset.nome;
@@ -180,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-// modal historico 
+    // modal historico 
 
     const fecharHistorico = document.getElementById("fecharHistorico");
 
@@ -229,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-// suspender e reativar conta 
+    // suspender e reativar conta 
 
     document.querySelectorAll(".btn-acao.suspender").forEach(function (botao) {
         botao.addEventListener("click", function () {
@@ -257,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-// fechar modais clicando fora 
+    // fechar modais clicando fora 
 
     [modalCriar, modalEditar, modalMsg, modalHist].forEach(fecharFora);
 

@@ -1,11 +1,115 @@
 <?php
+
+session_start();
+
+require_once __DIR__ . '/../../../../config/conexao.php';
+
+// Somente administradores podem acessar esta página
+if (!isset($_SESSION['id_usuario']) || $_SESSION['tipo_usuario'] !== 'adm') {
+    header('Location: /ConectaPet/app/Views/pages/user/login.php');
+    exit;
+}
+
 $titulo = 'Conta';
+
+// Verifica se o formulário de criação foi enviado
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])) {
+
+    $nome = trim($_POST['nome'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $telefone = preg_replace('/\D/', '', $_POST['telefone'] ?? '');
+    $cpf = preg_replace('/\D/', '', $_POST['cpf'] ?? '');
+    $senha = $_POST['senha'] ?? '';
+    $confirmarSenha = $_POST['confirmar_senha'] ?? '';
+
+    if (
+        empty($nome) ||
+        empty($email) ||
+        empty($telefone) ||
+        empty($cpf) ||
+        empty($senha) ||
+        empty($confirmarSenha)
+    ) {
+        $_SESSION['mensagem_contas'] = 'Preencha todos os campos.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['mensagem_contas'] = 'Digite um e-mail válido.';
+    } elseif (strlen($cpf) !== 11) {
+        $_SESSION['mensagem_contas'] = 'CPF inválido.';
+    } elseif (strlen($telefone) < 10 || strlen($telefone) > 11) {
+        $_SESSION['mensagem_contas'] = 'Telefone inválido.';
+    } elseif (strlen($senha) < 8) {
+        $_SESSION['mensagem_contas'] = 'A senha deve ter pelo menos 8 caracteres.';
+    } elseif ($senha !== $confirmarSenha) {
+        $_SESSION['mensagem_contas'] = 'As senhas não coincidem.';
+    } else {
+
+        try {
+
+            // Verifica se o e-mail ou CPF já estão cadastrados
+            $consulta = $conexao->prepare(
+                "SELECT id_usuario
+                 FROM usuarios
+                 WHERE email = :email OR cpf = :cpf"
+            );
+
+            $consulta->execute([
+                ':email' => $email,
+                ':cpf' => $cpf
+            ]);
+
+            if ($consulta->fetch(PDO::FETCH_ASSOC)) {
+
+                $_SESSION['mensagem_contas'] = 'Este e-mail ou CPF já está cadastrado.';
+            } else {
+
+                // Protege a senha
+                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+                // Cadastra o moderador
+                $sql = "INSERT INTO usuarios
+                        (nome, cpf, telefone, email, senha, tipo_usuario, data_cadastro)
+                        VALUES
+                        (:nome, :cpf, :telefone, :email, :senha, 'mod', CURRENT_TIMESTAMP)";
+
+                $inserir = $conexao->prepare($sql);
+
+                $inserir->execute([
+                    ':nome' => $nome,
+                    ':cpf' => $cpf,
+                    ':telefone' => $telefone,
+                    ':email' => $email,
+                    ':senha' => $senhaHash
+                ]);
+
+                $_SESSION['mensagem_contas'] = 'Moderador cadastrado com sucesso!';
+            }
+        } catch (PDOException $erro) {
+
+            $_SESSION['mensagem_contas'] = 'Erro ao cadastrar moderador. Verifique os dados e tente novamente.';
+        }
+    }
+
+    header('Location: /ConectaPet/app/Views/pages/adm/contas.php?tipo=moderadores');
+    exit;
+}
+
 include './../../components/head/head2.php';
+
 ?>
 
 <body>
 
     <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
+
+    <?php if (isset($_SESSION['mensagem_contas'])): ?>
+
+        <p class="mensagem-contas">
+            <?= htmlspecialchars($_SESSION['mensagem_contas']) ?>
+        </p>
+
+        <?php unset($_SESSION['mensagem_contas']); ?>
+
+    <?php endif; ?>
 
 
     <div class="main-content">
@@ -49,29 +153,18 @@ include './../../components/head/head2.php';
 
         <?php
 
-        if ($tipo == 'moderadores') {
+        // Aceita somente os dois tipos de listagem
+        $tipo = $_GET['tipo'] ?? 'usuarios';
 
-            $tituloTabela = "Moderadores";
+        if ($tipo !== 'usuarios' && $tipo !== 'moderadores') {
+            $tipo = 'usuarios';
+        }
 
-            $usuarios = [
-                [
-                    "id" => 10,
-                    "nome" => "Carlos",
-                    "data" => "05/02",
-                    "status" => "Ativo",
-                    "email" => "carlos@email.com",
-                    "telefone" => "(67)99999-9999"
-                ],
-                [
-                    "id" => 11,
-                    "nome" => "Ana",
-                    "data" => "06/02",
-                    "status" => "Ativo",
-                    "email" => "ana@email.com",
-                    "telefone" => "(67)98888-8888"
-                ]
-            ];
+        $tituloTabela = ($tipo === 'moderadores') ? 'Moderadores' : 'Usuários';
 
+        $tipoBanco = ($tipo === 'moderadores') ? 'mod' : 'user';
+
+        if ($tipo === 'moderadores') {
             $acoes = [
                 'suspender',
                 'historico',
@@ -79,28 +172,27 @@ include './../../components/head/head2.php';
                 'editar'
             ];
         } else {
-
-            $tituloTabela = "Usuários";
-
-            $usuarios = [
-                [
-                    "id" => 1,
-                    "nome" => "João",
-                    "data" => "01/01",
-                    "status" => "Ativo"
-                ],
-                [
-                    "id" => 2,
-                    "nome" => "Maria",
-                    "data" => "02/02",
-                    "status" => "Ativo"
-                ]
-            ];
-
             $acoes = [
                 'suspender'
             ];
         }
+
+        // Busca as contas cadastradas no banco
+        $sql = "SELECT
+            id_usuario AS id,
+            nome,
+            TO_CHAR(data_cadastro, 'DD/MM/YYYY') AS data,
+            'Ativo' AS status,
+            email,
+            telefone
+        FROM usuarios
+        WHERE tipo_usuario = :tipo
+        ORDER BY id_usuario DESC";
+
+        $consulta = $conexao->prepare($sql);
+        $consulta->execute([':tipo' => $tipoBanco]);
+
+        $usuarios = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
         include './../../components/adm_component/tabela.php';
 
@@ -155,6 +247,26 @@ include './../../components/head/head2.php';
                     name="cpf"
                     placeholder="Digite seu CPF"
                     maxlength="14"
+                    required>
+
+                <label>Senha</label>
+
+                <input
+                    type="password"
+                    name="senha"
+                    id="senha"
+                    placeholder="Digite uma senha"
+                    minlength="8"
+                    required>
+
+                <label>Confirmar senha</label>
+
+                <input
+                    type="password"
+                    name="confirmar_senha"
+                    id="confirmar_senha"
+                    placeholder="Digite a senha novamente"
+                    minlength="8"
                     required>
 
                 <div class="botoes-modal">

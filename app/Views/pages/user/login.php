@@ -46,7 +46,10 @@ include './../../components/head/head.php';
                     id="email"
                     name="email"
                     placeholder="Digite seu email"
+                    value="<?= htmlspecialchars($_SESSION['email_login'] ?? '') ?>"
                     required>
+
+                    <?php unset($_SESSION['email_login']); ?>
 
                 <label for="senha">Senha</label>
 
