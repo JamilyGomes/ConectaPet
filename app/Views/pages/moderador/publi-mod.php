@@ -13,30 +13,35 @@ include './../../components/head/head2.php';
 
         $tituloTabela = "Publicações";
 
-        $publicacoes = [
+        require_once __DIR__ . '/../../../../config/conexao.php';
 
-            [
-                'titulo' => 'Theo para adoção',
-                'autor' => 'Julia',
-                'data' => '31 out 2025',
-                'status' => 'Pendente'
-            ],
+        $sql = "
+            SELECT
+                a.id_animal,
+                a.nome,
+                a.data_cadastro,
+                a.status,
+                u.nome AS autor
+            FROM animais a
+            INNER JOIN usuarios u
+                ON a.id_usuario = u.id_usuario
+            ORDER BY a.data_cadastro DESC
+        ";
 
-            [
-                'titulo' => 'Mel para adoção',
-                'autor' => 'Carlos',
-                'data' => '01 nov 2025',
-                'status' => 'Pendente'
-            ],
+        $consulta = $conexao->query($sql);
 
-            [
-                'titulo' => 'Rex para adoção',
-                'autor' => 'Amanda',
-                'data' => '02 nov 2025',
-                'status' => 'Pendente'
-            ]
+        $publicacoes = [];
 
-        ];
+        while ($animal = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+            $publicacoes[] = [
+                'id_animal' => $animal['id_animal'],
+                'titulo' => $animal['nome'] . ' para adoção',
+                'autor' => $animal['autor'],
+                'data' => date('d/m/Y', strtotime($animal['data_cadastro'])),
+                'status' => $animal['status']
+            ];
+        }
 
         include './../../components/mod-component/tab-publicacoes.php';
 
@@ -62,27 +67,27 @@ include './../../components/head/head2.php';
             <div class="motivos-mod">
 
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" value="Informação falsa">
                     Informação falsa
                 </label>
 
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" value="Imagem inapropriada">
                     Imagem inapropriada
                 </label>
 
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" value="Animal já adotado">
                     Animal já adotado
                 </label>
 
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" value="Violação das regras de doação">
                     Violação das regras de doação
                 </label>
 
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" value="Outro motivo">
                     Outro motivo
                 </label>
 
@@ -286,5 +291,5 @@ include './../../components/head/head2.php';
     </div>
 
     <script src="../../assets/js/mod/publi.js"></script>
-    
+
 </body>

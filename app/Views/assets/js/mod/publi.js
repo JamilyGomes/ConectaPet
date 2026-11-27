@@ -48,97 +48,131 @@ modalRecusa.addEventListener("click", function (e) {
 
 /* CONFIRMAR */
 
-document
-    .querySelector(".confirmar-recusa-mod")
-    .addEventListener("click", function (e) {
+/* CONFIRMAR RECUSA */
 
-        e.preventDefault();
+document.querySelector(".confirmar-recusa-mod").addEventListener("click", async function (e) {
 
-        if (!linhaSelecionada) {
+    e.preventDefault();
+
+    if (!linhaSelecionada) return;
+
+    const idAnimal = linhaSelecionada.dataset.idAnimal;
+    const status = linhaSelecionada.querySelector(".status-mod");
+    const textarea = document.querySelector(".caixa-recusa-mod textarea");
+
+    const checkSelecionado = document.querySelectorAll(".motivos-mod input:checked");
+
+    const motivos = Array.from(checkSelecionado).map(item => item.value);
+
+    const observacao = textarea.value.trim();
+
+    if (motivos.length === 0 && observacao === "") {
+        alert("Selecione um motivo ou escreva uma observação.");
+        return;
+    }
+
+    try {
+
+        const resposta = await fetch(
+            "../../../../verificacoes/mod/atualizar-publicacao.php",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id_animal: idAnimal,
+                    status: "Recusado",
+                    motivos: motivos,
+                    observacao: observacao
+                })
+            }
+        );
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok || !resultado.sucesso) {
+            alert(resultado.erro || "Não foi possível recusar a publicação.");
             return;
         }
 
-        let status = linhaSelecionada.querySelector(".status-mod");
-
-        let textarea = document.querySelector(
-            ".caixa-recusa-mod textarea"
-        );
-
-        let checkSelecionado = document.querySelectorAll(
-            ".motivos-mod input:checked"
-        );
-
-
-        // precisa escolher algo
-        if (
-            checkSelecionado.length === 0 &&
-            textarea.value.trim() === ""
-        ) {
-
-            alert(
-                "Selecione um motivo ou escreva uma observação"
-            );
-
-            return;
-        }
-
-
-        // muda status
         status.textContent = "Recusado";
 
-        status.classList.remove(
-            "pendente-mod",
-            "aprovado-mod"
-        );
+        status.classList.remove("pendente-mod", "aprovado-mod");
+        status.classList.add("recusado-mod");
 
-        status.classList.add(
-            "recusado-mod"
-        );
+        document.querySelectorAll(".motivos-mod input").forEach(input => {
+            input.checked = false;
+        });
 
-
-        // limpa checkbox
-        document
-            .querySelectorAll(".motivos-mod input")
-            .forEach(item => {
-
-                item.checked = false;
-
-            });
-
-
-        // limpa textarea
         textarea.value = "";
 
-
-        // fecha modal
         modalRecusa.style.display = "none";
 
-    });
+        alert("Publicação recusada com sucesso!");
 
-/* APROVAR PUBLICAÇÃO */  
+    } catch (erro) {
+
+        console.error(erro);
+        alert("Erro ao comunicar com o servidor.");
+
+    }
+
+});
+
+/* APROVAR PUBLICAÇÃO */
 
 document.querySelectorAll(".aprovar-mod")
     .forEach(botao => {
 
-        botao.addEventListener("click", function () {
+        botao.addEventListener("click", async function () {
 
-            let linha = this.closest(".linha-mod");
+            const linha = this.closest(".linha-mod");
 
-            let status = linha.querySelector(".status-mod");
+            const idAnimal = linha.dataset.idAnimal;
 
-            // muda texto
-            status.textContent = "Aprovado";
+            try {
 
-            // remove outras classes
-            status.classList.remove(
-                "pendente-mod",
-                "recusado-mod"
-            );
+                const resposta = await fetch(
+                    "../../../../verificacoes/mod/atualizar-publicacao.php",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            id_animal: idAnimal,
+                            status: "Aprovado"
+                        })
+                    }
+                );
 
-            // adiciona aprovado
-            status.classList.add(
-                "aprovado-mod"
-            );
+                const resultado = await resposta.json();
+
+                if (!resposta.ok || !resultado.sucesso) {
+                    alert(resultado.erro || "Não foi possível aprovar a publicação.");
+                    return;
+                }
+
+                const status = linha.querySelector(".status-mod");
+
+                status.textContent = "Aprovado";
+
+                status.classList.remove(
+                    "pendente-mod",
+                    "recusado-mod"
+                );
+
+                status.classList.add("aprovado-mod");
+
+                alert("Publicação aprovada com sucesso!");
+
+            } catch (erro) {
+
+                console.error(erro);
+                alert("Erro ao comunicar com o servidor.");
+
+            }
 
         });
 

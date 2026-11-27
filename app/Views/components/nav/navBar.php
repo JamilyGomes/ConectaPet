@@ -1,5 +1,13 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$logado = isset($_SESSION['id_usuario']);
+
 $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
 ?>
 
 <body>
@@ -44,14 +52,14 @@ $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
             </li>
 
             <!-- aparece sem login -->
-            <li id="menu-login">
+            <li id="menu-login" style="<?= $logado ? 'display:none;' : '' ?>">
                 <a href="./../../pages/user/login.php">
                     Login
                 </a>
             </li>
 
             <!-- aparece com login -->
-            <li id="menu-publicar" style="display:none;">
+            <li id="menu-publicar" style="<?= $logado ? '' : 'display:none;' ?>">
                 <a href="./../../pages/user/doacao1.php">
                     Publicar
                 </a>
@@ -63,14 +71,14 @@ $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         <ul class="navbar-social">
 
             <!-- perfil só aparece logado -->
-            <li id="menu-perfil" style="display:none;">
+            <li id="menu-perfil" style="<?= $logado ? '' : 'display:none;' ?>">
                 <a href="./../../pages/user/perfil_usuario.php">
                     <img src="../../assets/img/user.png" class="nav-icon" alt="Meu perfil">
                 </a>
             </li>
 
             <!-- sair só aparece logado -->
-            <li id="menu-sair" style="display:none;">
+            <li id="menu-sair" style="<?= $logado ? '' : 'display:none;' ?>">
                 <button class="btn-sair-nav" onclick="logout()">
                     Sair
                 </button>
@@ -110,87 +118,32 @@ $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
-            const logado = localStorage.getItem("login");
-
-            const loginMenu = document.getElementById("menu-login");
-            const publicarMenu = document.getElementById("menu-publicar");
-
-            const perfil = document.getElementById("menu-perfil");
-            const sair = document.getElementById("menu-sair");
-
             const modal = document.getElementById("modalLoginAviso");
             const fechar = document.getElementById("fecharModalLogin");
 
+            <?php if (!$logado): ?>
 
+                const linksProtegidos = document.querySelectorAll(".link-protegido");
 
-            /* se estiver logado */
+                linksProtegidos.forEach(link => {
 
-            if (logado === "true") {
-
-                loginMenu.style.display = "none";
-
-                publicarMenu.style.display = "block";
-
-                perfil.style.display = "block";
-
-                sair.style.display = "block";
-            }
-
-
-
-            /* bloquear favoritos e contato */
-
-            const linksProtegidos =
-                document.querySelectorAll(".link-protegido");
-
-
-            linksProtegidos.forEach(link => {
-
-                link.addEventListener("click", function(e) {
-
-                    const logado = localStorage.getItem("login");
-
-                    if (logado !== "true") {
+                    link.addEventListener("click", function(e) {
 
                         e.preventDefault();
-
                         modal.style.display = "flex";
-                    }
+
+                    });
 
                 });
 
-            });
+            <?php endif; ?>
 
             fechar.addEventListener("click", function() {
-
                 modal.style.display = "none";
-
             });
 
-        });
+            modal.addEventListener("click", function(e) {
 
-
-
-        function logout() {
-
-            localStorage.removeItem("login");
-
-            window.location.href = "./home.php";
-
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-
-            const modal = document.getElementById("modalLoginAviso");
-
-            document.addEventListener("click", function(e) {
-
-                // botão "Entendi"
-                if (e.target && e.target.id === "fecharModalLogin") {
-                    modal.style.display = "none";
-                }
-
-                // clicar fora do box (opcional)
                 if (e.target === modal) {
                     modal.style.display = "none";
                 }
@@ -198,6 +151,10 @@ $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
             });
 
         });
+
+        function logout() {
+            window.location.href = "./../../../../verificacoes/user/logout.php";
+        }
     </script>
     <?php include __DIR__ . '/../acessibilidade/acessibilidade.php'; ?>
 </body>

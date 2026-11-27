@@ -40,16 +40,26 @@ $publicacoes = $publicacoes ?? [];
 
         <?php foreach ($publicacoes as $p): ?>
 
-            <div class="linha-mod publicacao-linha-mod">
+            <?php
+            $classeStatus = match ($p['status']) {
+                'Aprovado' => 'aprovado-mod',
+                'Recusado' => 'recusado-mod',
+                default => 'pendente-mod'
+            };
+            ?>
 
-                <span>"<?= $p['titulo'] ?>"</span>
+            <div
+                class="linha-mod publicacao-linha-mod"
+                data-id-animal="<?= (int) $p['id_animal'] ?>">
+
+                <span><?= htmlspecialchars($p['titulo']) ?></span>
 
                 <span><?= $p['autor'] ?></span>
 
                 <span><?= $p['data'] ?></span>
 
-                <span class="status-mod pendente-mod">
-                    <?= $p['status'] ?>
+                <span class="status-mod <?= $classeStatus ?>">
+                    <?= htmlspecialchars($p['status']) ?>
                 </span>
 
                 <div class="acoes-mod">

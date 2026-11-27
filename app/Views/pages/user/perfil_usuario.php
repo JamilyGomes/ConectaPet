@@ -1,4 +1,35 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['id_usuario'])) {
+  header('Location: login.php');
+  exit;
+}
+
+require_once __DIR__ . '/../../../../config/conexao.php';
+$id_usuario = $_SESSION['id_usuario'];
+
+$sqlDoacoes = "
+    SELECT
+        id_animal,
+        nome,
+        foto,
+        data_cadastro,
+        status,
+        motivo_recusa,
+        observacao_recusa
+    FROM animais
+    WHERE id_usuario = :id_usuario
+    ORDER BY data_cadastro DESC
+";
+
+$consultaDoacoes = $conexao->prepare($sqlDoacoes);
+
+$consultaDoacoes->execute([
+  ':id_usuario' => $id_usuario
+]);
+
+$minhasDoacoes = $consultaDoacoes->fetchAll(PDO::FETCH_ASSOC);
 $titulo = 'Meu Perfil';
 include './../../components/head/head.php';
 ?>
@@ -115,10 +146,55 @@ include './../../components/head/head.php';
 
         <div class="lista-card">
 
-          <div class="linha-item">
-            <span class="tag doacao">Doação</span>
-            <p>Muito obrigado pela sua contribuição para nossos animais.</p>
-          </div>
+          <?php if (empty($minhasDoacoes)): ?>
+
+            <p>Você ainda não cadastrou nenhum animal para doação.</p>
+
+          <?php else: ?>
+
+            <?php foreach ($minhasDoacoes as $animal): ?>
+
+              <div class="linha-item">
+
+                <div>
+                  <strong>
+                    <?= htmlspecialchars($animal['nome']) ?>
+                  </strong>
+
+                  <p>
+                    Publicado em:
+                    <?= date('d/m/Y', strtotime($animal['data_cadastro'])) ?>
+                  </p>
+
+                  <span class="tag <?= strtolower($animal['status']) ?>">
+                    <?= htmlspecialchars($animal['status']) ?>
+                  </span>
+
+                  <?php if ($animal['status'] === 'Recusado'): ?>
+
+                    <p>
+                      <strong>Motivo da recusa:</strong>
+                      <?= htmlspecialchars($animal['motivo_recusa'] ?? 'Não informado') ?>
+                    </p>
+
+                    <?php if (!empty($animal['observacao_recusa'])): ?>
+
+                      <p>
+                        <strong>Observação:</strong>
+                        <?= htmlspecialchars($animal['observacao_recusa']) ?>
+                      </p>
+
+                    <?php endif; ?>
+
+                  <?php endif; ?>
+
+                </div>
+
+              </div>
+
+            <?php endforeach; ?>
+
+          <?php endif; ?>
 
         </div>
 
