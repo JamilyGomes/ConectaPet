@@ -30,7 +30,35 @@ include './../../components/head/head.php';
         <section class="cards-container">
             <div class="cards">
                 <?php
-                for ($i = 0; $i < 17; $i++) {
+                require_once __DIR__ . '/../../../../config/conexao.php';
+
+                $sql = "
+                    SELECT
+                        id_animal,
+                        nome,
+                        idade_aproximada,
+                        foto
+                    FROM animais
+                    WHERE status = 'Aprovado'
+                    ORDER BY data_cadastro DESC
+                ";
+
+                $consulta = $conexao->query($sql);
+                $sqlFavoritos = "
+                    SELECT id_animal
+                    FROM favoritos
+                    WHERE id_usuario = :id_usuario
+                ";
+
+                $consultaFavoritos = $conexao->prepare($sqlFavoritos);
+
+                $consultaFavoritos->execute([
+                    ':id_usuario' => $_SESSION['id_usuario']
+                ]);
+
+                $favoritosIds = $consultaFavoritos->fetchAll(PDO::FETCH_COLUMN);
+
+                while ($animal = $consulta->fetch(PDO::FETCH_ASSOC)) {
                     include './../../components/card_home/card_home.php';
                 }
                 ?>
@@ -45,12 +73,12 @@ include './../../components/head/head.php';
 
     </main>
 
-
     <script src="./../../assets/js/user/home.js" defer></script>
+
 
     <?php include './../../components/footer/footer.php'; ?>
 
-    <script src="./../../assets/js/user/home.js" defer></script>
+
 </body>
 
 </html>

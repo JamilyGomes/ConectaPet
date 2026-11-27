@@ -1,48 +1,11 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    console.log("Quantidade de favoritos:", document.querySelectorAll(".fav").length);
-
-    // buscar btn fav 
 
     const botoesFavoritos = document.querySelectorAll(".fav");
 
-    // buscarfav salvos 
-
-    function obterFavoritos() {
-        try {
-            return JSON.parse(localStorage.getItem("favoritos")) || [];
-        } catch {
-            return [];
-        }
-    }
-
-    // atualizar oscoracoes ao atualizar a home 
-
-    let favoritos = obterFavoritos();
-
     botoesFavoritos.forEach(fav => {
 
-        const card = fav.closest(".card-home");
+        fav.addEventListener("click", async function(event) {
 
-        if (!card) return;
-
-        const nome = card.querySelector("h3")?.textContent.trim();
-
-        if (nome && favoritos.includes(nome)) {
-            fav.classList.add("active");
-        } else {
-            fav.classList.remove("active");
-        }
-
-    });
-
-    // add ou remover fav 
-
-    botoesFavoritos.forEach(fav => {
-
-        fav.addEventListener("click", (event) => {
-            console.log("Clique no favorito detectado!");
             event.preventDefault();
             event.stopPropagation();
 
@@ -50,36 +13,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!card) return;
 
-            const titulo = card.querySelector("h3");
+            const idAnimal = card.dataset.idAnimal;
 
-            if (!titulo) return;
+            const acao = fav.classList.contains("active")
+                ? "remover"
+                : "adicionar";
 
-            const nome = titulo.textContent.trim();
+            try {
 
-            favoritos = obterFavoritos();
+                const resposta = await fetch(
+                    "../../../../verificacoes/user/gerenciar-favorito.php",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            id_animal: idAnimal,
+                            acao: acao
+                        })
+                    }
+                );
 
-            if (favoritos.includes(nome)) {
+                const resultado = await resposta.json();
 
-                // Remove dos favoritos
-                favoritos = favoritos.filter(item => item !== nome);
+                if (!resposta.ok || !resultado.sucesso) {
+                    alert(resultado.erro || "Não foi possível atualizar o favorito.");
+                    return;
+                }
 
-                fav.classList.remove("active");
+                fav.classList.toggle("active");
 
-            } else {
+            } catch (erro) {
 
-                // Adiciona aos favoritos
-                favoritos.push(nome);
-
-                fav.classList.add("active");
+                console.error(erro);
+                alert("Erro ao comunicar com o servidor.");
 
             }
-
-            localStorage.setItem(
-                "favoritos",
-                JSON.stringify(favoritos)
-            );
-
-            console.log("Favoritos salvos:", localStorage.getItem("favoritos"));
 
         });
 

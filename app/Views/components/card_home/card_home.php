@@ -1,18 +1,28 @@
-<div class="card-home">
+<div class="card-home" data-id-animal="<?= (int) $animal['id_animal'] ?>">
 
-    <img class="animal-card-home" src="./../../assets/img/dog-card.png" alt="gold-card">
+    <img
+        class="animal-card-home"
+        src="/ConectaPet/<?= htmlspecialchars($animal['foto'] ?? '') ?>"
+        alt="<?= htmlspecialchars($animal['nome']) ?>">
 
     <span class="texto-card-home">
-        <h3>Theo - 1 ano</h3>
+        <h3>
+            <?= htmlspecialchars($animal['nome']) ?>
+            <?php if (!empty($animal['idade_aproximada'])): ?>
+                - <?= htmlspecialchars($animal['idade_aproximada']) ?>
+            <?php endif; ?>
+        </h3>
     </span>
 
-    <span class="material-symbols-outlined fav">
+    <span
+        class="material-symbols-outlined fav <?= in_array($animal['id_animal'], $favoritosIds) ? 'active' : '' ?>">
         pets
     </span>
 
-    <a href="../../pages/user/info-animais.php" class="btn-ver-card">
+    <a
+        href="../../pages/user/info-animais.php?id_animal=<?= (int) $animal['id_animal'] ?>"
+        class="btn-ver-card">
         Ver perfil <span>→</span>
     </a>
 
 </div>
-

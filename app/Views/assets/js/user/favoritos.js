@@ -1,7 +1,5 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-
-// elementos da pag 
+document.addEventListener("DOMContentLoaded", async () => {
 
     const lista = document.querySelector("#lista-favoritos");
     const pesquisaFav = document.querySelector(".input-pesquisa-fav");
@@ -14,18 +12,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!lista) return;
 
-// buscar fav no localStorage 
-
     let favoritos = [];
 
-    try {
-        favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    } catch {
-        favoritos = [];
+    // Buscar favoritos no banco de dados
+    async function carregarFavoritos() {
+
+        try {
+
+            const resposta = await fetch(
+                "../../../../verificacoes/user/listar-favoritos.php"
+            );
+
+            const dados = await resposta.json();
+
+            if (!resposta.ok) {
+                throw new Error(dados.erro || "Erro ao buscar favoritos.");
+            }
+
+            favoritos = dados;
+
+            mostrarFavoritos();
+
+        } catch (erro) {
+
+            console.error(erro);
+            lista.textContent = "Não foi possível carregar seus favoritos.";
+
+        }
     }
 
-// mostrar os fav 
-
+    // Mostrar favoritos
     function mostrarFavoritos() {
 
         lista.innerHTML = "";
@@ -35,30 +51,28 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        favoritos.forEach(nome => {
+        favoritos.forEach(animal => {
 
             const card = document.createElement("div");
             card.classList.add("card-favorito");
 
-            // Atualmente os favoritos armazenam apenas o nome
-            // Por isso, mantemos o tipo Cachorro como no código original
-            card.dataset.tipo = "Cachorro";
+            card.dataset.tipo = animal.tipo_animal || "";
 
             const imagem = document.createElement("img");
-            imagem.src = "./../../assets/img/dog-card.png";
-            imagem.alt = nome;
+            imagem.src = "/ConectaPet/" + animal.foto;
+            imagem.alt = animal.nome;
 
             const info = document.createElement("div");
             info.classList.add("card-info");
 
             const titulo = document.createElement("h3");
-            titulo.textContent = nome;
+            titulo.textContent = animal.nome;
 
             const descricao = document.createElement("p");
             descricao.textContent = "Favoritado";
 
             const localizacao = document.createElement("span");
-            localizacao.textContent = "Campo Grande - MS";
+            localizacao.textContent = animal.localizacao || "";
 
             const acoes = document.createElement("div");
             acoes.classList.add("acoes");
@@ -68,7 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
             btnVer.textContent = "Ver Perfil";
 
             btnVer.addEventListener("click", () => {
-                window.location.href = "../../pages/user/info-animais.php";
+                window.location.href =
+                    "../../pages/user/info-animais.php?id_animal=" + animal.id_animal;
             });
 
             const btnRemover = document.createElement("button");
@@ -76,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btnRemover.textContent = "Remover";
 
             btnRemover.addEventListener("click", () => {
-                removerFavorito(nome);
+                removerFavorito(animal.id_animal);
             });
 
             acoes.appendChild(btnVer);
@@ -91,27 +106,52 @@ document.addEventListener("DOMContentLoaded", () => {
             card.appendChild(info);
 
             lista.appendChild(card);
+
         });
 
         aplicarFiltros();
     }
 
-// remover fav 
+    // Remover favorito do banco
+    async function removerFavorito(idAnimal) {
 
-    function removerFavorito(nome) {
+        try {
 
-        favoritos = favoritos.filter(item => item !== nome);
+            const resposta = await fetch(
+                "../../../../verificacoes/user/gerenciar-favorito.php",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id_animal: idAnimal,
+                        acao: "remover"
+                    })
+                }
+            );
 
-        localStorage.setItem(
-            "favoritos",
-            JSON.stringify(favoritos)
-        );
+            const resultado = await resposta.json();
 
-        mostrarFavoritos();
+            if (!resposta.ok || !resultado.sucesso) {
+                throw new Error(resultado.erro || "Não foi possível remover.");
+            }
+
+            favoritos = favoritos.filter(
+                animal => Number(animal.id_animal) !== Number(idAnimal)
+            );
+
+            mostrarFavoritos();
+
+        } catch (erro) {
+
+            console.error(erro);
+            alert(erro.message);
+
+        }
     }
 
-// filtro por tipo de animal 
-
+    // Filtro por tipo de animal
     if (favSelected && favMenu && favDd && favHidden) {
 
         favSelected.addEventListener("click", () => {
@@ -129,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 aplicarFiltros();
             });
+
         });
 
         document.addEventListener("click", evento => {
@@ -140,14 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-// pesquisar fav 
-
+    // Pesquisa
     if (pesquisaFav) {
         pesquisaFav.addEventListener("input", aplicarFiltros);
     }
 
-// aplicar pesquisa e filtros juntos 
-
+    // Aplicar filtros
     function aplicarFiltros() {
 
         const texto = pesquisaFav
@@ -162,9 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cards.forEach(card => {
 
-            const nome = card.querySelector("h3")
-                .textContent.toLowerCase();
-
+            const nome = card.querySelector("h3").textContent.toLowerCase();
             const tipo = card.dataset.tipo;
 
             const correspondeNome = nome.includes(texto);
@@ -178,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-    mostrarFavoritos();
+    // Iniciar
+    await carregarFavoritos();
 
 });
