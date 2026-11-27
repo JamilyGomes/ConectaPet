@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // ABRIR MODAL DE INFORMAÇÕES DO ANIMAL
-    window.abrirModalAnimal = function () {
+    window.abrirModalAnimal = function (idAnimal) {
         document.getElementById("modalAnimal").style.display = "flex";
+
+        console.log("Animal selecionado:", idAnimal);
     };
 
     // FECHAR MODAL DE INFORMAÇÕES DO ANIMAL
@@ -11,8 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // ABRIR MODAL DO QUESTIONÁRIO
-    window.abrirModalQuestionarioAnimal = function () {
+    window.abrirModalQuestionarioAnimal = function (idAnimal) {
         document.getElementById("modalQuestionarioAnimal").style.display = "flex";
+
+        console.log("Questionário do animal:", idAnimal);
     };
 
     // FECHAR MODAL DO QUESTIONÁRIO
@@ -20,24 +24,50 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("modalQuestionarioAnimal").style.display = "none";
     };
 
-    // MARCAR ANIMAL COMO ADOTADO OU ATIVO
+    // MARCAR ANIMAL COMO ADOTADO OU APROVADO
     document.querySelectorAll(".adotar-animal").forEach(botao => {
 
-        botao.addEventListener("click", function () {
+        botao.addEventListener("click", async function () {
 
-            let linha = this.closest(".adm-animal-linha");
+            const idAnimal = this.dataset.id;
 
-            let status = linha.querySelector(".adm-status-animal");
+            const linha = this.closest(".adm-animal-linha");
+            const status = linha.querySelector(".adm-status-animal");
 
-            if (status.innerHTML.trim() === "Ativo") {
+            try {
 
-                status.innerHTML = "Adotado";
-                status.classList.add("adotado");
+                const resposta = await fetch(
+                    "./../../../../verificacoes/mod/atualizar-status-animal.php",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: "id_animal=" + encodeURIComponent(idAnimal)
+                    }
+                );
 
-            } else {
+                const resultado = await resposta.json();
 
-                status.innerHTML = "Ativo";
-                status.classList.remove("adotado");
+                if (!resposta.ok || !resultado.sucesso) {
+                    alert(resultado.mensagem || "Não foi possível atualizar o status.");
+                    return;
+                }
+
+                status.textContent = resultado.status;
+
+                if (resultado.status === "Adotado") {
+                    status.classList.add("adotado");
+                } else {
+                    status.classList.remove("adotado");
+                }
+
+                alert("Status atualizado com sucesso!");
+
+            } catch (erro) {
+
+                console.error(erro);
+                alert("Erro ao comunicar com o servidor.");
 
             }
 
@@ -45,4 +75,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-});
+    });

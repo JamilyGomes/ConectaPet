@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Desativa a validação automática do navegador
     formulario.noValidate = true;
 
-// salvar e reuperar os dados das etapas
+    // salvar e reuperar os dados das etapas
 
     function obterDados() {
         try {
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Salva os dados quando a pessoa avança ou volta
     window.addEventListener("beforeunload", salvarDados);
 
-// dropdowns 
+    // dropdowns 
     const dropdowns = formulario.querySelectorAll(".dropdown");
 
     dropdowns.forEach(dropdown => {
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-// campos extras 
+    // campos extras 
     function atualizarCamposExtras() {
         const camposExtras = formulario.querySelectorAll(".outroAssunto");
 
@@ -203,11 +203,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!mostrar) {
                 campoExtra.value = "";
+                salvarDados();
             }
         });
     }
 
-// mascara tel 
+    // mascara tel 
 
     const telefone = formulario.querySelector("#telefone");
 
@@ -227,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-// permitir apenas letra no nome 
+    // permitir apenas letra no nome 
 
     const nome = formulario.querySelector("#nome");
 
@@ -237,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-// contador de caracteres da msg 
+    // contador de caracteres da msg 
 
     const mensagem = formulario.querySelector("#mensagem");
     const contador = document.querySelector("#contador");
@@ -252,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mensagem.addEventListener("input", atualizarContador);
     }
 
-// validar nasc 
+    // validar nasc 
 
     const idade = formulario.querySelector("#idade");
 
@@ -272,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-// checkbox 
+    // checkbox 
 
     const checkboxesItens = formulario.querySelectorAll('input[name="itens[]"]');
 
@@ -294,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-// validar campos 
+    // validar campos 
 
     function validarFormulario() {
         // Verifica campos obrigatórios visíveis
@@ -379,9 +380,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
     }
 
-// avancar prox etapa 
+    // Avançar para a próxima etapa
 
-    formulario.addEventListener("submit", evento => {
+    formulario.addEventListener("submit", async evento => {
         evento.preventDefault();
 
         atualizarCamposExtras();
@@ -390,14 +391,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
         salvarDados();
 
+        // Envia a foto na primeira etapa
+        if (etapa === 1) {
+            const foto = formulario.querySelector('input[name="foto"]');
+
+            const dadosFoto = new FormData();
+            dadosFoto.append("foto", foto.files[0]);
+
+            try {
+                const resposta = await fetch(
+                    "../../../../verificacoes/user/receber-foto-doacao.php",
+                    {
+                        method: "POST",
+                        body: dadosFoto
+                    }
+                );
+
+                const resultado = await resposta.text();
+
+                if (!resposta.ok) {
+                    alert(resultado);
+                    return;
+                }
+
+            } catch (erro) {
+                alert("Não foi possível enviar a foto. Tente novamente.");
+                return;
+            }
+        }
+
+        // Avança para as próximas etapas
         if (etapa < 4) {
             window.location.href = `doacao${etapa + 1}.php`;
-        } else {
+            return;
+        }
+
+        // Na última etapa, envia todos os dados para o PHP
+        const dados = JSON.parse(sessionStorage.getItem(chaveDados));
+
+        try {
+            const resposta = await fetch(
+                "../../../../verificacoes/user/processa-doacao.php",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                }
+            );
+
+            const resultado = await resposta.text();
+
+            if (!resposta.ok || resultado.trim() !== "sucesso") {
+                alert(resultado);
+                return;
+            }
+
+            // Limpa os dados após salvar com sucesso
+            sessionStorage.removeItem(chaveDados);
+
             window.location.href = "doacao5.php";
+
+        } catch (erro) {
+            alert("Não foi possível salvar a doação. Tente novamente.");
         }
     });
 
-// iniciar page 
-
+    // Iniciar página
     recuperarDados();
 });

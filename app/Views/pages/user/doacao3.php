@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: login.php');
+    exit;
+}
+
 $titulo = 'Historido do Animal';
 include './../../components/head/head.php';
 ?>
@@ -25,7 +34,7 @@ include './../../components/head/head.php';
 
     <form class="form-animal">
 
- <!-- PERGUNTA 3 -->
+        <!-- PERGUNTA 3 -->
 
         <div class="campo">
             <label class="form-cadastro">Por que você está doando o animal?</label>
@@ -40,7 +49,7 @@ include './../../components/head/head.php';
                     <div class="option">Problemas de saúde do tutor</div>
                     <div class="option">Incompatibilidade com outros animais ou pessoas</div>
                     <div class="option">Outro</div>
-                    
+
                 </div>
 
                 <!-- valor enviado -->
@@ -91,7 +100,7 @@ include './../../components/head/head.php';
             </div>
         </div>
 
-       
+
         <div class="botoes">
             <button type="button" class="btn-voltar" onclick="window.location.href='./doacao2.php'">
                 Voltar
@@ -107,7 +116,7 @@ include './../../components/head/head.php';
     ?>
 
 
-   <script src="./../../assets/js/user/doacao.js" defer></script>
+    <script src="./../../assets/js/user/doacao.js" defer></script>
 
 
 </body>

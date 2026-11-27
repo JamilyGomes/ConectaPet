@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: login.php');
+    exit;
+}
+
 $titulo = 'Solicitação Enviada';
 include './../../components/head/head.php';
 ?>
@@ -12,14 +21,14 @@ include './../../components/head/head.php';
     <?php
     ob_start();
     ?>
-    
+
     <div class="progress-steps">
         <span class="active">1</span>
         <span class="active">2</span>
         <span class="active">3</span>
         <span class="active">4</span>
         <span class="active">5</span>
-    
+
     </div>
 
     <div class="confirmacao-box">

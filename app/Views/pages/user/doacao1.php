@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: login.php');
+    exit;
+}
+
 $titulo = 'Apresente seu Aumigo';
 include './../../components/head/head.php';
 ?>

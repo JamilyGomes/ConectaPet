@@ -1,6 +1,43 @@
 <?php
-$titulo = 'animais';
+$titulo = 'Animais';
 
+// Conexão com o banco de dados
+require_once __DIR__ . '/../../../../config/conexao.php';
+
+// Busca os animais cadastrados
+$sql = "SELECT
+            a.id_animal,
+            a.nome,
+            a.raca,
+            a.tipo_animal,
+            a.porte,
+            a.foto,
+            a.data_cadastro,
+            a.status,
+            u.nome AS responsavel
+        FROM animais a
+        INNER JOIN usuarios u ON a.id_usuario = u.id_usuario
+        ORDER BY a.id_animal DESC";
+
+$consulta = $conexao->query($sql);
+$animais = $consulta->fetchAll(PDO::FETCH_ASSOC);
+$totalGrande = 0;
+$totalMedio = 0;
+$totalPequeno = 0;
+
+foreach ($animais as $animal) {
+    if ($animal['porte'] === 'Grande') {
+        $totalGrande++;
+    } elseif ($animal['porte'] === 'Médio') {
+        $totalMedio++;
+    } elseif ($animal['porte'] === 'Pequeno') {
+        $totalPequeno++;
+    }
+}
+
+$totalAnimais = count($animais);
+
+// Cabeçalho
 include './../../components/head/head2.php';
 ?>
 
@@ -40,7 +77,7 @@ include './../../components/head/head2.php';
 
                     <span>GRANDE PORTE</span>
 
-                    <h2>2</h2>
+                    <h2><?= $totalGrande ?></h2>
 
                     <p>Animais de porte maior</p>
 
@@ -50,7 +87,7 @@ include './../../components/head/head2.php';
 
                     <span>MÉDIO PORTE</span>
 
-                    <h2>3</h2>
+                    <h2><?= $totalMedio ?></h2>
 
                     <p>Animais de porte médio</p>
 
@@ -60,7 +97,7 @@ include './../../components/head/head2.php';
 
                     <span>PEQUENO PORTE</span>
 
-                    <h2>3</h2>
+                    <h2><?= $totalPequeno ?></h2>
 
                     <p>Animais de porte menor</p>
 
@@ -70,9 +107,7 @@ include './../../components/head/head2.php';
             </div>
 
             <div class="adm-animal-total">
-
-                8 animais cadastrados
-
+                <?= $totalAnimais ?> animais cadastrados
             </div>
 
             <!-- TABELA -->
@@ -93,7 +128,7 @@ include './../../components/head/head2.php';
 
                 </div>
 
-                <?php for ($i = 1; $i <= 5; $i++): ?>
+                <?php foreach ($animais as $animal): ?>
 
 
                     <div class="adm-animal-linha">
@@ -101,36 +136,33 @@ include './../../components/head/head2.php';
 
 
                         <span class="adm-animal-id">
-
-                            <?= $i ?>
-
+                            <?= $animal['id_animal'] ?>
                         </span>
 
                         <div class="adm-animal-info">
-                            <img src="../../assets/img/dog-card.png">
-                            <div>
 
-                                <strong>Thor</strong>
+                            <img
+                                src="<?= !empty($animal['foto']) ? htmlspecialchars($animal['foto']) : '../../assets/img/dog-card.png' ?>"
+                                alt="<?= htmlspecialchars($animal['nome']) ?>">
+
+                            <div>
+                                <strong><?= htmlspecialchars($animal['nome']) ?></strong>
 
                                 <small>
-                                    Labrador • Médio porte
+                                    <?= htmlspecialchars($animal['raca'] ?? 'Sem raça definida') ?>
+                                    •
+                                    <?= htmlspecialchars($animal['porte'] ?? 'Porte não informado') ?>
                                 </small>
-
-
                             </div>
 
                         </div>
 
                         <span>
-
-                            10/10/2025
-
+                            <?= date('d/m/Y', strtotime($animal['data_cadastro'])) ?>
                         </span>
 
                         <span class="adm-status-animal">
-
-                            Ativo
-
+                            <?= htmlspecialchars($animal['status']) ?>
                         </span>
 
                         <div class="adm-animal-acoes">
@@ -138,7 +170,7 @@ include './../../components/head/head2.php';
 
                             <button
                                 class="btn-acao-mod visualizar-mod"
-                                onclick="abrirModalAnimal()">
+                                onclick="abrirModalAnimal(<?= (int) $animal['id_animal'] ?>)">
 
                                 <i class="fas fa-eye"></i>
 
@@ -149,7 +181,7 @@ include './../../components/head/head2.php';
 
                             <button
                                 class="btn-acao-mod"
-                                onclick="abrirModalQuestionarioAnimal()">
+                                onclick="abrirModalQuestionarioAnimal(<?= (int) $animal['id_animal'] ?>)">
 
                                 <i class="fas fa-clipboard-list"></i>
 
@@ -159,7 +191,8 @@ include './../../components/head/head2.php';
 
 
                             <button
-                                class="btn-acao-mod aprovar-mod adotar-animal">
+                                class="btn-acao-mod aprovar-mod adotar-animal"
+                                data-id="<?= (int) $animal['id_animal'] ?>">
 
                                 <i class="fas fa-paw"></i>
 
@@ -176,7 +209,7 @@ include './../../components/head/head2.php';
                     </div>
 
 
-                <?php endfor; ?>
+                <?php endforeach; ?>
 
 
 
@@ -487,4 +520,5 @@ include './../../components/head/head2.php';
     <script src="./../../assets/js/mod/animais.js" defer></script>
 
 </body>
+
 </html>
