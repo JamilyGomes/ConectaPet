@@ -36,7 +36,7 @@ include './../../components/head/head.php';
             Equipe Conecta Pet
         </p>
 
-        <class class="bt">
+        <div class="bt">
 
             <a href="./home.php">
                 <button class="bt_home">

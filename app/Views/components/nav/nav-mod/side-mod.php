@@ -57,7 +57,7 @@ $totalNotificacoes = 3; // exemplo
 
         <!-- sair -->
         <li class="logout">
-            <a href="./logout.php">
+            <a href="/ConectaPet/verificacoes/mod/logout.php">
                 <i class="fas fa-sign-out-alt"></i> Sair
             </a>
         </li>

@@ -36,8 +36,8 @@ if (!$animal) {
 $nome = $animal['nome'];
 
 $imagem = !empty($animal['foto'])
-    ? $animal['foto']
-    : '../../assets/img/dog-card.png';
+    ? '/ConectaPet/' . $animal['foto']
+    : '/ConectaPet/app/Views/assets/img/dog-card.png';
 
 $descricao = !empty($animal['mensagem'])
     ? $animal['mensagem']

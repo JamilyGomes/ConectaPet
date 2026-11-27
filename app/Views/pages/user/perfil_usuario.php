@@ -9,6 +9,28 @@ if (!isset($_SESSION['id_usuario'])) {
 require_once __DIR__ . '/../../../../config/conexao.php';
 $id_usuario = $_SESSION['id_usuario'];
 
+// BUSCAR DADOS DO USUÁRIO
+$sqlUsuario = "
+    SELECT nome, cpf, email, telefone, foto_perfil
+    FROM usuarios
+    WHERE id_usuario = :id_usuario
+";
+
+$consultaUsuario = $conexao->prepare($sqlUsuario);
+$consultaUsuario->execute([':id_usuario' => $id_usuario]);
+
+$usuario = $consultaUsuario->fetch(PDO::FETCH_ASSOC);
+
+if (!$usuario) {
+  exit('Usuário não encontrado.');
+}
+
+// FOTO DO PERFIL
+$fotoPerfil = !empty($usuario['foto_perfil'])
+  ? './../../../../' . $usuario['foto_perfil']
+  : 'https://img.freepik.com/fotos-premium/garota-feliz-segura-seu-amado-animal-de-estimacao-um-gato-britanico-escoces-vermelho-no-colo-e-acaricia-seu-pelo_121837-9908.jpg?semt=ais_hybrid&w=740&q=80';
+
+  
 $sqlDoacoes = "
     SELECT
         id_animal,
@@ -57,7 +79,7 @@ include './../../components/head/head.php';
 
         <div class="perfil-foto">
           <img
-            src="https://img.freepik.com/fotos-premium/garota-feliz-segura-seu-amado-animal-de-estimacao-um-gato-britanico-escoces-vermelho-no-colo-e-acaricia-seu-pelo_121837-9908.jpg?semt=ais_hybrid&w=740&q=80"
+            src="<?= htmlspecialchars($fotoPerfil) ?>"
             alt="Foto do usuário"
             id="fotoPerfil">
         </div>
@@ -66,17 +88,23 @@ include './../../components/head/head.php';
 
           <div class="campo">
             <span class="label">Nome:</span>
-            <span class="valor" id="perfilNome">Julia Rocha</span>
+            <span class="valor" id="perfilNome">
+              <?= htmlspecialchars($usuario['nome']) ?>
+            </span>
           </div>
 
           <div class="campo">
             <span class="label">Telefone:</span>
-            <span class="valor" id="perfilTelefone">(67) 9999-9999</span>
+            <span class="valor" id="perfilTelefone">
+              <?= htmlspecialchars($usuario['telefone']) ?>
+            </span>
           </div>
 
           <div class="campo">
             <span class="label">E-mail:</span>
-            <span class="valor" id="perfilEmail">exemplo@gmail.com</span>
+            <span class="valor" id="perfilEmail">
+              <?= htmlspecialchars($usuario['email']) ?>
+            </span>
           </div>
 
         </div>
@@ -220,12 +248,16 @@ include './../../components/head/head.php';
           type="text"
           name="telefone"
           id="telefone"
-          value="(67) 9999-9999"
+          value="<?= htmlspecialchars($usuario['telefone']) ?>"
           maxlength="15"
           required>
 
         <label>E-mail</label>
-        <input type="email" id="editEmail" value="exemplo@gmail.com" required>
+        <input
+          type="email"
+          id="editEmail"
+          value="<?= htmlspecialchars($usuario['email']) ?>"
+          required>
 
         <!-- NOVA SENHA -->
         <label>Nova Senha</label>
@@ -249,8 +281,9 @@ include './../../components/head/head.php';
 
         <div class="perfil-foto">
 
-          <img id="previewFoto"
-            src="https://img.freepik.com/fotos-premium/garota-feliz-segura-seu-amado-animal-de-estimacao-um-gato-britanico-escoces-vermelho-no-colo-e-acaricia-seu-pelo_121837-9908.jpg?semt=ais_hybrid&w=740&q=80"
+          <img
+            id="previewFoto"
+            src="<?= htmlspecialchars($fotoPerfil) ?>"
             alt="Foto do usuário">
 
           <!-- botão editar foto -->

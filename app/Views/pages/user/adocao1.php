@@ -33,7 +33,7 @@ if (!$id_animal) {
         <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
 
         <!-- MORADIA -->
-        <p>Você mora em casa, apartamento ou chácara/sítio?
+        <p>Você mora em casa, apartamento ou chácara/sítio?</p>
         <div class="campo">
 
             <div class="dropdown">

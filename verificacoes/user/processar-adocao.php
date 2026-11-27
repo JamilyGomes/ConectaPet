@@ -38,7 +38,8 @@ if (!$id_animal) {
 $verificar = $conexao->prepare(
     "SELECT id_animal FROM animais
      WHERE id_animal = :id_animal
-     AND id_usuario <> :id_usuario"
+     AND id_usuario <> :id_usuario
+     AND status = 'Aprovado'"
 );
 
 $verificar->execute([

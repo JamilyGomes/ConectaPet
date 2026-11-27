@@ -1,22 +1,52 @@
 <?php
-// Simulação de dados (depois você pode puxar do banco)
-$usuario = [
-    "nome" => "Rafael Oliveira",
-    "email" => "exemplo@gmail.com",
-    "cpf" => "987.***.***-22",
-    "senha" => "******",
-    "endereco" => "Rua dos Ipês, 145 - Monte Castelo",
-    "telefone" => "(67) 91876542",
-    "foto" => "img/user.jpg"
-];
+session_start();
 
-$posts = [
-    "total" => 48,
-    "aprovados" => 36,
-    "rejeitados" => 12,
-    "tempo" => "2h 36min"
-];
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: login.php');
+    exit;
+}
+
+require_once __DIR__ . '/../../../../config/conexao.php';
+
+$id_usuario = $_SESSION['id_usuario'];
+
+// BUSCAR DADOS DO MODERADOR
+$sqlUsuario = "
+    SELECT nome, cpf, email, telefone, foto_perfil
+    FROM usuarios
+    WHERE id_usuario = :id_usuario
+      AND tipo_usuario = 'mod'
+";
+
+$consultaUsuario = $conexao->prepare($sqlUsuario);
+$consultaUsuario->execute([':id_usuario' => $id_usuario]);
+
+$usuario = $consultaUsuario->fetch(PDO::FETCH_ASSOC);
+
+if (!$usuario) {
+    exit('Moderador não encontrado.');
+}
+
+// FOTO DO PERFIL
+$fotoPerfil = !empty($usuario['foto_perfil'])
+    ? './../../../../' . $usuario['foto_perfil']
+    : './../../assets/img/adm-foto.jpg';
+
+// CONTAGEM DE PUBLICAÇÕES
+$sqlPosts = "
+    SELECT
+        COUNT(*) AS total,
+        COUNT(*) FILTER (WHERE status = 'Aprovado') AS aprovados,
+        COUNT(*) FILTER (WHERE status = 'Recusado') AS rejeitados
+    FROM animais
+";
+
+$consultaPosts = $conexao->query($sqlPosts);
+$posts = $consultaPosts->fetch(PDO::FETCH_ASSOC);
+
+$posts['tempo'] = '—';
 ?>
+
 
 <?php
 $titulo = "Perfil moderador";
@@ -24,7 +54,7 @@ include './../../components/head/head2.php';
 ?>
 
 <body>
-    <?php include './../../components/nav/nav_adm/sideBar.php'; ?>
+    <?php include './../../components/nav/nav-mod/side-mod.php'; ?>
 
     <div class="container">
 
@@ -53,7 +83,7 @@ include './../../components/head/head2.php';
                     <div class="foto-perfil">
 
                         <img
-                            src="./../../assets/img/adm-foto.jpg"
+                            src="<?= htmlspecialchars($fotoPerfil) ?>"
                             class="foto-adm"
                             id="previewFoto"
                             alt="Foto do administrador">
@@ -91,12 +121,12 @@ include './../../components/head/head2.php';
 
                             <p>
                                 <strong>Senha:</strong>
-                                <span id="perfilSenha"><?= $usuario['senha'] ?></span>
+                                <span id="perfilSenha">••••••••</span>
                             </p>
 
                             <p>
                                 <strong>Endereço:</strong>
-                                <span id="perfilEndereco"><?= $usuario['endereco'] ?></span>
+                                <span id="perfilEndereco">Não informado</span>
                             </p>
 
                             <p>
@@ -177,7 +207,7 @@ include './../../components/head/head2.php';
 
                     <div class="campo-senha">
 
-                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
                         <span class="material-icons olho" onclick="toggleSenha('senha', this)">
                             visibility
                         </span>
@@ -191,7 +221,7 @@ include './../../components/head/head2.php';
 
                     <div class="campo-senha">
 
-                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha" required>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha">
                         <span class="material-icons olho" onclick="toggleSenha('confirmarSenha', this)">
                             visibility
                         </span>

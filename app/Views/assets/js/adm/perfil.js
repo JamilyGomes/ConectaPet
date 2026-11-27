@@ -1,58 +1,62 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // TROCAR ABAS
-    window.trocarAba = function (id, botao) {
-        document.querySelectorAll('.painel').forEach(item => {
-            item.classList.remove('ativo');
-        });
+    const modalEditar = document.getElementById("modalEditar");
+    const abrirEditar = document.getElementById("abrirEditar");
+    const fecharEditar = document.getElementById("fecharEditar");
+    const formEditarPerfil = document.getElementById("formEditarPerfil");
 
-        document.querySelectorAll('.aba').forEach(item => {
-            item.classList.remove('ativa');
-        });
-
-        document.getElementById(id).classList.add('ativo');
-        botao.classList.add('ativa');
-    };
-
-    // MÁSCARA DE TELEFONE
+    const nome = document.getElementById("editNome");
     const telefone = document.getElementById("telefone");
+    const email = document.getElementById("editEmail");
+    const senha = document.getElementById("senha");
+    const confirmarSenha = document.getElementById("confirmarSenha");
 
-    if (telefone) {
-        telefone.addEventListener("input", function () {
-            let valor = this.value.replace(/\D/g, "");
+    const perfilNome = document.getElementById("perfilNome");
+    const perfilTelefone = document.getElementById("perfilTelefone");
+    const perfilEmail = document.getElementById("perfilEmail");
 
-            if (valor.length > 11) {
-                valor = valor.substring(0, 11);
-            }
+    const inputFoto = document.getElementById("editFoto");
+    const previewFoto = document.getElementById("previewFoto");
 
-            if (valor.length > 10) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{5})(\d{4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 6) {
-                valor = valor.replace(
-                    /^(\d{2})(\d{4,5})(\d{0,4}).*/,
-                    "($1) $2-$3"
-                );
-            } else if (valor.length > 2) {
-                valor = valor.replace(
-                    /^(\d{2})(\d+)/,
-                    "($1) $2"
-                );
-            } else if (valor.length > 0) {
-                valor = valor.replace(
-                    /^(\d+)/,
-                    "($1"
-                );
-            }
+    // ABRIR MODAL
+    abrirEditar.addEventListener("click", function () {
+        modalEditar.style.display = "flex";
 
-            this.value = valor;
-        });
-    }
+        nome.value = perfilNome.textContent.trim();
+        telefone.value = perfilTelefone.textContent.trim();
+        email.value = perfilEmail.textContent.trim();
+    });
 
-    // MOSTRAR OU OCULTAR SENHA
+    // FECHAR MODAL
+    fecharEditar.addEventListener("click", function () {
+        modalEditar.style.display = "none";
+    });
+
+    modalEditar.addEventListener("click", function (e) {
+        if (e.target === modalEditar) {
+            modalEditar.style.display = "none";
+        }
+    });
+
+    // MÁSCARA DO TELEFONE
+    telefone.addEventListener("input", function () {
+        let valor = this.value.replace(/\D/g, "").substring(0, 11);
+
+        if (valor.length > 10) {
+            valor = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+        } else if (valor.length > 6) {
+            valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
+        } else if (valor.length > 2) {
+            valor = valor.replace(/^(\d{2})(\d+)$/, "($1) $2");
+        } else if (valor.length > 0) {
+            valor = "(" + valor;
+        }
+
+        this.value = valor;
+    });
+
+    // MOSTRAR E OCULTAR SENHA
     window.toggleSenha = function (id, icone) {
         const input = document.getElementById(id);
 
@@ -65,160 +69,100 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // MODAL DE EDIÇÃO
-    const modalEditar = document.getElementById("modalEditar");
 
-    function abrir(modal) {
-        modal.style.display = "flex";
+    // VISUALIZAR E SALVAR FOTO
+    inputFoto.addEventListener("change", async function () {
 
-        if (fotoSalva && previewFoto) {
-            previewFoto.src = fotoSalva;
+        const arquivo = this.files[0];
+
+        if (!arquivo) return;
+
+        if (!arquivo.type.startsWith("image/")) {
+            alert("Selecione uma imagem.");
+            this.value = "";
+            return;
         }
-    }
-    function fechar(modal) {
-        modal.style.display = "none";
-    }
 
-    function fecharFora(modal) {
-        modal.addEventListener("click", function (e) {
-            if (e.target === modal) {
-                fechar(modal);
-            }
-        });
-    }
+        const dados = new FormData();
+        dados.append("foto", arquivo);
 
-    // ELEMENTOS DO PERFIL
+        try {
+            const resposta = await fetch("../../../../verificacoes/user/atualizar-perfil.php", {
+                method: "POST",
+                body: dados
+            });
 
-    // TROCAR FOTO DO PERFIL
-    const previewFoto = document.getElementById("previewFoto");
-    const inputFoto = document.getElementById("inputFoto");
-    const editFoto = document.getElementById("editFoto");
+            const resultado = await resposta.json();
 
-    function trocarFoto(input) {
-        const arquivo = input.files[0];
-
-        if (arquivo) {
-            if (!arquivo.type.startsWith("image/")) {
-                alert("Selecione um arquivo de imagem.");
+            if (!resposta.ok || !resultado.sucesso) {
+                alert(resultado.erro || "Erro ao atualizar foto.");
                 return;
             }
 
-            const leitor = new FileReader();
+            const caminho = "../../../../" + resultado.usuario.foto;
 
-            leitor.onload = function (e) {
-                previewFoto.src = e.target.result;
-                localStorage.setItem("fotoAdm", e.target.result);
-                alert("Foto atualizada com sucesso!");
-            };
+            previewFoto.src = caminho + "?t=" + Date.now();
 
-            leitor.readAsDataURL(arquivo);
+            alert("Foto de perfil atualizada!");
+
+        } catch (erro) {
+            console.error(erro);
+            alert("Erro ao salvar a foto.");
         }
-    }
-
-    if (inputFoto) {
-        inputFoto.addEventListener("change", function () {
-            trocarFoto(this);
-        });
-    }
-
-    if (editFoto) {
-        editFoto.addEventListener("change", function () {
-            trocarFoto(this);
-        });
-    }
-
-    // CARREGAR FOTO SALVA
-    const fotoSalva = localStorage.getItem("fotoAdm");
-
-    if (fotoSalva && previewFoto) {
-        previewFoto.src = fotoSalva;
-    }
-
-    const perfilNome = document.getElementById("perfilNome");
-    const perfilEmail = document.getElementById("perfilEmail");
-    const perfilEndereco = document.getElementById("perfilEndereco");
-    const perfilTelefone = document.getElementById("perfilTelefone");
-
-    const editNome = document.getElementById("editNome");
-    const editEmail = document.getElementById("editEmail");
-    const editEndereco = document.getElementById("editEndereco");
-    const editTelefone = document.getElementById("telefone");
-
-    // CARREGAR DADOS SALVOS
-    const dadosSalvos = localStorage.getItem("perfilAdm");
-
-    if (dadosSalvos) {
-        const dados = JSON.parse(dadosSalvos);
-
-        perfilNome.textContent = dados.nome;
-        perfilEmail.textContent = dados.email;
-        perfilEndereco.textContent = dados.endereco;
-        perfilTelefone.textContent = dados.telefone;
-
-        editNome.value = dados.nome;
-        editEmail.value = dados.email;
-        editEndereco.value = dados.endereco;
-        editTelefone.value = dados.telefone;
-    }
-
-    // ABRIR MODAL
-    document.getElementById("abrirEditar").addEventListener("click", function () {
-        abrir(modalEditar);
     });
 
-    // FECHAR MODAL
-    document.getElementById("fecharEditar").addEventListener("click", function () {
-        fechar(modalEditar);
-    });
-
-    fecharFora(modalEditar);
-
-    // SALVAR ALTERAÇÕES
-    document.getElementById("formEditarPerfil").addEventListener("submit", function (e) {
+    
+    // SALVAR NO BANCO
+    formEditarPerfil.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        const senha = document.getElementById("senha").value;
-        const confirmar = document.getElementById("confirmarSenha").value;
+        if (senha.value !== confirmarSenha.value) {
+            alert("As senhas não coincidem.");
+            return;
+        }
 
-        if (senha || confirmar) {
-            if (!senha || !confirmar) {
-                alert("Preencha os dois campos de senha.");
+        const dados = new FormData();
+
+        dados.append("nome", nome.value);
+        dados.append("telefone", telefone.value);
+        dados.append("email", email.value);
+        dados.append("senha", senha.value);
+        dados.append("confirmarSenha", confirmarSenha.value);
+
+        if (inputFoto.files[0]) {
+            dados.append("foto", inputFoto.files[0]);
+        }
+
+        try {
+            const resposta = await fetch("../../../../verificacoes/user/atualizar-perfil.php", {
+                method: "POST",
+                body: dados
+            });
+
+            const resultado = await resposta.json();
+
+            if (!resposta.ok || !resultado.sucesso) {
+                alert(resultado.erro || "Erro ao atualizar perfil.");
                 return;
             }
 
-            if (senha !== confirmar) {
-                alert("As senhas não coincidem.");
-                return;
+            perfilNome.textContent = resultado.usuario.nome;
+            perfilTelefone.textContent = resultado.usuario.telefone;
+            perfilEmail.textContent = resultado.usuario.email;
+
+            if (resultado.usuario.foto) {
+                previewFoto.src = "../../../../" + resultado.usuario.foto;
             }
+
+            modalEditar.style.display = "none";
+
+            alert(resultado.mensagem);
+            location.reload();
+
+        } catch (erro) {
+            console.error(erro);
+            alert("Erro ao comunicar com o servidor.");
         }
-
-        const dados = {
-            nome: editNome.value,
-            email: editEmail.value,
-            endereco: editEndereco.value,
-            telefone: editTelefone.value
-        };
-
-        // SALVAR NO NAVEGADOR
-        localStorage.setItem("perfilAdm", JSON.stringify(dados));
-
-        // ATUALIZAR INFORMAÇÕES NA TELA
-        perfilNome.textContent = dados.nome;
-        perfilEmail.textContent = dados.email;
-        perfilEndereco.textContent = dados.endereco;
-        perfilTelefone.textContent = dados.telefone;
-
-        if (senha && confirmar) {
-            alert("Dados do perfil atualizados! A senha ainda não foi alterada, pois precisa de integração com o servidor.");
-        } else {
-            alert("Dados atualizados com sucesso!");
-        }
-
-        // LIMPAR CAMPOS DE SENHA
-        document.getElementById("senha").value = "";
-        document.getElementById("confirmarSenha").value = "";
-
-        fechar(modalEditar);
     });
 
 });
