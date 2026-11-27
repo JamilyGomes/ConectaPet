@@ -1,6 +1,12 @@
 <?php
 $titulo = 'Termo de Responsabilidade';
 include './../../components/head/head.php';
+
+$id_animal = filter_input(INPUT_GET, 'id_animal', FILTER_VALIDATE_INT);
+
+if (!$id_animal) {
+    exit('Animal não informado.');
+}
 ?>
 
 <body>
@@ -20,6 +26,7 @@ include './../../components/head/head.php';
     <h2>Termo de Responsabilidade – Adoção de Animais</h2>
 
     <form class="form-cadastro" id="formTermo">
+        <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
 
         <p>
             Ao prosseguir com a adoção, o(a) adotante declara estar ciente e de acordo com as condições abaixo:
@@ -57,7 +64,12 @@ include './../../components/head/head.php';
         <!-- CHECKBOX -->
         <div class="checkbox-termo">
             <label class="opcao" id="label-termo">
-                <input class="input-questionario" type="checkbox" id="aceite">
+                <input
+                    class="input-questionario"
+                    type="checkbox"
+                    id="aceite"
+                    name="aceite"
+                    value="Sim">
                 <span>Declaro que li e aceito os termos acima.</span>
             </label>
         </div>

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const CHAVE_ADOCAO = 'dadosFormularioAdocao';
 
-// identificar page atual 
+    // identificar page atual 
 
     const formularios = {
         formResidencia: 'adocao2.php',
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// recuperar respostas salvas 
+    // recuperar respostas salvas 
 
     function recuperarDados() {
         try {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// salvar respostas pag atual 
+    // salvar respostas pag atual 
 
     function salvarDados() {
 
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// restauras respostas ao voltar uma pag 
+    // restauras respostas ao voltar uma pag 
 
     function restaurarDados() {
 
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// dropdows personalizados
+    // dropdows personalizados
 
     document.addEventListener('click', function (evento) {
 
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-// outro tipo de residencia 
+    // outro tipo de residencia 
 
     function atualizarCampoOutro() {
 
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// criancas 
+    // criancas 
 
     function atualizarCampoCriancas() {
 
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// outros animais 
+    // outros animais 
 
     function atualizarCampoAnimais() {
 
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// checkbox - nenhum dos anteriores 
+    // checkbox - nenhum dos anteriores 
 
     const checkboxGroup = document.getElementById('checkboxGroup');
 
@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// validar os campos 
+    // validar os campos 
 
     function validarFormulario() {
 
@@ -437,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// btn- voltar 
+    // btn- voltar 
 
     const paginasAnteriores = {
         formResidencia: 'home.php',
@@ -460,7 +460,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const paginaAnterior = paginasAnteriores[formularioAtual.id];
 
             if (paginaAnterior) {
-                window.location.href = './' + paginaAnterior;
+
+                const dados = recuperarDados();
+                const idAnimal = dados.id_animal;
+
+                if (idAnimal) {
+                    window.location.href = './' + paginaAnterior + '?id_animal=' + encodeURIComponent(idAnimal);
+                } else {
+                    window.location.href = './' + paginaAnterior;
+                }
+
             }
 
         });
@@ -468,9 +477,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-// btn continuar/enviar solicitacao 
 
-    formularioAtual.addEventListener('submit', function (evento) {
+    // btn continuar/enviar solicitacao
+
+    formularioAtual.addEventListener('submit', async function (evento) {
 
         evento.preventDefault();
 
@@ -483,14 +493,61 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const proximaPagina = formularios[formularioAtual.id];
 
-        if (proximaPagina) {
+        if (!proximaPagina) {
+            return;
+        }
+
+        const dados = recuperarDados();
+        const idAnimal = dados.id_animal;
+
+        if (!idAnimal) {
+            alert('Não foi possível identificar o animal selecionado.');
+            return;
+        }
+
+        // Nas quatro primeiras etapas, apenas avança.
+        if (formularioAtual.id !== 'formTermo') {
+            window.location.href = './' + proximaPagina + '?id_animal=' + encodeURIComponent(idAnimal);
+            return;
+        }
+
+        // Na última etapa, envia todas as respostas ao PHP.
+        try {
+
+            const resposta = await fetch('../../../../verificacoes/user/processar-adocao.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            });
+
+            const resultado = await resposta.json();
+
+            if (!resposta.ok || !resultado.sucesso) {
+                alert(
+                    (resultado.erro || 'Não foi possível enviar a solicitação.') +
+                    '\n\nEtapa: ' + (resultado.etapa || 'Não identificada') +
+                    '\n\nDetalhes: ' + (resultado.detalhes || 'Nenhum detalhe retornado.')
+                );
+                return;
+            }
+
+            sessionStorage.removeItem(CHAVE_ADOCAO);
+
             window.location.href = './' + proximaPagina;
+
+        } catch (erro) {
+
+            console.error('Erro ao enviar solicitação:', erro);
+            alert('Ocorreu um erro ao enviar sua solicitação. Tente novamente.');
+
         }
 
     });
 
 
-// inicializacao 
+    // inicializacao 
 
     restaurarDados();
 

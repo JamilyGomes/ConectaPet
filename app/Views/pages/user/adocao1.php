@@ -1,6 +1,12 @@
 <?php
 $titulo = 'Residência';
 include './../../components/head/head.php';
+$id_animal = filter_input(INPUT_GET, 'id_animal', FILTER_VALIDATE_INT);
+
+if (!$id_animal) {
+    exit('Animal não informado.');
+}
+
 ?>
 
 <body>
@@ -24,6 +30,8 @@ include './../../components/head/head.php';
         action="./adocao2.php"
         method="POST">
 
+        <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
+
         <!-- MORADIA -->
         <p>Você mora em casa, apartamento ou chácara/sítio?
         <div class="campo">
@@ -41,7 +49,7 @@ include './../../components/head/head.php';
                 </div>
 
                 <input type="hidden"
-                    name="tipoAnimal"
+                    name="tipo_residencia"
                     required>
             </div>
         </div>

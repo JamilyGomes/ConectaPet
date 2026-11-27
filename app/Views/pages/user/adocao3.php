@@ -1,6 +1,12 @@
 <?php
 $titulo = 'Experiência';
 include './../../components/head/head.php';
+
+$id_animal = filter_input(INPUT_GET, 'id_animal', FILTER_VALIDATE_INT);
+
+if (!$id_animal) {
+    exit('Animal não informado.');
+}
 ?>
 
 <body>
@@ -20,6 +26,7 @@ include './../../components/head/head.php';
     <h2>Sobre experiência com animais</h2>
 
     <form class="form-cadastro" id="formExperiencia">
+        <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
 
         <!-- TEVE ANIMAIS -->
         <p>Você já teve animais antes?</p>

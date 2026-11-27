@@ -1,6 +1,12 @@
 <?php
 $titulo = 'Família';
 include './../../components/head/head.php';
+
+$id_animal = filter_input(INPUT_GET, 'id_animal', FILTER_VALIDATE_INT);
+
+if (!$id_animal) {
+    exit('Animal não informado.');
+}
 ?>
 
 <body>
@@ -20,6 +26,7 @@ include './../../components/head/head.php';
     <h2>Sobre a família</h2>
 
     <form class="form-cadastro" id="formFamilia">
+        <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
 
         <!-- PESSOAS -->
         <p>Quantas pessoas moram na casa?</p>
